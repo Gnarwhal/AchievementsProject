@@ -1,4 +1,5 @@
 :root {
+	--background-dark: #111115;
 	--background: #22222A;
 	--foreground: #EEEEEE;
 	--distinction: #44444F;
@@ -20,7 +21,7 @@
 }
 
 html, body {
-	background-color: var(--background);
+	background-color: var(--background-dark);
 
 	margin: 0;
 	border: 0;
@@ -32,6 +33,8 @@ html, body {
 }
 
 #navbar {
+	z-index: 1;
+
 	position: fixed;
 
 	background-color: var(--navbar-background);
@@ -45,6 +48,8 @@ html, body {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+
+	box-shadow: 0px 0px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 #navbar-left {
@@ -108,12 +113,19 @@ html, body {
 }
 
 .page {
+	z-index: 0;
+
 	box-sizing: border-box;
 
 	padding: 0px 64px;
 
 	width: 100%;
-	height: max-content;
+	height: 100%;
+
+	background-color: var(--background);
+	box-shadow: 0px 0px 5px 10px rgba(0, 0, 0, 0.5);
+
+	overflow-y: auto;
 
 	display: none;
 }
@@ -449,6 +461,8 @@ html, body {
 
 #profile-page {
 	max-width: 1920px;
+
+	display: block;
 }
 
 #profile-section-1 {
