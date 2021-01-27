@@ -20,5 +20,5 @@ dependencies {
 }
 
 tasks.getByName('bootRun') {
-	systemProperty 'spring.profiles.active', 'db'
+	systemProperty 'spring.profiles.active', 'local'
 }

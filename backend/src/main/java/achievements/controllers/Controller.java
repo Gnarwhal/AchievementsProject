@@ -20,7 +20,7 @@ public class Controller {
 	public Controller() {}
 
 	@RequestMapping(value = "/achievements", method = GET, produces = "application/json")
-	public ResponseEntity index() {
+	public ResponseEntity<String> index() {
 		try {
 			var achievements = db.getAchievements();
 			var mapper = new ObjectMapper();

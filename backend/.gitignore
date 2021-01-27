@@ -18,4 +18,4 @@ gradlew.bat
 .settings/
 
 # Local property file
-src/main/resources/application-db.properties
+src/main/resources/application-*.properties
