@@ -1,0 +1,21 @@
+# Intellij project files
+.idea/
+
+# Build files
+build/
+
+# Gradle files
+.gradle/
+gradle/
+
+gradlew
+gradlew.bat
+
+# Eclipse project files
+.classpath
+.project
+
+.settings/
+
+# Local property file
+src/main/resources/application-db.properties

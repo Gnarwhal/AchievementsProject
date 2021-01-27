@@ -1,0 +1,24 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.3.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'edu.rh.achievements'
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = 1.15
+targetCompatibility = 1.15
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile 'com.microsoft.sqlserver:mssql-jdbc'
+}
+
+tasks.getByName('bootRun') {
+	systemProperty 'spring.profiles.active', 'db'
+}
