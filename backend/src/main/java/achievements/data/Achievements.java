@@ -9,8 +9,6 @@ public class Achievements {
 
 	public static class Achievement {
 
-		@JsonProperty("GameID")
-		private int gameID;
 		@JsonProperty("Name")
 		private String name;
 		@JsonProperty("Description")
@@ -18,58 +16,49 @@ public class Achievements {
 		@JsonProperty("Stages")
 		private int stages;
 
-		public Achievement(int gameID, String name, String description, int stages) {
-			this.gameID      = gameID;
+		public Achievement(String name, String description, int stages) {
 			this.name        = name;
 			this.description = description;
 			this.stages      = stages;
 		}
 
-		public int getGameID() {
-			return gameID;
-		}
+		// Start Getters/Setters
+		public String getName() { return name; }
 
-		public void setGameID(int gameID) {
-			this.gameID = gameID;
-		}
+		public void setName(String name) { this.name = name; }
 
-		public String getName() {
-			return name;
-		}
+		public String getDescription() { return description; }
 
-		public void setName(String name) {
-			this.name = name;
-		}
+		public void setDescription(String description) { this.description = description; }
 
-		public String getDescription() {
-			return description;
-		}
+		public int getStages() { return stages; }
 
-		public void setDescription(String description) {
-			this.description = description;
-		}
-
-		public int getStages() {
-			return stages;
-		}
-
-		public void setStages(int stages) {
-			this.stages = stages;
-		}
+		public void setStages(int stages) { this.stages = stages; }
+		// End Getters/Setters
 	}
 
-	@JsonProperty("achievements")
-	List<Achievement> achievements;
+	@JsonProperty("GameID")
+	private int gameID;
+	@JsonProperty("GameName")
+	private String gameName;
+	@JsonProperty("Achievements")
+	private List<Achievement> achievements;
 
-	public Achievements() {
-		achievements = new ArrayList<Achievement>();
-	}
+	public Achievements() { achievements = new ArrayList<Achievement>(); }
 
-	public List<Achievement> getAchievements() {
-		return achievements;
-	}
+	// Start Getters/Setters
+	public int getGameID() { return gameID; }
 
-	public void setAchievements(List<Achievement> achievements) {
-		this.achievements = achievements;
-	}
+	public void setGameID(int gameID) { this.gameID = gameID; }
+
+	public String getGameName() { return gameName; }
+
+	public void setGameName(String gameName) { this.gameName = gameName; }
+
+	public List<Achievement> getAchievements() { return achievements; }
+
+	public void setAchievements(List<Achievement> achievements) { this.achievements = achievements; }
+	// End Getters/Setters
+
+	public void addAchievement(Achievement achievement) { this.achievements.add(achievement); };
 }
