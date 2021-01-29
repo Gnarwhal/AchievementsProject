@@ -21,8 +21,8 @@ public class Controller {
 
 	public Controller() {}
 
-	@RequestMapping(value = "/achievements/{Name}", method = GET, produces = "application/json")
-	public ResponseEntity<String> fetchAchievements(@PathVariable("Name") String getName) {
+	@RequestMapping(value = { "/achievements", "/achievements/{Name}" }, method = GET, produces = "application/json")
+	public ResponseEntity<String> fetchAchievements(@PathVariable(value = "Name", required = false) String getName) {
 		var achievements = (Achievements) null;
 		if (getName == null) {
 			achievements = db.getAchievements("%");
@@ -42,8 +42,8 @@ public class Controller {
 		}
 	}
 
-	@RequestMapping(value = "/games/{Name}", method = GET, produces = "text/html")
-	public ResponseEntity<String> fetchGames(@PathVariable("Name") String getName) {
+	@RequestMapping(value = { "/games", "/games/{Name}" }, method = GET, produces = "application/json")
+	public ResponseEntity<String> fetchGames(@PathVariable(value = "Name", required = false) String getName) {
 		var games = (Games) null;
 		if (getName == null) {
 			games = db.getGames("%");

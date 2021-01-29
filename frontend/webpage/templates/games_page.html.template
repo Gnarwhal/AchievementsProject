@@ -1,0 +1,53 @@
+<div class="list-page-search">
+	<label for="game-search">Search</label>
+	<input id="game-search" type="text" placeholder="Name, Keyword, etc..." name="game-search" />
+</div>
+<div class="list-page-partitions">
+	<div class="list-page-filter-partition">
+		<p class="page-subheader-text">Filters</p>
+		<div class="page-subheader-separator"></div>
+		<div id="games-owned-filter" class="list-page-filter">
+			<div class="list-page-filter-checkbox"></div>
+			<p class="list-page-filter-name">Games Owned</p>
+		</div>
+	</div>
+	<div class="list-page-list-partition">
+		<div class="list-page-list">
+			<div class="list-page-list-header">
+				<p class="game-list-page-entry-icon"></p>
+				<p class="game-list-page-entry-name">Name</p>
+				<p class="game-list-page-entry-description">Description</p>
+			</div>
+			<div class="list-page-list-entry">
+				<img class="game-list-page-entry-icon" src="res/dummy_game.png" alt="Achievement Icon.png" />
+				<p class="game-list-page-entry-name">Latin</p>
+				<p class="game-list-page-entry-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			</div>
+			<div class="list-page-list-entry">
+				<img class="game-list-page-entry-icon" src="res/dummy_game.png" alt="Achievement Icon.png" />
+				<p class="game-list-page-entry-name">Latin</p>
+				<p class="game-list-page-entry-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			</div>
+			<div class="list-page-list-entry">
+				<img class="game-list-page-entry-icon" src="res/dummy_game.png" alt="Achievement Icon.png" />
+				<p class="game-list-page-entry-name">Latin</p>
+				<p class="game-list-page-entry-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			</div>
+			<div class="list-page-list-entry">
+				<img class="game-list-page-entry-icon" src="res/dummy_game.png" alt="Achievement Icon.png" />
+				<p class="game-list-page-entry-name">Latin</p>
+				<p class="game-list-page-entry-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			</div>
+			<div class="list-page-list-entry">
+				<img class="game-list-page-entry-icon" src="res/dummy_game.png" alt="Achievement Icon.png" />
+				<p class="game-list-page-entry-name">Latin</p>
+				<p class="game-list-page-entry-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			</div>
+			<div class="list-page-list-entry">
+				<img class="game-list-page-entry-icon" src="res/dummy_game.png" alt="Achievement Icon.png" />
+				<p class="game-list-page-entry-name">Latin</p>
+				<p class="game-list-page-entry-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			</div>
+		</div>
+	</div>
+</div>

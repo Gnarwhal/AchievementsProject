@@ -1,0 +1,40 @@
+<div class="list-page-search">
+	<label for="achievement-search">Search</label>
+	<input id="achievement-search" type="text" placeholder="Name, Keyword, etc..." name="achievement-search" />
+</div>
+<div class="list-page-partitions">
+	<div class="list-page-filter-partition">
+		<p class="page-subheader-text">Filters</p>
+		<div class="page-subheader-separator"></div>
+		<div id="games-owned-filter" class="list-page-filter">
+			<div class="list-page-filter-checkbox"></div>
+			<p class="list-page-filter-name">From Games Owned</p>
+		</div>
+		<div id="games-owned-filter" class="list-page-filter">
+			<div class="list-page-filter-checkbox"></div>
+			<p class="list-page-filter-name">In Progress</p>
+		</div>
+		<div id="games-owned-filter" class="list-page-filter">
+			<div class="list-page-filter-checkbox"></div>
+			<p class="list-page-filter-name">Completed</p>
+		</div>
+	</div>
+	<div class="list-page-list-partition">
+		<div class="list-page-list">
+			<div class="list-page-list-header">
+				<p class="achievement-list-page-entry-icon"></p>
+				<p class="achievement-list-page-entry-name">Name</p>
+				<p class="achievement-list-page-entry-description">Description</p>
+				<p class="achievement-list-page-entry-stages">Stages</p>
+			</div>
+			<template data-template="achievements-page-list: list">
+				<div class="list-page-list-entry">
+					<img class="achievement-list-page-entry-icon" src="res/dummy_achievement.png" alt="Achievement Thumbnail"></img>
+					<p class="achievement-list-page-entry-name">${achievements-page-list[Name]}</p>
+					<p class="achievement-list-page-entry-description">${achievements-page-list[Description]}</p>
+					<p class="achievement-list-page-entry-stages">${achievements-page-list[Stages]}</p>
+				</div>
+			</template>
+		</div>
+	</div>
+</div>

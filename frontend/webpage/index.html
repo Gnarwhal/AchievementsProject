@@ -1,272 +1,35 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Achievements Project</title>
 		<meta charset="UTF-8" />
+		<title>Achievements Project</title>
 
-		<!-- Load Stylesheets -->
 		<link rel="stylesheet" href="styles/index.css" />
 	</head>
 	<body>
 		<div id="navbar">
-			<div id="navbar-left">
-				<div id="navbar-item-games" class="navbar-item" data-page-name="games">
-					Games
-				</diV>
-				<div id="navbar-item-achievement" class="navbar-item" data-page-name="achievements">
-					Achievements
-				</diV>
-			</div>
-			<div id="navbar-right">
-				<div id="navbar-item-profile" class="navbar-item" data-page-name="profile">
-					Profile
+			<template data-template="navbar: list">
+				<div id="navbar-section-${navbar[section]}" class="navbar-section">
+					<template data-template="navbar-section-${navbar[section]}: list">
+						<div id="navbar-item-${navbar-section-${navbar[section]}[item]}" class="navbar-item" data-page-name="${navbar-section-${navbar[section]}[item]}">
+							${navbar-section-${navbar[section]}[title]}
+						</div>
+					</template>
 				</div>
-			</div>	
+			</template>
 		</div>
 		<div id="content-body">
-			<div id="games-page" class="page">
-				<div class="page-header">
-					<p class="page-header-text">Games</p>
-					<div class="page-header-separator"></div>
-					<div class="list-page-search">
-						<label for="game-search">Search</label>
-						<input id="game-search" type="text" placeholder="Name, Keyword, etc..." name="game-search" />
+			<template data-template="content-body: list">
+				<div id="${content-body[page]}-page" class="page">
+					<div class="page-header">
+						<p class="page-header-text">${content-body[title]}</p>
+						<div class="page-header-separator"></div>
 					</div>
-					<div class="list-page-partitions">
-						<div class="list-page-filter-partition">
-							<p class="page-subheader-text">Filters</p>
-							<div class="page-subheader-separator"></div>
-							<div id="games-owned-filter" class="list-page-filter">
-								<div class="list-page-filter-checkbox"></div>
-								<p class="list-page-filter-name">Games Owned</p>
-							</div>
-						</div>
-						<div class="list-page-list-partition">
-							<div class="list-page-list">
-								<div class="list-page-list-header">
-									<p class="game-list-page-entry-icon"></p>
-									<p class="game-list-page-entry-name">Name</p>
-									<p class="game-list-page-entry-description">Description</p>
-								</div>
-								<div class="list-page-list-entry">
-									<img class="game-list-page-entry-icon" src="res/dummy_game.png" alt="Achievement Icon.png" />
-									<p class="game-list-page-entry-name">Latin</p>
-									<p class="game-list-page-entry-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-								<div class="list-page-list-entry">
-									<img class="game-list-page-entry-icon" src="res/dummy_game.png" alt="Achievement Icon.png" />
-									<p class="game-list-page-entry-name">Latin</p>
-									<p class="game-list-page-entry-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-								<div class="list-page-list-entry">
-									<img class="game-list-page-entry-icon" src="res/dummy_game.png" alt="Achievement Icon.png" />
-									<p class="game-list-page-entry-name">Latin</p>
-									<p class="game-list-page-entry-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-								<div class="list-page-list-entry">
-									<img class="game-list-page-entry-icon" src="res/dummy_game.png" alt="Achievement Icon.png" />
-									<p class="game-list-page-entry-name">Latin</p>
-									<p class="game-list-page-entry-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-								<div class="list-page-list-entry">
-									<img class="game-list-page-entry-icon" src="res/dummy_game.png" alt="Achievement Icon.png" />
-									<p class="game-list-page-entry-name">Latin</p>
-									<p class="game-list-page-entry-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-								<div class="list-page-list-entry">
-									<img class="game-list-page-entry-icon" src="res/dummy_game.png" alt="Achievement Icon.png" />
-									<p class="game-list-page-entry-name">Latin</p>
-									<p class="game-list-page-entry-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-								</div>
-							</div>
-						</div>
-					</div>
+					<template data-template="fetch-${content-body[page]}-page: fetch"></template>
 				</div>
-			</div>
-			<div id="achievements-page" class="page">
-				<div class="page-header">
-					<p class="page-header-text">Achievements</p>
-					<div class="page-header-separator"></div>
-					<div class="list-page-search">
-						<label for="achievement-search">Search</label>
-						<input id="achievement-search" type="text" placeholder="Name, Keyword, etc..." name="achievement-search" />
-					</div>
-					<div class="list-page-partitions">
-						<div class="list-page-filter-partition">
-							<p class="page-subheader-text">Filters</p>
-							<div class="page-subheader-separator"></div>
-							<div id="games-owned-filter" class="list-page-filter">
-								<div class="list-page-filter-checkbox"></div>
-								<p class="list-page-filter-name">From Games Owned</p>
-							</div>
-							<div id="games-owned-filter" class="list-page-filter">
-								<div class="list-page-filter-checkbox"></div>
-								<p class="list-page-filter-name">In Progress</p>
-							</div>
-							<div id="games-owned-filter" class="list-page-filter">
-								<div class="list-page-filter-checkbox"></div>
-								<p class="list-page-filter-name">Completed</p>
-							</div>
-						</div>
-						<div class="list-page-list-partition">
-							<div class="list-page-list">
-								<div class="list-page-list-header">
-									<p class="achievement-list-page-entry-icon"></p>
-									<p class="achievement-list-page-entry-name">Name</p>
-									<p class="achievement-list-page-entry-description">Description</p>
-									<p class="achievement-list-page-entry-game">Game</p>
-								</div>
-								${list}
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="profile-page" class="page">
-				<div class="page-header">
-					<p class="page-header-text">Profile</p>
-					<div class="page-header-separator"></div>
-				</div>
-				<div id="profile-section-1">
-					<div id="profile-info">
-						<img id="profile-info-pfp" src="res/temp_pfp.png" alt="User's Profile Pictuer" />
-						<p id="profile-info-name">Jane Doe</p>
-					</div>
-					<div id="profile-platforms">
-						<p class="page-subheader-text">Platforms</p>
-						<div class="page-subheader-separator"></div>
-						<div class="profile-platform-entry connected">
-							<div class="profile-platform-entry-left">
-								<img class="profile-platform-icon" src="res/steam.png" alt="Steam Logo" />
-								<p class="profile-platform-name">Steam</p>
-							</div>
-							<div class="profile-platform-entry-right">
-								<p class="profile-platform-connected">Connected</p>
-							</div>
-						</div>
-						<div class="profile-platform-entry">
-							<div class="profile-platform-entry-left">
-								<img class="profile-platform-icon" src="res/xbox.png"  alt="Xbox Logo" />
-								<p class="profile-platform-name">Xbox Live</p>
-							</div>
-							<div class="profile-platform-entry-right">
-								<p class="profile-platform-connected">Connected</p>
-							</div>
-						</div>
-						<div class="profile-platform-entry">
-							<div class="profile-platform-entry-left">
-								<img class="profile-platform-icon" src="res/psn.png"  alt="PSN Logo" />
-								<p class="profile-platform-name">PSN</p>
-							</div>
-							<div class="profile-platform-entry-right">
-								<p class="profile-platform-connected">Connected</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="profile-section-2">
-					<div id="profile-games">
-						<p class="page-subheader-text">Games</p>
-						<div class="page-subheader-separator"></div>
-						<div class="profile-game-entry">
-							<img class="profile-game-entry-icon" src="res/dummy_game.png" alt="Some Game Icon" />
-							<p class="profile-game-entry-name">Latin</p>
-						</div>
-						<div class="profile-game-entry">
-							<img class="profile-game-entry-icon" src="res/dummy_game.png" alt="Some Game Icon" />
-							<p class="profile-game-entry-name">Latin</p>
-						</div>
-						<div class="profile-game-entry">
-							<img class="profile-game-entry-icon" src="res/dummy_game.png" alt="Some Game Icon" />
-							<p class="profile-game-entry-name">Latin</p>
-						</div>
-						<div class="profile-game-entry">
-							<img class="profile-game-entry-icon" src="res/dummy_game.png" alt="Some Game Icon" />
-							<p class="profile-game-entry-name">Latin</p>
-						</div>
-					</div>
-					<div id="profile-achievements">
-						<p class="page-subheader-text">Achievements</p>
-						<div class="page-subheader-separator"></div>
-						<div class="profile-achievement-entry completed">
-							<div class="profile-achievement-entry-left">
-								<img class="profile-achievement-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
-								<p class="profile-achievement-entry-name">Lorem Ipsum</p>
-							</div>
-							<div class="profile-achievement-entry-right">
-								<p class="profile-achievement-completed">Completed</p>
-							</div>
-						</div>
-						<div class="profile-achievement-entry completed">
-							<div class="profile-achievement-entry-left">
-								<img class="profile-achievement-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
-								<p class="profile-achievement-entry-name">Lorem Ipsum</p>
-							</div>
-							<div class="profile-achievement-entry-right">
-								<p class="profile-achievement-completed">Completed</p>
-							</div>
-						</div>
-						<div class="profile-achievement-entry completed">
-							<div class="profile-achievement-entry-left">
-								<img class="profile-achievement-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
-								<p class="profile-achievement-entry-name">Lorem Ipsum</p>
-							</div>
-							<div class="profile-achievement-entry-right">
-								<p class="profile-achievement-completed">Completed</p>
-							</div>
-						</div>
-						<div class="profile-achievement-entry">
-							<div class="profile-achievement-entry-left">
-								<img class="profile-achievement-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
-								<p class="profile-achievement-entry-name">Lorem Ipsum</p>
-							</div>
-							<div class="profile-achievement-entry-right">
-								<p class="profile-achievement-completed">Completed</p>
-							</div>
-						</div>
-						<div class="profile-achievement-entry">
-							<div class="profile-achievement-entry-left">
-								<img class="profile-achievement-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
-								<p class="profile-achievement-entry-name">Lorem Ipsum</p>
-							</div>
-							<div class="profile-achievement-entry-right">
-								<p class="profile-achievement-completed">Completed</p>
-							</div>
-						</div>
-						<div class="profile-achievement-entry">
-							<div class="profile-achievement-entry-left">
-								<img class="profile-achievement-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
-								<p class="profile-achievement-entry-name">Lorem Ipsum</p>
-							</div>
-							<div class="profile-achievement-entry-right">
-								<p class="profile-achievement-completed">Completed</p>
-							</div>
-						</div>
-						<div class="profile-achievement-entry">
-							<div class="profile-achievement-entry-left">
-								<img class="profile-achievement-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
-								<p class="profile-achievement-entry-name">Lorem Ipsum</p>
-							</div>
-							<div class="profile-achievement-entry-right">
-								<p class="profile-achievement-completed">Completed</p>
-							</div>
-						</div>
-						<div class="profile-achievement-entry">
-							<div class="profile-achievement-entry-left">
-								<img class="profile-achievement-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
-								<p class="profile-achievement-entry-name">Lorem Ipsum</p>
-							</div>
-							<div class="profile-achievement-entry-right">
-								<p class="profile-achievement-completed">Completed</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			</template>
 		</div>
-
-		<!-- Load javascript -->
+		<script src="scripts/template.js"></script>
 		<script src="scripts/index.js"></script>
 	</body>
 </html>
-

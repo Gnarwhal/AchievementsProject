@@ -52,17 +52,7 @@ html, body {
 	box-shadow: 0px 0px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
-#navbar-left {
-	width: max-content;
-	height: 100%;
-
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-}
-
-#navbar-right {
+.navbar-section {
 	width: max-content;
 	height: 100%;
 
@@ -363,7 +353,7 @@ html, body {
 }
 
 #games-page {
-	max-width: 2560px;
+	max-width: 1920px;
 }
 
 .game-list-page-entry-icon {
@@ -404,7 +394,7 @@ html, body {
 }
 
 #achievements-page {
-	max-width: 2560px;
+	max-width: 1920px;
 }
 
 .achievement-list-page-entry-icon {
@@ -425,7 +415,7 @@ html, body {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 
-	flex-grow: 1;
+	flex-grow: 4;
 	flex-basis: 0px;
 }
 
@@ -440,11 +430,11 @@ html, body {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 
-	flex-grow: 2;
+	flex-grow: 8;
 	flex-basis: 0px;
 }
 
-.achievement-list-page-entry-game {
+.achievement-list-page-entry-stages {
 	box-sizing: border-box;
 
 	margin: 0;
