@@ -1,25 +1,25 @@
 const expandTemplates = async () => {
-	template.register("navbar", [
+	template.apply("navbar").values([
 		{ section: "left" },
 		{ section: "right" }
 	]);
-	template.register("navbar-section-left", [
+	template.apply("navbar-section-left").values([
 		{ item: "games",        title: "Games"        },
 		{ item: "achievements", title: "Achievements" }
 	]);
-	template.register("navbar-section-right", [
+	template.apply("navbar-section-right").values([
 		{ item: "profile", title: "Profile" }
 	]);
-	template.register("content-body", [
+	template.apply("content-body").values([
 		{ page: "games",        title: "Games"        },
 		{ page: "achievements", title: "Achievements" },
 		{ page: "profile",      title: "Profile"      }
 	]);
-	template.register("fetch-games-page",        "games_page"       );
-	template.register("fetch-achievements-page", "achievements_page");
-	template.register("fetch-profile-page",      "profile_page"     );
-	template.registerFetch("achievements-page-list", "Achievements", "https://localhost:4730/achievements", { method: 'GET', mode: 'cors' });
-	
+	template.apply("extern-games-page"       ).values("games_page"       );
+	template.apply("extern-achievements-page").values("achievements_page");
+	template.apply("extern-profile-page"     ).values("profile_page"     );
+	template.apply("achievements-page-list"  ).fetch("achievements", "https://localhost:4730/achievements");
+
 	await template.expand();
 };
 

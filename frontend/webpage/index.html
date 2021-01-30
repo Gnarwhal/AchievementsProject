@@ -8,24 +8,24 @@
 	</head>
 	<body>
 		<div id="navbar">
-			<template data-template="navbar: list">
-				<div id="navbar-section-${navbar[section]}" class="navbar-section">
-					<template data-template="navbar-section-${navbar[section]}: list">
-						<div id="navbar-item-${navbar-section-${navbar[section]}[item]}" class="navbar-item" data-page-name="${navbar-section-${navbar[section]}[item]}">
-							${navbar-section-${navbar[section]}[title]}
+			<template data-template="navbar: List<Basic>">
+				<div id="navbar-section-${section}" class="navbar-section">
+					<template data-template="navbar-section-${section}: List<Basic>">
+						<div id="navbar-item-${item}" class="navbar-item" data-page-name="${item}">
+							${title}
 						</div>
 					</template>
 				</div>
 			</template>
 		</div>
 		<div id="content-body">
-			<template data-template="content-body: list">
-				<div id="${content-body[page]}-page" class="page">
+			<template data-template="content-body: List<Basic>">
+				<div id="${page}-page" class="page">
 					<div class="page-header">
-						<p class="page-header-text">${content-body[title]}</p>
+						<p class="page-header-text">${title}</p>
 						<div class="page-header-separator"></div>
 					</div>
-					<template data-template="fetch-${content-body[page]}-page: fetch"></template>
+					<template data-template="extern-${page}-page: Extern"></template>
 				</div>
 			</template>
 		</div>

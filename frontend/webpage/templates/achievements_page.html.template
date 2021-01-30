@@ -27,12 +27,12 @@
 				<p class="achievement-list-page-entry-description">Description</p>
 				<p class="achievement-list-page-entry-stages">Stages</p>
 			</div>
-			<template data-template="achievements-page-list: list">
+			<template data-template="achievements-page-list: List<Basic>">
 				<div class="list-page-list-entry">
 					<img class="achievement-list-page-entry-icon" src="res/dummy_achievement.png" alt="Achievement Thumbnail"></img>
-					<p class="achievement-list-page-entry-name">${achievements-page-list[Name]}</p>
-					<p class="achievement-list-page-entry-description">${achievements-page-list[Description]}</p>
-					<p class="achievement-list-page-entry-stages">${achievements-page-list[Stages]}</p>
+					<p class="achievement-list-page-entry-name">${name}</p>
+					<p class="achievement-list-page-entry-description">${description}</p>
+					<p class="achievement-list-page-entry-stages">${stages}</p>
 				</div>
 			</template>
 		</div>

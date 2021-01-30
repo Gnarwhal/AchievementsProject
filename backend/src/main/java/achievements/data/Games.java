@@ -11,9 +11,9 @@ public class Games {
 
         @JsonProperty("ID")
         private int id;
-        @JsonProperty("Name")
+        @JsonProperty("name")
         private String name;
-        @JsonProperty("Platforms")
+        @JsonProperty("platforms")
         private List<String> platforms;
 
         public Game(int id, String name, String platform) {
@@ -41,7 +41,7 @@ public class Games {
 
     }
 
-    @JsonProperty("Games")
+    @JsonProperty("games")
     private List<Game> games;
 
     public Games() { games = new ArrayList<Game>(); }

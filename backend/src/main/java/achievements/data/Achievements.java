@@ -9,11 +9,11 @@ public class Achievements {
 
 	public static class Achievement {
 
-		@JsonProperty("Name")
+		@JsonProperty("name")
 		private String name;
-		@JsonProperty("Description")
+		@JsonProperty("description")
 		private String description;
-		@JsonProperty("Stages")
+		@JsonProperty("stages")
 		private int stages;
 
 		public Achievement(String name, String description, int stages) {
@@ -37,11 +37,11 @@ public class Achievements {
 		// End Getters/Setters
 	}
 
-	@JsonProperty("GameID")
+	@JsonProperty("gameID")
 	private int gameID;
-	@JsonProperty("GameName")
+	@JsonProperty("gameName")
 	private String gameName;
-	@JsonProperty("Achievements")
+	@JsonProperty("achievements")
 	private List<Achievement> achievements;
 
 	public Achievements() { achievements = new ArrayList<Achievement>(); }
