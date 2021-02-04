@@ -18,7 +18,7 @@ gradlew.bat
 .settings/
 
 # Local property file
-src/main/resources/application-*.properties
+src/main/resources/application-local.properties
 
 # Server Keystore
 src/main/resources/achievements-ssl-key.p12
