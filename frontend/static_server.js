@@ -1,5 +1,6 @@
-const express  = require('express');
-const morgan   = require('morgan' );
+const express  = require('express' );
+const morgan   = require('morgan'  );
+const promptly = require('promptly');
 
 const config  = require('./config.js').load(process.argv[2]);
 
@@ -11,4 +12,15 @@ const app = express();
 app.use("/", morgan("dev"));
 app.use("/", express.static("webpage"));
 
-app.listen(config.port);
+const server = app.listen(config.port);
+
+const prompt = input => {
+	if (/q(?:uit)?|exit/i.test(input)) {
+		server.close();
+	} else {
+		promptly.prompt('')
+			.then(prompt);
+	}
+};
+
+prompt();
