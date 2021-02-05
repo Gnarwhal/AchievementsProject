@@ -1,38 +1,38 @@
 <div class="list-page-search">
 	<label for="achievement-search">Search</label>
-	<input id="achievement-search" type="text" placeholder="Name, Keyword, etc..." name="achievement-search" />
+	<input id="achievement-search" type="text" placeholder="Name, Keyword, etc..." achievement-name="achievement-search" />
 </div>
 <div class="list-page-partitions">
 	<div class="list-page-filter-partition">
 		<p class="page-subheader-text">Filters</p>
 		<div class="page-subheader-separator"></div>
-		<div id="games-owned-filter" class="list-page-filter">
+		<div id="from-games-owned-filter" class="list-page-filter">
 			<div class="list-page-filter-checkbox"></div>
 			<p class="list-page-filter-name">From Games Owned</p>
 		</div>
-		<div id="games-owned-filter" class="list-page-filter">
+		<div id="in-progress-filter" class="list-page-filter">
 			<div class="list-page-filter-checkbox"></div>
 			<p class="list-page-filter-name">In Progress</p>
 		</div>
-		<div id="games-owned-filter" class="list-page-filter">
+		<div id="completed-filter" class="list-page-filter">
 			<div class="list-page-filter-checkbox"></div>
 			<p class="list-page-filter-name">Completed</p>
 		</div>
 	</div>
 	<div class="list-page-list-partition">
 		<div class="list-page-list">
-			<div class="list-page-list-header">
-				<p class="achievement-list-page-entry-icon"></p>
-				<p class="achievement-list-page-entry-name">Name</p>
-				<p class="achievement-list-page-entry-description">Description</p>
-				<p class="achievement-list-page-entry-stages">Stages</p>
+			<div class="list-page-header">
+				<p class="list-page-entry-icon"></p>
+				<p class="list-page-entry-text achievement-name">Name</p>
+				<p class="list-page-entry-text achievement-description">Description</p>
+				<p class="list-page-entry-text achievement-stages">Stages</p>
 			</div>
 			<template data-template="achievements-page-list: List<Basic>">
-				<div class="list-page-list-entry">
-					<img class="achievement-list-page-entry-icon" src="res/dummy_achievement.png" alt="Achievement Thumbnail"></img>
-					<p class="achievement-list-page-entry-name">${name}</p>
-					<p class="achievement-list-page-entry-description">${description}</p>
-					<p class="achievement-list-page-entry-stages">${stages}</p>
+				<div class="list-page-entry">
+					<img class="list-page-entry-icon" src="res/dummy_achievement.png" alt="Achievement Thumbnail"></img>
+					<p class="list-page-entry-text achievement-name">${achievement-name}</p>
+					<p class="list-page-entry-text achievement-description">${achievement-description}</p>
+					<p class="list-page-entry-text achievement-stages">${stages}</p>
 				</div>
 			</template>
 		</div>

@@ -1,7 +1,5 @@
-const express = require('express');
-const morgan  = require('morgan' );
-const fs      = require('fs'     );
-const https   = require('https'  );
+const express  = require('express');
+const morgan   = require('morgan' );
 
 const config  = require('./config.js').load(process.argv[2]);
 

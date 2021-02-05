@@ -2,6 +2,8 @@ package achievements.services;
 
 import achievements.data.Achievements;
 import achievements.data.Games;
+import achievements.data.User;
+import achievements.misc.Password;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -83,5 +85,50 @@ public class DbService {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public int createUser(User user) {
+		try {
+			var statement = db.prepareCall("{? = call CreateUser(?, ?, ?, ?)}");
+			statement.registerOutParameter(1, Types.INTEGER);
+			statement.setString(2, user.getEmail());
+			statement.setString(3, user.getUsername());
+
+			var password = Password.generate(user.getPassword());
+			statement.setString(4, password.salt);
+			statement.setString(5, password.hash);
+
+			statement.execute();
+			var code = statement.getInt(1);
+			statement.close();
+
+			return code;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	public int login(User user) {
+		try {
+			var statement = db.prepareStatement("SELECT Salt, Password FROM [dbo].[User] WHERE Email = ?");
+			statement.setString(1, user.email);
+
+			var result = statement.executeQuery();
+			if (result.next()) {
+				var salt = result.getString("Salt");
+				var hash = result.getString("Password");
+				if (Password.validate(salt, user.getPassword(), hash)) {
+					return 0;
+				} else {
+					return 2;
+				}
+			} else {
+				return 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 }

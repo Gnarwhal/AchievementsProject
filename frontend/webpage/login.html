@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Achievements Project | Login</title>
+		<link rel="stylesheet" href="styles/theme.css" />
+		<link rel="stylesheet" href="styles/common.css" />
+		<link rel="stylesheet" href="styles/login.css" />
+	</head>
+	<body>
+		<div id="navbar"></div>
+
+		<div id="content-body">
+			<div id="login-page" class="page">
+				<div class="page-header">
+					<p class="page-header-text">Achievements Project</p>
+					<div class="page-header-separator"></div>
+				</div>
+				<div id="login-header">
+					<p id="login-header-text" class="page-subheader-text">Login</p>
+					<div class="page-subheader-separator"></div>
+				</div>
+				<div id="login-form">
+					<p id="error-message">Egg</p>
+					<input id="email"    class="login-field" type="text"     placeholder="Email"></input>
+					<input id="username" class="login-field" type="text"     placeholder="Username"></input>
+					<input id="password" class="login-field" type="password" placeholder="Password"></input>
+					<input id="confirm"  class="login-field" type="password" placeholder="Confirm your password"></input>
+					<div id="login-buttons">
+						<div id="create-user-button" class="ap-button login">Create Account</div>
+						<div id="login-button" class="ap-button login">Login</div>
+					</div>
+					<p id="warning">WARNING! The security of this project is questionable at best. Please refrain from using any truly sensitive data.</p>
+				</div>
+			</div>
+		</div>
+
+		<script src="scripts/template.js"></script>
+		<script src="scripts/login.js"></script>
+	</body>
+</html>

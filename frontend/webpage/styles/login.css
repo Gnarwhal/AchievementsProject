@@ -1,0 +1,101 @@
+:root {
+	--form-spacing: 48px;
+
+	--element-spacing: 12px;
+
+	--error: #FA7575;
+}
+
+#login-page {
+	display: block;
+
+	max-width: 1280px;
+}
+
+#login-header {
+	box-sizing: border-box;
+
+	padding: 0 calc(25% - 64px);
+
+	width: 100%;
+	height: max-content;
+}
+
+#login-form {
+	box-sizing: border-box;
+
+	margin: 24px calc(25% - 64px) 0;
+	padding: 24px 0;
+
+	height: max-content;
+
+	background-color: var(--distinction);
+
+	border-radius: 8px;
+}
+
+#error-message {
+	display: none;
+
+	box-sizing: border-box;
+
+	margin: 0 var(--form-spacing) var(--element-spacing);
+	width: calc(100% - (var(--form-spacing) * 2));
+
+	color: var(--error);
+
+	font-size: 20px;
+}
+
+.login-field {
+	box-sizing: border-box;
+
+	margin: 0 var(--form-spacing) var(--element-spacing);
+	border: 0;
+	padding: 8px;
+
+	width: calc(100% - (var(--form-spacing) * 2));
+	height: max-content;
+
+	font-size: 20px;
+
+	border-radius: 4px;
+
+	outline: none;
+}
+
+.login-field.error {
+	background-color: var(--error);
+}
+
+#username,
+#confirm {
+	display: none;
+}
+
+#login-buttons {
+	margin: 0 calc(var(--form-spacing) - (var(--element-spacing) / 2));
+	width: calc(100% - (var(--form-spacing) * 2) + var(--element-spacing));
+	height: max-content;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.ap-button.login {
+	margin: 0 calc(var(--element-spacing) / 2);
+	flex-grow: 1;
+	flex-basis: 0px;
+}
+
+#warning {
+	box-sizing: border-box;
+
+	padding: 0 var(--form-spacing);
+
+	color: var(--foreground);
+
+	font-size: 24px;
+}
