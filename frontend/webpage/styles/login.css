@@ -86,8 +86,15 @@
 
 .ap-button.login {
 	margin: 0 calc(var(--element-spacing) / 2);
+	flex-basis: max-content;
+}
+
+#create-user-button {
+	flex-grow: 0;
+}
+
+#login-button {
 	flex-grow: 1;
-	flex-basis: 0px;
 }
 
 #warning {

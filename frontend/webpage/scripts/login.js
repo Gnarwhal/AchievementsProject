@@ -31,11 +31,17 @@ window.addEventListener("load", (loadEvent) => {
 		if (!frozen) {
 			fields.username.style.display = "block";
 			fields.confirm.style.display = "block";
-			login.style.display = "none";
 			header.textContent = "Create User";
+			login.style.flexGrow = "0";
+			login.textContent = "< Login";
+			createUser.style.flexGrow = "1";
+			createUser.textContent = "Create User";
 
 			createUser.removeEventListener("click", switchToCreateAction);
 			createUser.addEventListener("click", createUserAction);
+
+			login.removeEventListener("click", loginAction);
+			login.addEventListener("click", switchToLoginAction);
 		}
 	};
 	const createUserAction = (clickEvent) => {
@@ -82,6 +88,23 @@ window.addEventListener("load", (loadEvent) => {
 	};
 	createUser.addEventListener("click", switchToCreateAction);
 
+	const switchToLoginAction = (clickEvent) => {
+		if (!frozen) {
+			fields.username.style.display = "none";
+			fields.confirm.style.display = "none";
+			header.textContent = "Login";
+			login.style.flexGrow = "1"
+			login.textContent = "Login";
+			createUser.style.flexGrow = "0";
+			createUser.textContent = "Create User >";
+
+			createUser.removeEventListener("click", createUserAction);
+			createUser.addEventListener("click", switchToCreateAction);
+
+			login.removeEventListener("click", switchToLoginAction);
+			login.addEventListener("click", loginAction);
+		}
+	};
 	const loginAction = (clickEvent) => {
 		if (!frozen) {
 			if (fields.email.value === '') {
