@@ -1,7 +1,6 @@
 package achievements;
 
-import achievements.misc.Password;
-import achievements.services.DbConnectionService;
+import achievements.misc.DbConnectionService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

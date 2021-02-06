@@ -1,3 +1,7 @@
+:root {
+	--shadow-color: rgba(0, 0, 0, 0.5);
+}
+
 html, body {
 	background-color: var(--background-dark);
 
@@ -27,7 +31,7 @@ html, body {
 	justify-content: space-between;
 	align-items: center;
 
-	box-shadow: 0px 0px 5px 10px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 5px 10px var(--shadow-color);
 }
 
 .navbar-section {
@@ -67,19 +71,16 @@ html, body {
 }
 
 .ap-button {
-	box-sizing: border-box;
-
-	padding: 12px 16px;
-
 	color: var(--foreground);
 	background-color: var(--accent-value2);
-
-	font-size: 18px;
-	text-align: center;
 
 	border-radius: 4px;
 
 	cursor: default;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
 	transition-property: background-color;
 	transition-duration: 0.15s;
@@ -112,33 +113,61 @@ html, body {
 
 	box-sizing: border-box;
 
-	padding: 0px 64px;
+	padding: 32px;
 
 	width: 100%;
 	height: max-content;
 	min-height: 100%;
 
 	background-color: var(--background);
-	box-shadow: 0px 0px 5px 10px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 5px 10px var(--shadow-color);
 
 	display: none;
+}
+
+.page-subsection {
+	box-sizing: border-box;
+	margin: 32px;
+	padding: 16px;
+	
+	background-color: var(--background-dark);
+
+	border-radius: 8px;
+
+	box-shadow: inset 0px 0px 8px 8px var(--shadow-color);
+
+	position: relative;
+	z-index: -1;
+}
+
+.page-subsection-wrapper {
+	padding: 16px;
+}
+
+.page-subsection-chunk {
+	box-shadow: 0px 0px 8px 8px var(--shadow-color);
+
+	border-radius: 8px;
+	overflow: hidden;
 }
 
 .page-header {
 	box-sizing: border-box;
 
-	padding: 64px 0px;
-
-	width: 100%;
 	height: max-content;
+
+	margin: 16px;
+}
+
+.page-subheader {
+	margin-bottom: 16px;
 }
 
 .page-header-text,
 .page-subheader-text {
 	width: max-content;
 
-	margin: 0;
-	margin-bottom: 0.25em;
+	margin: 0 0 0.25em;
 
 	color: var(--foreground);
 
@@ -157,11 +186,11 @@ html, body {
 }
 
 .page-header-text {
-	font-size: 64px;
+	font-size: 48px;
 }
 
 .page-subheader-text {
-	font-size: 48px;
+	font-size: 32px;
 }
 
 .page-header-separator,
@@ -175,9 +204,7 @@ html, body {
 .list-page-search {
 	box-sizing: border-box;
 
-	padding: 0px 64px 32px;
-
-	width: 100%;
+	margin: 16px;
 
 	display: flex;
 	flex-direction: row;
@@ -197,8 +224,6 @@ html, body {
 
 .list-page-search > label {
 	background-color: var(--accent-value2);
-
-	border-radius: 8px 0px 0px 8px;
 }
 
 .list-page-search > label:hover {
@@ -216,7 +241,6 @@ html, body {
 	background-color: var(--distinction);
 
 	border: 0;
-	border-radius: 0px 8px 8px 0px;
 
 	flex-grow: 1;
 
@@ -235,8 +259,6 @@ html, body {
 .list-page-partitions {
 	box-sizing: border-box;
 
-	padding: 32px 64px;
-
 	width: 100%;
 	height: max-content;
 
@@ -251,9 +273,11 @@ html, body {
 	max-width: 640px;
 }
 
-.list-page-filter {
-	margin-top: 16px;
+.list-page-filter-chunk {
+	background-color: var(--distinction);
+}
 
+.list-page-filter {
 	box-sizing: border-box;
 
 	width: 100%;
@@ -269,9 +293,9 @@ html, body {
 	width: 32px;
 	height: 32px;
 
-	background-color: var(--background);
+	background-color: var(--foreground);
 
-	border: 3px solid var(--distinction);
+	border: 3px solid var(--foreground-dark);
 	border-radius: 8px;
 
 	transition-property: background-color, border-color;
@@ -279,7 +303,7 @@ html, body {
 }
 
 .list-page-filter:hover > .list-page-filter-checkbox {
-	background-color: var(--background);
+	background-color: var(--foreground);
 	border-color: var(--selected-accent1);
 }
 
@@ -306,8 +330,6 @@ html, body {
 
 .list-page-list-partition {
 	box-sizing: border-box;
-
-	padding-left: 64px;
 
 	flex-grow: 1;
 }

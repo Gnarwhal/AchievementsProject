@@ -1,37 +1,37 @@
 <div id="profile-section-1">
-	<div id="profile-info">
-		<img id="profile-info-pfp" src="res/temp_pfp.png" alt="User's Profile Pictuer" />
-		<div class="page-subheader-separator"></div>
-		<p id="profile-info-name">Jane Doe</p>
+	<div id="profile-info" class="page-subsection">
+		<div class="page-subsection-wrapper">
+			<div class="page-subheader">
+				<p id="profile-info-name" class="page-subheader-text">Jane Doe</p>
+				<div class="page-subheader-separator"></div>
+			</div>
+			<div id="profile-info-pfp-border" class="page-subsection-chunk">
+				<div id="profile-info-pfp-vignette">
+					<img id="profile-info-pfp-img" src="res/guest_pfp.png" alt="User's Profile Pictuer" />
+				</div>
+			</div>
+		</div>
 	</div>
-	<div id="profile-platforms">
-		<p class="page-subheader-text">Platforms</p>
-		<div class="page-subheader-separator"></div>
-		<div class="profile-list">
-			<div class="profile-entry accented">
-				<div class="profile-entry-left">
+	<div id="profile-platforms" class="page-subsection">
+		<div class="page-subsection-wrapper">
+			<div class="page-subheader">
+				<p class="page-subheader-text">Platforms</p>
+				<div class="page-subheader-separator"></div>
+			</div>
+			<div class="profile-list page-subsection-chunk">
+				<div class="profile-entry accented top">
 					<img class="profile-entry-icon" src="res/steam.png" alt="Steam Logo" />
-					<p class="profile-entry-text">Steam</p>
-				</div>
-				<div class="profile-entry-right">
+					<p class="profile-entry-text platform-name">Steam</p>
 					<p class="profile-entry-text accented">Connected</p>
 				</div>
-			</div>
-			<div class="profile-entry">
-				<div class="profile-entry-left">
+				<div class="profile-entry">
 					<img class="profile-entry-icon" src="res/xbox.png"  alt="Xbox Logo" />
-					<p class="profile-entry-text">Xbox Live</p>
-				</div>
-				<div class="profile-entry-right">
+					<p class="profile-entry-text platform-name">Xbox Live</p>
 					<p class="profile-entry-text accented">Connected</p>
 				</div>
-			</div>
-			<div class="profile-entry">
-				<div class="profile-entry-left">
+				<div class="profile-entry">
 					<img class="profile-entry-icon" src="res/psn.png"  alt="PSN Logo" />
-					<p class="profile-entry-text">PSN</p>
-				</div>
-				<div class="profile-entry-right">
+					<p class="profile-entry-text platform-name">PSN</p>
 					<p class="profile-entry-text accented">Connected</p>
 				</div>
 			</div>
@@ -39,109 +39,130 @@
 	</div>
 </div>
 <div id="profile-section-2">
-	<div id="profile-games">
-		<p class="page-subheader-text link">Games</p>
-		<div class="page-subheader-separator"></div>
-		<div class="profile-list">
-			<div class="profile-entry game">
-				<div class="profile-entry-left">
-					<img class="profile-entry-icon" src="res/dummy_game.png" alt="Some Game Icon" />
-					<p class="profile-entry-text">Latin</p>
-				</div>
+	<div id="profile-games" class="page-subsection">
+		<div class="page-subsection-wrapper">
+			<div class="page-subheader">
+				<p class="page-subheader-text link">Games</p>
+				<div class="page-subheader-separator"></div>
 			</div>
-			<div class="profile-entry game">
-				<div class="profile-entry-left">
+			<div class="profile-list page-subsection-chunk">
+				<div class="profile-entry game top">
 					<img class="profile-entry-icon" src="res/dummy_game.png" alt="Some Game Icon" />
-					<p class="profile-entry-text">Latin</p>
+					<p class="profile-entry-text game-name">Latin</p>
 				</div>
-			</div>
-			<div class="profile-entry game">
-				<div class="profile-entry-left">
+				<div class="profile-entry game">
 					<img class="profile-entry-icon" src="res/dummy_game.png" alt="Some Game Icon" />
-					<p class="profile-entry-text">Latin</p>
+					<p class="profile-entry-text game-name">Latin</p>
 				</div>
-			</div>
-			<div class="profile-entry game">
-				<div class="profile-entry-left">
+				<div class="profile-entry game">
 					<img class="profile-entry-icon" src="res/dummy_game.png" alt="Some Game Icon" />
-					<p class="profile-entry-text">Latin</p>
+					<p class="profile-entry-text game-name">Latin</p>
+				</div>
+				<div class="profile-entry game">
+					<img class="profile-entry-icon" src="res/dummy_game.png" alt="Some Game Icon" />
+					<p class="profile-entry-text game-name">Latin</p>
+				</div>
+				<div class="profile-entry game">
+					<img class="profile-entry-icon" src="res/dummy_game.png" alt="Some Game Icon" />
+					<p class="profile-entry-text game-name">Latin</p>
+				</div>
+				<div class="profile-entry game">
+					<img class="profile-entry-icon" src="res/dummy_game.png" alt="Some Game Icon" />
+					<p class="profile-entry-text game-name">Latin</p>
+				</div>
+				<div class="profile-entry game">
+					<img class="profile-entry-icon" src="res/dummy_game.png" alt="Some Game Icon" />
+					<p class="profile-entry-text game-name">Latin</p>
+				</div>
+				<div class="profile-entry game">
+					<img class="profile-entry-icon" src="res/dummy_game.png" alt="Some Game Icon" />
+					<p class="profile-entry-text game-name">Latin</p>
+				</div>
+				<div class="profile-entry game">
+					<img class="profile-entry-icon" src="res/dummy_game.png" alt="Some Game Icon" />
+					<p class="profile-entry-text game-name">Latin</p>
+				</div>
+				<div class="profile-entry game">
+					<img class="profile-entry-icon" src="res/dummy_game.png" alt="Some Game Icon" />
+					<p class="profile-entry-text game-name">Latin</p>
+				</div>
+				<div class="profile-entry game">
+					<img class="profile-entry-icon" src="res/dummy_game.png" alt="Some Game Icon" />
+					<p class="profile-entry-text game-name">Latin</p>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div id="profile-achievements">
-		<p class="page-subheader-text link">Achievements</p>
-		<div class="page-subheader-separator"></div>
-		<div class="profile-list">
-			<div class="profile-entry accented">
-				<div class="profile-entry-left">
+	<div id="profile-achievements" class="page-subsection">
+		<div class="page-subsection-wrapper">
+			<div class="page-subheader">
+				<p class="page-subheader-text link">Achievements</p>
+				<div class="page-subheader-separator"></div>
+			</div>
+			<div class="profile-list page-subsection-chunk">
+				<div class="profile-entry accented top">
 					<img class="profile-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
-					<p class="profile-entry-text">Lorem Ipsum</p>
-				</div>
-				<div class="profile-entry-right">
+					<p class="profile-entry-text achievement-name">Lorem Ipsum</p>
 					<p class="profile-entry-text accented">Completed</p>
 				</div>
-			</div>
-			<div class="profile-entry accented">
-				<div class="profile-entry-left">
+				<div class="profile-entry accented">
 					<img class="profile-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
-					<p class="profile-entry-text">Lorem Ipsum</p>
-				</div>
-				<div class="profile-entry-right">
+					<p class="profile-entry-text achievement-name">Lorem Ipsum</p>
 					<p class="profile-entry-text accented">Completed</p>
 				</div>
-			</div>
-			<div class="profile-entry accented">
-				<div class="profile-entry-left">
+				<div class="profile-entry accented">
 					<img class="profile-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
-					<p class="profile-entry-text">Lorem Ipsum</p>
-				</div>
-				<div class="profile-entry-right">
+					<p class="profile-entry-text achievement-name">Lorem Ipsum</p>
 					<p class="profile-entry-text accented">Completed</p>
 				</div>
-			</div>
-			<div class="profile-entry">
-				<div class="profile-entry-left">
+				<div class="profile-entry accented">
 					<img class="profile-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
-					<p class="profile-entry-text">Lorem Ipsum</p>
-				</div>
-				<div class="profile-entry-right">
+					<p class="profile-entry-text achievement-name">Lorem Ipsum</p>
 					<p class="profile-entry-text accented">Completed</p>
 				</div>
-			</div>
-			<div class="profile-entry">
-				<div class="profile-entry-left">
+				<div class="profile-entry accented">
 					<img class="profile-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
-					<p class="profile-entry-text">Lorem Ipsum</p>
-				</div>
-				<div class="profile-entry-right">
+					<p class="profile-entry-text achievement-name">Lorem Ipsum</p>
 					<p class="profile-entry-text accented">Completed</p>
 				</div>
-			</div>
-			<div class="profile-entry">
-				<div class="profile-entry-left">
+				<div class="profile-entry accented">
 					<img class="profile-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
-					<p class="profile-entry-text">Lorem Ipsum</p>
-				</div>
-				<div class="profile-entry-right">
+					<p class="profile-entry-text achievement-name">Lorem Ipsum</p>
 					<p class="profile-entry-text accented">Completed</p>
 				</div>
-			</div>
-			<div class="profile-entry">
-				<div class="profile-entry-left">
+				<div class="profile-entry accented">
 					<img class="profile-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
-					<p class="profile-entry-text">Lorem Ipsum</p>
-				</div>
-				<div class="profile-entry-right">
+					<p class="profile-entry-text achievement-name">Lorem Ipsum</p>
 					<p class="profile-entry-text accented">Completed</p>
 				</div>
-			</div>
-			<div class="profile-entry">
-				<div class="profile-entry-left">
+				<div class="profile-entry">
 					<img class="profile-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
-					<p class="profile-entry-text">Lorem Ipsum</p>
+					<p class="profile-entry-text achievement-name">Lorem Ipsum</p>
+					<p class="profile-entry-text accented">Completed</p>
 				</div>
-				<div class="profile-entry-right">
+				<div class="profile-entry">
+					<img class="profile-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
+					<p class="profile-entry-text achievement-name">Lorem Ipsum</p>
+					<p class="profile-entry-text accented">Completed</p>
+				</div>
+				<div class="profile-entry">
+					<img class="profile-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
+					<p class="profile-entry-text achievement-name">Lorem Ipsum</p>
+					<p class="profile-entry-text accented">Completed</p>
+				</div>
+				<div class="profile-entry">
+					<img class="profile-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
+					<p class="profile-entry-text achievement-name">Lorem Ipsum</p>
+					<p class="profile-entry-text accented">Completed</p>
+				</div>
+				<div class="profile-entry">
+					<img class="profile-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
+					<p class="profile-entry-text achievement-name">Lorem Ipsum</p>
+					<p class="profile-entry-text accented">Completed</p>
+				</div>
+				<div class="profile-entry">
+					<img class="profile-entry-icon" src="res/dummy_achievement.png" alt="Some Achievement Icon" />
+					<p class="profile-entry-text achievement-name">Lorem Ipsum</p>
 					<p class="profile-entry-text accented">Completed</p>
 				</div>
 			</div>

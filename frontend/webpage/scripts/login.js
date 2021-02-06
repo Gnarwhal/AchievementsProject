@@ -8,6 +8,7 @@ window.addEventListener("load", (loadEvent) => {
 
 	const createUser = document.querySelector("#create-user-button");
 	const login      = document.querySelector("#login-button");
+	const guest      = document.querySelector("#guest-login-button");
 
 	const header = document.querySelector("#login-header-text");
 	const error  = document.querySelector("#error-message");
@@ -31,11 +32,7 @@ window.addEventListener("load", (loadEvent) => {
 		if (!frozen) {
 			fields.username.style.display = "block";
 			fields.confirm.style.display = "block";
-			header.textContent = "Create User";
-			login.style.flexGrow = "0";
-			login.textContent = "< Login";
-			createUser.style.flexGrow = "1";
-			createUser.textContent = "Create User";
+			header.textContent = "Create Account";
 
 			createUser.removeEventListener("click", switchToCreateAction);
 			createUser.addEventListener("click", createUserAction);
@@ -65,16 +62,20 @@ window.addEventListener("load", (loadEvent) => {
 					body: JSON.stringify({ email: fields.email.value, username: fields.username.value, password: fields.password.value })
 				})
 				.then(async response => ({ status: response.status, data: await response.json() }))
-				.then(response => {
+				.then(response =>{
 					const data = response.data;
 					if (response.status === 200) {
 						window.sessionStorage.setItem('sessionKey', data.key);
+						window.sessionStorage.setItem('id',         data.id );
 						window.location.href = "/";
 					} else if (response.status === 500) {
 						raiseError([], "Internal server error :(");
 					} else {
 						if (data.code === 1) {
 							raiseError([ "email" ], "A user with that email is already registered");
+							fields.email.value = '';
+						} else if (data.code === 2) {
+							raiseError([ "email" ], "Invalid email address");
 							fields.email.value = '';
 						}
 					}
@@ -93,10 +94,6 @@ window.addEventListener("load", (loadEvent) => {
 			fields.username.style.display = "none";
 			fields.confirm.style.display = "none";
 			header.textContent = "Login";
-			login.style.flexGrow = "1"
-			login.textContent = "Login";
-			createUser.style.flexGrow = "0";
-			createUser.textContent = "Create User >";
 
 			createUser.removeEventListener("click", createUserAction);
 			createUser.addEventListener("click", switchToCreateAction);
@@ -125,7 +122,9 @@ window.addEventListener("load", (loadEvent) => {
 				.then(response => {
 					const data = response.data;
 					if (response.status === 200) {
+						console.log(data);
 						window.sessionStorage.setItem('sessionKey', data.key);
+						window.sessionStorage.setItem('id',         data.id );
 						window.location.href = "/";
 					} else if (response.status === 500) {
 						raiseError([], "Internal server error :(");
@@ -142,4 +141,37 @@ window.addEventListener("load", (loadEvent) => {
 		}
 	};
 	login.addEventListener("click", loginAction);
+
+	guest.addEventListener("click", (clickEvent) => {
+		if (!frozen) {
+			frozen = true;
+			fetch('https://localhost:4730/login?guest=true', {
+				method: 'POST',
+				mode: 'cors',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: "{}"
+			})
+			.then(async response => ({ status: response.status, data: await response.json() }))
+			.then(response => {
+				const data = response.data;
+				if (response.status === 200) {
+					console.log(data);
+					window.sessionStorage.setItem('sessionKey', data.key);
+					window.sessionStorage.setItem('id',         data.id );
+					window.location.href = "/";
+				} else if (response.status === 500) {
+					raiseError([], "Internal server error :(");
+				} else {
+					raiseError([ "email", "password" ], "Email or password is incorrect");
+					fields.password.value = '';
+				}
+			})
+			.catch(error => {
+				console.error(error);
+				raiseError([], "Unknown error :(");
+			}).then(() => frozen = false);
+		}
+	});
 });

@@ -34,33 +34,36 @@
 	border-radius: 8px;
 }
 
+.form-row {
+	margin: var(--element-spacing) var(--form-spacing) 0;
+	border: 0;
+	padding: 0;
+	width: calc(100% - var(--form-spacing) * 2);
+	height: 40px;
+}
+
+.form-row.top {
+	margin-top: 0;
+}
+
+.form-row.multiline {
+	height: max-content;
+}
+
 #error-message {
 	display: none;
 
-	box-sizing: border-box;
-
-	margin: 0 var(--form-spacing) var(--element-spacing);
-	width: calc(100% - (var(--form-spacing) * 2));
+	line-height: 40px;
 
 	color: var(--error);
-
 	font-size: 20px;
 }
 
 .login-field {
 	box-sizing: border-box;
-
-	margin: 0 var(--form-spacing) var(--element-spacing);
-	border: 0;
-	padding: 8px;
-
-	width: calc(100% - (var(--form-spacing) * 2));
-	height: max-content;
-
-	font-size: 20px;
-
+	padding: 0 var(--element-spacing);
+	font-size: 18px;
 	border-radius: 4px;
-
 	outline: none;
 }
 
@@ -68,41 +71,34 @@
 	background-color: var(--error);
 }
 
+.ap-button.login {
+	height: 40px;
+
+	font-size: 18px;
+}
+
 #username,
 #confirm {
 	display: none;
 }
 
-#login-buttons {
-	margin: 0 calc(var(--form-spacing) - (var(--element-spacing) / 2));
-	width: calc(100% - (var(--form-spacing) * 2) + var(--element-spacing));
-	height: max-content;
-
+#button-row {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.ap-button.login {
-	margin: 0 calc(var(--element-spacing) / 2);
-	flex-basis: max-content;
-}
-
-#create-user-button {
-	flex-grow: 0;
+#create-user-button,
+#guest-login-button {
+	width: calc(50% - var(--element-spacing) / 2);
 }
 
 #login-button {
-	flex-grow: 1;
+	width: calc(100% - var(--form-spacing * 2))
 }
 
 #warning {
-	box-sizing: border-box;
-
-	padding: 0 var(--form-spacing);
-
 	color: var(--foreground);
-
 	font-size: 24px;
 }

@@ -1,7 +1,6 @@
 package achievements.controllers;
 
 import achievements.data.Achievements;
-import achievements.data.User;
 import achievements.data.Games;
 import achievements.data.InternalError;
 import achievements.services.DbService;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 public class Controller {
@@ -62,49 +60,6 @@ public class Controller {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 			return new ResponseEntity("{}", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-	/**
-	 * Acceptable codes
-	 * 0 => Success
-	 * 1 => Email already registered
-	 *
-	 * -1 => Unknown error
-	 */
-	@RequestMapping(value = "/create_user", method = POST, consumes = "application/json", produces = "application/json")
-	public ResponseEntity createUser(@RequestBody User user) {
-		var status = db.createUser(user);
-		if (status == 0) {
-			return ResponseEntity.ok("{ \"key\": \"aoeuhtns\" }");
-			//var sessionKey = db.generateSessionKey(user);
-		} else {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{ \"code\": " + status + " }");
-		}
-	}
-
-	/**
-	 * DO NOT RETURN CODE DIRECTLY!
-	 *
-	 * User should only ever recieve -1, 0, or 1. The specific authentication error should be hidden.
-	 *
-	 * Acceptable codes
-	 * 0 => Success
-	 * 1 => Unregistered email address
-	 * 2 => Incorrect password
-	 *
-	 * -1 => Unknown error
-	 */
-	@RequestMapping(value = "/login", method = POST, consumes = "application/json", produces = "application/json")
-	public ResponseEntity login(@RequestBody User user) {
-		var status = db.login(user);
-		if (status == 0) {
-			return ResponseEntity.ok("{ \"key\": \"aoeuhtns\" }");
-		} else if (status > 0) {
-			// Hardcoded 1 response code
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{ \"code\": 1 }");
-		} else {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{ \"code\": " + status + " }");
 		}
 	}
 }
