@@ -16,13 +16,11 @@ public class SessionManager {
 		return key;
 	}
 
-	public String guest() {
-		var key = HashManager.encode(HashManager.generateBytes(16));
-		session.put(key, null);
-		return key;
+	public int getUser(String key) {
+		return session.get(key);
 	}
 
-	public Integer getUser(String key) {
-		return session.get(key);
+	public void remove(String key) {
+		session.remove(key);
 	}
 }

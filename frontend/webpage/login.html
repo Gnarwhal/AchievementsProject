@@ -9,29 +9,37 @@
 	</head>
 	<body>
 		<div id="navbar"></div>
-
 		<div id="content-body">
 			<div id="login-page" class="page">
-				<div class="page-header">
-					<p class="page-header-text">Achievements Project</p>
-					<div class="page-header-separator"></div>
-				</div>
-				<div id="login-header">
-					<p id="login-header-text" class="page-subheader-text">Login</p>
-					<div class="page-subheader-separator"></div>
-				</div>
-				<div id="login-form">
-					<p id="error-message" class="form-row top multiline">Egg</p>
-					<input id="email"    class="login-field form-row" type="text"     placeholder="Email"></input>
-					<input id="username" class="login-field form-row" type="text"     placeholder="Username"></input>
-					<input id="password" class="login-field form-row" type="password" placeholder="Password"></input>
-					<input id="confirm"  class="login-field form-row" type="password" placeholder="Confirm your password"></input>
-					<div id="button-row" class="form-row">
-						<div id="create-user-button" class="ap-button login">Create Account</div>
-						<div id="guest-login-button" class="ap-button login">Continue as Guest</div>
+				<div class="page-subsection">
+					<div class="page-header">
+						<p class="page-header-text">Achievements Project</p>
+						<div class="page-header-separator"></div>
 					</div>
-					<div id="login-button" class="ap-button login form-row">Login</div>
-					<p id="warning" class="form-row multiline">WARNING! The security of this project is questionable at best. Please refrain from using any truly sensitive data.</p>
+				</div>
+				<div id="login-flex">
+					<div id="login-subsection" class="page-subsection">
+						<div id="login-elements" class="page-subsection-wrapper">
+							<div id="login-header" class="page-subheader">
+								<p id="login-header-text" class="page-subheader-text">Login</p>
+								<div class="page-subheader-separator"></div>
+							</div>
+							<div id="login-form">
+								<p id="error-message" class="form-row top multiline">Egg</p>
+								<input id="email"    class="login-field form-row" type="text"     placeholder="Email"></input>
+								<input id="username" class="login-field form-row" type="text"     placeholder="Username"></input>
+								<input id="password" class="login-field form-row" type="password" placeholder="Password"></input>
+								<input id="confirm"  class="login-field form-row" type="password" placeholder="Confirm your password"></input>
+								<div id="button-row" class="form-row">
+									<div id="create-user-button" class="ap-button login">Create Account</div>
+									<div id="guest-login-button" class="ap-button login">Continue as Guest</div>
+								</div>
+								<div id="login-button" class="ap-button login form-row">Login</div>
+								<p id="warning" class="form-row">WARNING!</p>
+								<p id="warning-message" class="form-row multiline">The security of this project is questionable at best. Please refrain from using any truly sensitive data.</p>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -1,3 +1,11 @@
+let session = null;
+const loadSession = () => {
+	session = JSON.parse(window.sessionStorage.getItem('session'));
+	if (session) {
+		document.querySelector(":root").style.setProperty('--accent-hue', session.hue);
+	}
+};
+
 const expandTemplates = async () => {
 	template.apply("navbar").values([
 		{ section: "left" },
@@ -7,9 +15,16 @@ const expandTemplates = async () => {
 		{ item: "games",        title: "Games"        },
 		{ item: "achievements", title: "Achievements" }
 	]);
-	template.apply("navbar-section-right").values([
-		{ item: "profile", title: "Profile" }
-	]);
+	if (session) {
+		template.apply("navbar-section-right").values([
+			{ item: "profile", title: "Profile" },
+			{ item: "logout",  title: "Logout"  }
+		]);
+	} else {
+		template.apply("navbar-section-right").values([
+			{ item: "login",   title: "Login" }
+		]);
+	}
 	template.apply("content-body").values([
 		{ page: "games",        title: "Games"        },
 		{ page: "achievements", title: "Achievements" },
@@ -18,7 +33,6 @@ const expandTemplates = async () => {
 	template.apply("extern-games-page"       ).values("games_page"       );
 	template.apply("extern-achievements-page").values("achievements_page");
 	template.apply("extern-profile-page"     ).values("profile_page"     );
-	template.apply("achievements-page-list"  ).fetch("achievements", "https://localhost:4730/achievements");
 
 	await template.expand();
 };
@@ -32,22 +46,41 @@ const connectNavbar = () => {
 	const navItems = document.querySelectorAll(".navbar-item");
 
 	for (const item of navItems) {
-		item.addEventListener("click", (clickEvent) => {
-			const navItemPageId = item.dataset.pageName + "-page"
-			for (const page of pages) {
-				if (page.id === navItemPageId) {
-					page.style.display = "block";
-				} else {
-					page.style.display = "none";
+		if (item.dataset.pageName === "logout") {
+			item.addEventListener("click", (clickEvent) => {
+				fetch('https://localhost:4730/logout', {
+					method: 'POST',
+					mode: 'cors',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ key: session.key })
+				})
+				.then(response => {
+					window.sessionStorage.removeItem('session');
+					window.location.href = "/login.html";
+				});
+			});
+		} else if (item.dataset.pageName === "login") {
+			item.addEventListener("click", (clickEvent) => window.location.href = "/login.html");
+		} else {
+			item.addEventListener("click", (clickEvent) => {
+				const navItemPageId = item.dataset.pageName + "-page"
+				for (const page of pages) {
+					if (page.id === navItemPageId) {
+						page.style.display = "block";
+					} else {
+						page.style.display = "none";
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 };
 
 const connectProfile = () => {
-	const games        = document.querySelector("#profile-games");
-	const achievements = document.querySelector("#profile-achievements");
+	const games        = document.querySelector("#profile-games-header");
+	const achievements = document.querySelector("#profile-achievements-header");
 
 	games.children[0].addEventListener("click", (clickEvent) => {
 		for (const page of pages) {
@@ -84,6 +117,8 @@ const loadFilters = () => {
 }
 
 window.addEventListener("load", async (loadEvent) => {
+	loadSession();
+
 	await expandTemplates();
 
 	loadPages();

@@ -94,6 +94,21 @@ html, body {
 	background-color: var(--accent-value1);
 }
 
+.ap-button.disabled {
+	background-color: var(--accent-value1);
+	color: var(--accent-value0);
+}
+
+.ap-button.disabled:hover {
+	background-color: var(--accent-value1);
+	color: var(--accent-value0);
+}
+
+.ap-button.disabled:active {
+	background-color: var(--accent-value1);
+	color: var(--accent-value0);
+}
+
 #content-body {
 	position: relative;
 
@@ -109,8 +124,6 @@ html, body {
 }
 
 .page {
-	z-index: 0;
-
 	box-sizing: border-box;
 
 	padding: 32px;
@@ -135,9 +148,6 @@ html, body {
 	border-radius: 8px;
 
 	box-shadow: inset 0px 0px 8px 8px var(--shadow-color);
-
-	position: relative;
-	z-index: -1;
 }
 
 .page-subsection-wrapper {
@@ -290,12 +300,12 @@ html, body {
 }
 
 .list-page-filter-checkbox {
-	width: 32px;
-	height: 32px;
+	width:  28px;
+	height: 28px;
 
 	background-color: var(--foreground);
 
-	border: 3px solid var(--foreground-dark);
+	border: 3px solid var(--foreground);
 	border-radius: 8px;
 
 	transition-property: background-color, border-color;

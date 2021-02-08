@@ -1,7 +1,7 @@
 <div class="page-subsection">
 	<div class="list-page-search page-subsection-chunk">
 		<label for="achievement-search">Search</label>
-		<input id="achievement-search" type="text" placeholder="Name, Keyword, etc..." name="achievement-search"/>
+		<input id="achievement-search" type="text" placeholder="Name" name="achievement-search"/>
 	</div>
 	<div class="list-page-partitions">
 		<div class="list-page-filter-partition">
@@ -14,7 +14,7 @@
 					<div class="page-subsection-wrapper">
 						<div id="from-games-owned-filter" class="list-page-filter">
 							<div class="list-page-filter-checkbox"></div>
-							<p class="list-page-filter-name">From Games Owned</p>
+							<p class="list-page-filter-name">My Games</p>
 						</div>
 						<div id="in-progress-filter" class="list-page-filter">
 							<div class="list-page-filter-checkbox"></div>

@@ -6,8 +6,9 @@
 				<div class="page-subheader-separator"></div>
 			</div>
 			<div id="profile-info-pfp-border" class="page-subsection-chunk">
-				<div id="profile-info-pfp-vignette">
+				<div id="profile-info-pfp">
 					<img id="profile-info-pfp-img" src="res/guest_pfp.png" alt="User's Profile Pictuer" />
+					<div id="profile-info-pfp-vignette"></div>
 				</div>
 			</div>
 		</div>
@@ -41,7 +42,7 @@
 <div id="profile-section-2">
 	<div id="profile-games" class="page-subsection">
 		<div class="page-subsection-wrapper">
-			<div class="page-subheader">
+			<div id="profile-games-header" class="page-subheader">
 				<p class="page-subheader-text link">Games</p>
 				<div class="page-subheader-separator"></div>
 			</div>
@@ -95,7 +96,7 @@
 	</div>
 	<div id="profile-achievements" class="page-subsection">
 		<div class="page-subsection-wrapper">
-			<div class="page-subheader">
+			<div id="profile-achievements-header" class="page-subheader">
 				<p class="page-subheader-text link">Achievements</p>
 				<div class="page-subheader-separator"></div>
 			</div>

@@ -1,4 +1,9 @@
 window.addEventListener("load", (loadEvent) => {
+	let session = window.sessionStorage.getItem('session');
+	if (session) {
+		window.location.href = '/';
+	}
+
 	const fields = {
 		email:    document.querySelector("#email"   ),
 		username: document.querySelector("#username"),
@@ -27,6 +32,18 @@ window.addEventListener("load", (loadEvent) => {
 	}
 
 	let frozen = false;
+	const freeze = () => {
+		frozen = true;
+		createUser.classList.add("disabled");
+		login.classList.add("disabled");
+		guest.classList.add("disabled");
+	};
+	const unfreeze = () => {
+		frozen = false;
+		createUser.classList.remove("disabled");
+		login.classList.remove("disabled");
+		guest.classList.remove("disabled");
+	};
 
 	const switchToCreateAction = (clickEvent) => {
 		if (!frozen) {
@@ -39,6 +56,8 @@ window.addEventListener("load", (loadEvent) => {
 
 			login.removeEventListener("click", loginAction);
 			login.addEventListener("click", switchToLoginAction);
+
+			activeAction = createUserAction;
 		}
 	};
 	const createUserAction = (clickEvent) => {
@@ -52,7 +71,7 @@ window.addEventListener("load", (loadEvent) => {
 			} else if (fields.password.value === '') {
 				raiseError([ "password", "confirm" ], "Password cannot be empty");
 			} else {
-				frozen = true;
+				freeze();
 				fetch('https://localhost:4730/create_user', {
 					method: 'POST',
 					mode: 'cors',
@@ -65,8 +84,7 @@ window.addEventListener("load", (loadEvent) => {
 				.then(response =>{
 					const data = response.data;
 					if (response.status === 200) {
-						window.sessionStorage.setItem('sessionKey', data.key);
-						window.sessionStorage.setItem('id',         data.id );
+						window.sessionStorage.setItem('session', JSON.stringify(data));
 						window.location.href = "/";
 					} else if (response.status === 500) {
 						raiseError([], "Internal server error :(");
@@ -83,7 +101,7 @@ window.addEventListener("load", (loadEvent) => {
 				.catch(error => {
 					console.error(error);
 					raiseError([], "Server error :(");
-				}).then(() => frozen = false);
+				}).then(unfreeze);
 			}
 		}
 	};
@@ -100,6 +118,8 @@ window.addEventListener("load", (loadEvent) => {
 
 			login.removeEventListener("click", switchToLoginAction);
 			login.addEventListener("click", loginAction);
+
+			activeAction = loginAction;
 		}
 	};
 	const loginAction = (clickEvent) => {
@@ -109,7 +129,7 @@ window.addEventListener("load", (loadEvent) => {
 			} else if (fields.password.value === '') {
 				raiseError([ "password" ], "Password cannot be empty");
 			} else {
-				frozen = true;
+				freeze();
 				fetch('https://localhost:4730/login', {
 					method: 'POST',
 					mode: 'cors',
@@ -123,8 +143,7 @@ window.addEventListener("load", (loadEvent) => {
 					const data = response.data;
 					if (response.status === 200) {
 						console.log(data);
-						window.sessionStorage.setItem('sessionKey', data.key);
-						window.sessionStorage.setItem('id',         data.id );
+						window.sessionStorage.setItem('session', JSON.stringify(data));
 						window.location.href = "/";
 					} else if (response.status === 500) {
 						raiseError([], "Internal server error :(");
@@ -136,7 +155,7 @@ window.addEventListener("load", (loadEvent) => {
 				.catch(error => {
 					console.error(error);
 					raiseError([], "Unknown error :(");
-				}).then(() => frozen = false);
+				}).then(unfreeze);
 			}
 		}
 	};
@@ -144,34 +163,16 @@ window.addEventListener("load", (loadEvent) => {
 
 	guest.addEventListener("click", (clickEvent) => {
 		if (!frozen) {
-			frozen = true;
-			fetch('https://localhost:4730/login?guest=true', {
-				method: 'POST',
-				mode: 'cors',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: "{}"
-			})
-			.then(async response => ({ status: response.status, data: await response.json() }))
-			.then(response => {
-				const data = response.data;
-				if (response.status === 200) {
-					console.log(data);
-					window.sessionStorage.setItem('sessionKey', data.key);
-					window.sessionStorage.setItem('id',         data.id );
-					window.location.href = "/";
-				} else if (response.status === 500) {
-					raiseError([], "Internal server error :(");
-				} else {
-					raiseError([ "email", "password" ], "Email or password is incorrect");
-					fields.password.value = '';
-				}
-			})
-			.catch(error => {
-				console.error(error);
-				raiseError([], "Unknown error :(");
-			}).then(() => frozen = false);
+			window.location.href = '/';
 		}
 	});
+
+	let activeAction = loginAction;
+	for (const field in fields) {
+		fields[field].addEventListener("keydown", (keyEvent) => {
+			if (keyEvent.key === "Enter") {
+				activeAction();
+			}
+		})
+	}
 });

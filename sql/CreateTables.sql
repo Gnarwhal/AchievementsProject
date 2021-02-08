@@ -33,7 +33,11 @@ CREATE TABLE [User] (
 	Username VARCHAR(32) NOT NULL,
 	[Password] CHAR(64) NOT NULL,
 	[Salt] CHAR(32) NOT NULL,
-	Verified BIT NOT NULL CONSTRAINT VerifiedDefault DEFAULT 0
+	Hue INT NOT NULL
+		CONSTRAINT HueDefault DEFAULT 0
+		CONSTRAINT HueConstraint CHECK (0 <= Hue AND Hue <= 360),
+	Verified BIT NOT NULL
+		CONSTRAINT VerifiedDefault DEFAULT 0
 	PRIMARY KEY(ID)
 )
 

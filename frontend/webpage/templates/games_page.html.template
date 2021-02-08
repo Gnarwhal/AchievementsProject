@@ -1,7 +1,7 @@
 <div class="page-subsection">
 	<div class="list-page-search page-subsection-chunk">
 		<label for="game-search">Search</label>
-		<input id="game-search" type="text" placeholder="Name, Keyword, etc..." game-name="game-search"  name="game-search"/>
+		<input id="game-search" type="text" placeholder="Name" game-name="game-search"  name="game-search"/>
 	</div>
 	<div class="list-page-partitions">
 		<div class="list-page-filter-partition">

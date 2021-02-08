@@ -1,5 +1,6 @@
 package achievements.services;
 
+import achievements.data.Session;
 import achievements.data.User;
 import achievements.misc.DbConnectionService;
 import achievements.misc.Password;
@@ -16,10 +17,12 @@ public class AuthenticationService {
 	public static class LoginResponse {
 		public int     status;
 		public Integer id;
+		public int    hue;
 
 		public LoginResponse() {
 			this.status = 0;
 			this.id     = null;
+			this.hue    = 0;
 		}
 
 		public LoginResponse(int status) {
@@ -27,13 +30,12 @@ public class AuthenticationService {
 			this.id     = null;
 		}
 
-		public LoginResponse(int status, int id) {
+		public LoginResponse(int status, int id, int hue) {
 			this.status = status;
 			this.id     = id;
+			this.hue    = hue;
 		}
 	}
-
-	public static final LoginResponse GUEST = new LoginResponse();
 
 	@Autowired
 	private DbConnectionService dbs;
@@ -53,7 +55,7 @@ public class AuthenticationService {
 		}
 
 		try {
-			var statement = db.prepareCall("{? = call CreateUser(?, ?, ?, ?, ?)}");
+			var statement = db.prepareCall("{? = call CreateUser(?, ?, ?, ?, ?, ?)}");
 			statement.registerOutParameter(1, Types.INTEGER);
 			statement.setString(2, user.getEmail());
 			statement.setString(3, user.getUsername());
@@ -63,9 +65,14 @@ public class AuthenticationService {
 			statement.setString(5, password.hash);
 
 			statement.registerOutParameter(6, Types.INTEGER);
+			statement.registerOutParameter(7, Types.INTEGER);
 
 			statement.execute();
-			var response = new LoginResponse(statement.getInt(1), statement.getInt(6));
+			var response = new LoginResponse(
+				statement.getInt(1),
+				statement.getInt(6),
+				statement.getInt(7)
+			);
 			statement.close();
 
 			return response;
@@ -86,7 +93,7 @@ public class AuthenticationService {
 				var salt = result.getString("Salt");
 				var hash = result.getString("Password");
 				if (Password.validate(salt, user.getPassword(), hash)) {
-					response = new LoginResponse(0, result.getInt("ID"));
+					response = new LoginResponse(0, result.getInt("ID"), result.getInt("Hue"));
 				} else {
 					response = new LoginResponse(2);
 				}
@@ -98,6 +105,10 @@ public class AuthenticationService {
 			e.printStackTrace();
 		}
 		return response;
+	}
+
+	public void logout(Session key) {
+		session.remove(key.getKey());
 	}
 
 	public SessionManager session() {
