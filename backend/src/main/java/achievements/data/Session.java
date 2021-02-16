@@ -1,5 +1,6 @@
 package achievements.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Session {
@@ -10,11 +11,14 @@ public class Session {
 	private int id;
 	@JsonProperty("hue")
 	private int hue;
+	@JsonIgnore
+	private boolean used;
 
 	public Session(String key, int id, int hue) {
-		this.key = key;
-		this.id = id;
-		this.hue = hue;
+		this.key  = key;
+		this.id   = id;
+		this.hue  = hue;
+		this.used = false;
 	}
 
 	public String getKey() {
@@ -39,5 +43,13 @@ public class Session {
 
 	public void setHue(int hue) {
 		this.hue = hue;
+	}
+
+	public boolean getUsed() {
+		return used;
+	}
+
+	public void setUsed(boolean used) {
+		this.used = used;
 	}
 }

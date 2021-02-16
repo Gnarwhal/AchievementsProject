@@ -4,9 +4,9 @@
 		<meta charset="UTF-8" />
 		<title>Achievements Project</title>
 
-		<link rel="stylesheet" href="styles/theme.css" />
-		<link rel="stylesheet" href="styles/common.css" />
-		<link rel="stylesheet" href="styles/index.css" />
+		<link rel="stylesheet" href="/static/styles/theme.css" />
+		<link rel="stylesheet" href="/static/styles/common.css" />
+		<link rel="stylesheet" href="/static/styles/index.css" />
 	</head>
 	<body>
 		<div id="navbar">
@@ -21,19 +21,111 @@
 			</template>
 		</div>
 		<div id="content-body">
-			<template data-template="content-body: List<Basic>">
-				<div id="${page}-page" class="page">
-					<div class="page-subsection">
-						<div class="page-header">
-							<p class="page-header-text">${title}</p>
-							<div class="page-header-separator"></div>
+			<div id="index-page" class="page">
+				<div class="page-subsection">
+					<div class="page-header">
+						<p class="page-header-text">Achievements Project</p>
+						<div class="page-header-separator"></div>
+					</div>
+				</div>
+				<div class="page-subsection">
+					<div id="list-page-search-filters">
+						<div id="list-page-search-dropdown">
+							<div id="search-wrapper" class="page-subsection-wrapper">
+								<div id="list-page-search-pair" class="list-page-search page-subsection-chunk">
+									<label for="achievement-search">Search</label>
+									<input id="achievement-search" type="text" placeholder="Name" name="achievement-search"/>
+								</div>
+							</div>
+							<div id="filter-dropdown-wrapper" class="page-subsection-wrapper">
+								<div id="filter-dropdown-stack">
+									<img id="filter-dropdown-button"       src="/static/res/dropdown.svg"       alt="Dropdown Button"/>
+									<img id="filter-dropdown-button-hover" src="/static/res/dropdown-hover.svg" alt="Dropdown Button"/>
+								</div>
+							</div>
+						</div>
+						<div id="list-page-filters-flex">
+							<div class="list-page-filter-section page-subsection-wrapper">
+								<div class="page-subheader">
+									<p class="page-subheader-text">Games</p>
+									<div class="page-subheader-separator"></div>
+								</div> 
+								<div class="list-page-filter-chunk page-subsection-chunk">
+									<div class="page-subsection-wrapper">
+										<div id="games-owned-filter" class="list-page-filter">
+											<div class="list-page-filter-checkbox"></div>
+											<p class="list-page-filter-name">Games Owned</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="list-page-filter-section page-subsection-wrapper">
+								<div class="page-subheader">
+									<p class="page-subheader-text">Achievements</p>
+									<div class="page-subheader-separator"></div>
+								</div> 
+								<div class="list-page-filter-chunk page-subsection-chunk">
+									<div class="page-subsection-wrapper">
+										<div id="from-games-owned-filter" class="list-page-filter">
+											<div class="list-page-filter-checkbox"></div>
+											<p class="list-page-filter-name">My Games</p>
+										</div>
+										<div id="in-progress-filter" class="list-page-filter">
+											<div class="list-page-filter-checkbox"></div>
+											<p class="list-page-filter-name">In Progress</p>
+										</div>
+										<div id="completed-filter" class="list-page-filter">
+											<div class="list-page-filter-checkbox"></div>
+											<p class="list-page-filter-name">Completed</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="list-page-filter-section page-subsection-wrapper">
+								<div class="page-subheader">
+									<p class="page-subheader-text">Platforms</p>
+									<div class="page-subheader-separator"></div>
+								</div> 
+								<div class="list-page-filter-chunk page-subsection-chunk">
+									<div class="page-subsection-wrapper">
+										<div id="games-owned-filter" class="list-page-filter">
+											<div class="list-page-filter-checkbox"></div>
+											<p class="list-page-filter-name">Games Owned</p>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					<template data-template="extern-${page}-page: Extern"></template>
+					<div class="list-page-partitions">
+						<div class="list-page-list-partition page-subsection-wrapper">
+							<div class="page-subsection-chunk">
+								<div class="list-page-list">
+									<div class="list-page-header">
+										<p class="list-page-entry-icon"></p>
+										<p class="list-page-entry-text achievement-name">Name</p>
+										<p class="list-page-entry-text achievement-description">Description</p>
+										<p class="list-page-entry-text achievement-stages">Stages</p>
+									</div>
+									<template data-template="achievements-page-list: List<Basic>">
+										<div class="list-page-entry">
+											<img class="list-page-entry-icon" src="/static/res/dummy_achievement.png" alt="Achievement Thumbnail"></img>
+											<div class="list-page-entry-text-section">
+												<p class="list-page-entry-text achievement-name">${achievement-name}</p>
+												<p class="list-page-entry-text achievement-description">${achievement-description}</p>
+												<p class="list-page-entry-text achievement-stages">${stages}</p>
+											</div>
+										</div>
+									</template>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-			</template>
+			</div>
 		</div>
-		<script src="scripts/template.js"></script>
-		<script src="scripts/index.js"></script>
+		<script src="/static/scripts/template.js"></script>
+		<script src="/static/scripts/common.js"></script>
+		<script src="/static/scripts/index.js"></script>
 	</body>
 </html>

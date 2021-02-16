@@ -1,0 +1,21 @@
+:root {
+	--background-dark:     #111117;
+	--background:          #22222A;
+	--foreground-disabled: #77777D;
+	--foreground-dark:     #AAAAAA;
+	--foreground:          #EEEEEE;
+	--distinction:         #44444C;
+
+	--accent-hue: 0;
+
+	--accent-value0: hsl(var(--accent-hue), 100%, 16%);
+	--accent-value1: hsl(var(--accent-hue), 100%, 25%);
+	--accent-value2: hsl(var(--accent-hue), 100%, 31%);
+	--accent-value3: hsl(var(--accent-hue), 73%,  47%);
+	--accent-value4: hsl(var(--accent-hue), 83%,  57%);
+	--accent-value5: hsl(var(--accent-hue), 93%,  72%);
+	--accent-pure:   hsl(var(--accent-hue), 100%, 50%);
+
+	--selected-accent0: #2266CC;
+	--selected-accent1: #3388FF;
+}

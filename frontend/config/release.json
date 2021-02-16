@@ -2,6 +2,9 @@
 	"extends": [
 		"config/base.json"
 	],
+	"hosts": {
+		"frontend": "http://localhost"
+	},
 	"build": "release",
 	"port": 80
 }

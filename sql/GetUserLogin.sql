@@ -1,6 +1,0 @@
-CREATE PROCEDURE GetUserLogin(
-	@email VARCHAR(254)
-) AS
-BEGIN TRANSACTION
-SELECT Id, Salt, [Password], Hue FROM [User] WHERE Email = @email
-COMMIT TRANSACTION

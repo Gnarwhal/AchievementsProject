@@ -3,17 +3,19 @@
   "version": "1.0.0",
   "description": "Cross platform achievement tracker",
   "repository": "github:Gnarwhal/AchievementProject",
-  "main": "static_server.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "debug": "node static_server.js config/debug.json",
-    "release": "node static_server.js config/release.json"
+    "debug": "node server.js config/debug.json",
+    "release": "node server.js config/release.json"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
     "morgan": "^1.10.0",
+    "passport": "^0.4.1",
+    "passport-steam": "^1.0.15",
     "promptly": "^3.2.0"
   }
 }

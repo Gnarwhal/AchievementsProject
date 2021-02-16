@@ -1,0 +1,13 @@
+#about-page {
+	max-width: 1600px;
+}
+
+#about-text {
+	margin: 0;
+	padding: 16px;
+
+	font-size: 18px;
+	color: var(--foreground);
+
+	background-color: var(--distinction);
+}

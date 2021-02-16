@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Achievements Project</title>
+
+		<link rel="stylesheet" href="/static/styles/theme.css" />
+		<link rel="stylesheet" href="/static/styles/common.css" />
+		<link rel="stylesheet" href="/static/styles/about.css" />
+	</head>
+	<body>
+		<div id="navbar">
+			<template data-template="navbar: List<Basic>">
+				<div id="navbar-section-${section}" class="navbar-section">
+					<template data-template="navbar-section-${section}: List<Basic>">
+						<div id="navbar-item-${item}" class="navbar-item" data-page-name="${item}">
+							${title}
+						</div>
+					</template>
+				</div>
+			</template>
+		</div>
+		<div id="content-body">
+			<div id="about-page" class="page">
+				<div class="page-subsection">
+					<div class="page-header">
+						<p class="page-header-text">About</p>
+						<div class="page-header-separator"></div>
+					</div>
+				</div>
+				<div class="page-subsection">
+					<div class="page-subsection-wrapper">
+						<p id="about-text" class="page-subsection-chunk">Collate achievement data from multiple platforms into a single location. Explore achievement data of yourself and others.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="/static/scripts/template.js"></script>
+		<script src="/static/scripts/common.js"></script>
+		<script src="/static/scripts/about.js"></script>
+	</body>
+</html>

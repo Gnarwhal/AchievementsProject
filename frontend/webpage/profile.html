@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Achievements Project</title>
+
+		<link rel="stylesheet" href="/static/styles/theme.css" />
+		<link rel="stylesheet" href="/static/styles/common.css" />
+		<link rel="stylesheet" href="/static/styles/profile.css" />
+	</head>
+	<body>
+		<div id="navbar">
+			<template data-template="navbar: List<Basic>">
+				<div id="navbar-section-${section}" class="navbar-section">
+					<template data-template="navbar-section-${section}: List<Basic>">
+						<div id="navbar-item-${item}" class="navbar-item" data-page-name="${item}">
+							${title}
+						</div>
+					</template>
+				</div>
+			</template>
+		</div>
+		<div id="content-body">
+			<div id="profile-page" class="page">
+				<div class="page-subsection">
+					<div class="page-header">
+						<p class="page-header-text">Profile</p>
+						<div class="page-header-separator"></div>
+					</div>
+				</div>
+				<template data-template="profile-page">
+					<div id="profile-section-1">
+						<div id="profile-info" class="page-subsection">
+							<div class="page-subsection-wrapper">
+								<div class="page-subheader">
+									<div id="profile-info-name" class="page-subheader-flex">
+										<p id="profile-info-username-text" class="page-subheader-text">${username}</p>
+										<input id="profile-info-username-field" class="page-subheader-text" value="${username}"/>
+										<span id="info-edit-stack" class="profile-edit-stack">
+											<img class="profile-edit page-subheader-icon" src="/static/res/edit.svg" alt="Edit Platforms" />
+											<img class="profile-edit-hover page-subheader-icon" src="/static/res/edit-hover.svg" alt="Edit Platforms" />
+										</span>
+										<span id="info-save-stack" class="profile-save-stack">
+											<img class="profile-save page-subheader-icon" src="/static/res/save.svg" alt="Save Platforms" />
+											<img class="profile-save-hover page-subheader-icon" src="/static/res/save-hover.svg" alt="Edit Platforms" />
+										</span>
+									</div>
+									<div class="page-subheader-separator"></div>
+								</div>
+								<div id="profile-info-pfp-border" class="page-subsection-chunk">
+									<div id="profile-info-pfp">
+										<img id="profile-info-pfp-img" src="/api/user/${id}/image" alt="User's Profile Picture" />
+										<div id="profile-info-pfp-vignette"></div>
+										<img id="profile-info-pfp-upload" src="/static/res/upload.svg" alt="Upload Image" />
+										<img id="profile-info-pfp-upload-hover" src="/static/res/upload-hover.svg" alt="Upload Image" />
+										<img id="profile-info-pfp-upload-invalid" src="/static/res/upload-invalid.svg" alt="Invalid Image" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="profile-stats" class="page-subsection">
+							<div id="profile-stats-numeric">
+								<div id="profile-completion" class="page-subsection-wrapper">
+									<div class="page-subheader">
+										<p class="page-subheader-text">Avg. Completion</p>
+										<div class="page-subheader-separator"></div>
+									</div>
+									<div id="profile-completion-stack">
+										<img id="profile-completion-background" src="/static/res/completion.svg">
+										<canvas id="profile-completion-canvas"></canvas>
+										<p id="profile-completion-text">${average}</p>
+									</div>
+								</div>
+								<div id="profile-perfect" class="page-subsection-wrapper">
+									<div class="page-subheader">
+										<p class="page-subheader-text">Perfect Games</p>
+										<div class="page-subheader-separator"></div>
+									</div>
+									<p id="profile-perfect-text">${perfect}</p>
+								</div>
+							</div>
+							<div id="profile-hardest" class="page-subsection-wrapper">
+								<div class="page-subheader">
+									<p class="page-subheader-text">Noteworthy Achievements</p>
+									<div class="page-subheader-separator"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="profile-section-2">
+						<div id="profile-platforms" class="page-subsection">
+							<div class="page-subsection-wrapper">
+								<div class="page-subheader">
+										<div class="page-subheader-flex">
+											<p class="page-subheader-text">Platforms</p>
+											<span id="platform-edit-stack" class="profile-edit-stack">
+												<img id="platform-edit" class="profile-edit page-subheader-icon" src="/static/res/edit.svg" alt="Edit Platforms" />
+												<img id="platform-edit-hover" class="profile-edit-hover page-subheader-icon" src="/static/res/edit-hover.svg" alt="Edit Platforms" />
+											</span>
+											<span id="platform-save-stack" class="profile-save-stack">
+												<img id="platform-save" class="profile-save page-subheader-icon" src="/static/res/save.svg" alt="Save Platforms" />
+												<img id="platform-save-hover" class="profile-save-hover page-subheader-icon" src="/static/res/save-hover.svg" alt="Edit Platforms" />
+											</span>
+										</div>
+									<div class="page-subheader-separator"></div>
+								</div>
+								<div class="profile-list page-subsection-chunk">
+									<template data-template="profile-platforms-list: List<Basic>">
+										<div class="profile-entry ${connected}">
+											${img}
+											<p class="profile-entry-text platform-name">${name}</p>
+											<div id="platform-${platform_id}" class="platform-remove-stack">
+												<img class="platform-remove"       src="/static/res/cancel.svg"       alt="Cancel" />
+												<img class="platform-remove-hover" src="/static/res/cancel-hover.svg" alt="Cancel" />
+											</div>
+											${add}
+										</div>
+									</template>
+								</div>
+							</div>
+						</div>
+						<div id="profile-ratings" class="page-subsection">
+							<div class="page-subsection-wrapper">
+								<div class="page-subheader">
+									<p class="page-subheader-text">Ratings</p>
+									<div class="page-subheader-separator"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</template>
+			</div>
+		</div>
+		<script src="/static/scripts/template.js"></script>
+		<script src="/static/scripts/common.js"></script>
+		<script src="/static/scripts/profile.js"></script>
+	</body>
+</html>

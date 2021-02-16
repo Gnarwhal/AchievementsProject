@@ -1,1 +1,5 @@
-{}
+{
+	"hosts": {
+		"backend":  "https://localhost:4730"
+	}
+}
