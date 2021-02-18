@@ -1,4 +1,4 @@
-package achievements.data.query;
+package achievements.data.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

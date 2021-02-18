@@ -11,14 +11,10 @@ const promptly = require('promptly');
 
 const config = require('./config.js').load(process.argv[2]);
 
-if (config.build === 'debug') {
-	process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
-}
-
 console.log(`Running server at '${config.hosts.frontend}'`);
 
 passport.use(new SteamStrategy({
-	returnURL: `${config.hosts.frontend}/profile/steam`,
+	returnURL: `${config.hosts.frontend}/user/steam`,
 	realm:     `${config.hosts.frontend}`,
 	profile: false,
 }));
@@ -41,8 +37,11 @@ app.get("/users", (req, res) => {
 app.get("/games", (req, res) => {
 	res.sendFile(path.join(__dirname + "/webpage/search_games.html"));
 });
-app.get("/profile/:id", (req, res) => {
-	res.sendFile(path.join(__dirname + "/webpage/profile.html"));
+app.get("/achievement/:id", (req, res) => {
+	res.sendFile(path.join(__dirname + "/webpage/achievement.html"));
+});
+app.get("/user/:id", (req, res) => {
+	res.sendFile(path.join(__dirname + "/webpage/user.html"));
 });
 app.get("/auth/steam", passport.authenticate('steam'), (req, res) => {});
 

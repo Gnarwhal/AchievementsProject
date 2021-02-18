@@ -25,7 +25,7 @@
 			<div id="search-achievements-page" class="search page">
 				<div class="page-subsection">
 					<div class="page-header">
-						<p class="page-header-text">Search Achievements</p>
+						<p class="page-header-text">Achievement Search</p>
 						<div class="page-header-separator"></div>
 					</div>
 				</div>
@@ -35,7 +35,7 @@
 							<div id="search-wrapper" class="page-subsection-wrapper">
 								<div id="list-page-search-pair" class="list-page-search page-subsection-chunk">
 									<label id="achievement-search-button" for="achievement-search">Search</label>
-									<input id="achievement-search-field"  type="text" placeholder="Name" name="achievement-search"/>
+									<input id="achievement-search-field"  type="text" placeholder="Game Name, Achievement Name" name="achievement-search"/>
 								</div>
 							</div>
 							<div id="filter-dropdown-wrapper" class="page-subsection-wrapper">
@@ -46,16 +46,16 @@
 							</div>
 						</div>
 						<div id="list-page-filters-flex">
-							<div class="list-page-filter-section page-subsection-wrapper">
+							<div id="personal-filters" class="list-page-filter-section page-subsection-wrapper">
 								<div class="page-subheader">
-									<p class="page-subheader-text">Me</p>
+									<p class="page-subheader-text">Personal</p>
 									<div class="page-subheader-separator"></div>
 								</div> 
 								<div class="list-page-filter-chunk page-subsection-chunk">
 									<div class="page-subsection-wrapper">
 										<div id="completed-filter" class="list-page-filter">
 											<div class="list-page-filter-checkbox"></div>
-											<p class="list-page-filter-name">Completed</p>
+											<p class="list-page-filter-name">Completed By Me</p>
 										</div>
 									</div>
 								</div>
@@ -68,19 +68,19 @@
 								<div class="list-page-filter-chunk page-subsection-chunk">
 									<div class="page-subsection-wrapper">
 										<div class="list-page-filter">
-											<p class="list-page-filter-label">Min Completion</p>
+											<p class="list-page-filter-label">Min. Completion</p>
 											<input id="min-completion-filter" type="text" class="list-page-filter-param"></input>
 										</div>
 										<div class="list-page-filter">
-											<p class="list-page-filter-label">Max Completion</p>
+											<p class="list-page-filter-label">Max. Completion</p>
 											<input id="max-completion-filter" type="text" class="list-page-filter-param"></input>
 										</div>
 										<div class="list-page-filter">
-											<p class="list-page-filter-label">Min Difficulty</p>
+											<p class="list-page-filter-label">Min. Difficulty</p>
 											<input id="min-difficulty-filter" type="text" class="list-page-filter-param"></input>
 										</div>
 										<div class="list-page-filter">
-											<p class="list-page-filter-label">Max Difficulty</p>
+											<p class="list-page-filter-label">Max. Difficulty</p>
 											<input id="max-difficulty-filter" type="text" class="list-page-filter-param"></input>
 										</div>
 									</div>
@@ -94,11 +94,11 @@
 								<div class="list-page-filter-chunk page-subsection-chunk">
 									<div class="page-subsection-wrapper">
 										<div class="list-page-filter">
-											<p class="list-page-filter-label">Min Quality</p>
+											<p class="list-page-filter-label">Min. Quality</p>
 											<input id="min-quality-filter" type="text" class="list-page-filter-param"></input>
 										</div>
 										<div class="list-page-filter">
-											<p class="list-page-filter-label">Max Quality</p>
+											<p class="list-page-filter-label">Max. Quality</p>
 											<input id="max-quality-filter" type="text" class="list-page-filter-param"></input>
 										</div>
 									</div>
@@ -112,15 +112,15 @@
 								<div class="list-page-list">
 									<div class="list-page-header">
 										<p class="list-page-entry-icon"></p>
-										<p class="list-page-entry-text achievement-game-name">Game</p>
-										<p class="list-page-entry-text achievement-name">Name</p>
-										<p class="list-page-entry-text achievement-completion">Completion Rate</p>
-										<p class="list-page-entry-text achievement-difficulty">Difficulty</p>
-										<p class="list-page-entry-text achievement-quality">Quality</p>
+										<p id="achievement-header-game" class="list-page-entry-text achievement-game-name">Game</p>
+										<p id="achievement-header-name" class="list-page-entry-text achievement-name">Name</p>
+										<p id="achievement-header-completion" class="list-page-entry-text achievement-completion">Completion Rate</p>
+										<p id="achievement-header-difficulty" class="list-page-entry-text achievement-difficulty">Difficulty</p>
+										<p id="achievement-header-quality" class="list-page-entry-text achievement-quality">Quality</p>
 									</div>
 									<template id="achievement-list-template" data-template="achievements-page-list: List<Basic>">
-										<div class="list-page-entry">
-											<img class="list-page-entry-icon lazy-img" data-src="/api/achievement/${achievement_id}/image" alt="Achievement Thumbnail"></img>
+										<div id="achievement-entry-${achievement_id}" class="list-page-entry achievement">
+											<img class="list-page-entry-icon lazy-img" data-src="/api/achievement/${achievement_id}/image" alt="Achievement Icon"></img>
 											<p class="list-page-entry-text achievement-game-name">${game_name}</p>
 											<p class="list-page-entry-text achievement-name">${achievement_name}</p>
 											<p class="list-page-entry-text achievement-completion">${completion}</p>

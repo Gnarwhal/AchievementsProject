@@ -1,5 +1,6 @@
 package achievements.data;
 
+import achievements.data.response.search.Achievement;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;

@@ -10,6 +10,10 @@ const saveTemplate = () => {
 const loadAchievementSearch = () => {
 	const loading = document.querySelector("#loading-results");
 
+	const personal = document.querySelector("#personal-filters");
+	if (!session) {
+		personal.style.display = 'none';
+	}
 
 	const searchButton = document.querySelector("#achievement-search-button");
 	const searchField  = document.querySelector("#achievement-search-field" );
@@ -22,23 +26,26 @@ const loadAchievementSearch = () => {
 	const minQuality    = document.querySelector("#min-quality-filter"   );
 	const maxQuality    = document.querySelector("#max-quality-filter"   );
 
+	let ordering  = 'name';
+	let direction = true;
 	let canSearch = true;
 	const loadList = async () => {
 		if (canSearch) {
 			canSearch = false;
 
 			const body = {
-				searchTerm:    searchField.value,
-				userId:        completed.classList.contains('active') ? session.id : null,
-				completed:     completed.classList.contains('active'),
-				minCompletion: minCompletion.value === '' ? null : Number(minCompletion.value),
-				maxCompletion: maxCompletion.value === '' ? null : Number(maxCompletion.value),
-				minDifficulty: minDifficulty.value === '' ? null : Number(minDifficulty.value),
-				maxDifficulty: maxDifficulty.value === '' ? null : Number(maxDifficulty.value),
-				minQuality:    minQuality.value    === '' ? null : Number(minQuality.value   ),
-				maxQuality:    maxQuality.value    === '' ? null : Number(maxQuality.value   ),
+				searchTerm:     searchField.value,
+				userId:         completed.classList.contains('selected') ? session.id : null,
+				completed:      completed.classList.contains('selected') ? true : null,
+				minCompletion:  minCompletion.value === '' ? null : Number(minCompletion.value),
+				maxCompletion:  maxCompletion.value === '' ? null : Number(maxCompletion.value),
+				minDifficulty:  minDifficulty.value === '' ? null : Number(minDifficulty.value),
+				maxDifficulty:  maxDifficulty.value === '' ? null : Number(maxDifficulty.value),
+				minQuality:     minQuality.value    === '' ? null : Number(minQuality.value   ),
+				maxQuality:     maxQuality.value    === '' ? null : Number(maxQuality.value   ),
+				ordering:       ordering,
+				orderDirection: direction ? 'ASC' : 'DESC',
 			};
-			console.log(body);
 			let successful = true;
 			if (Number.isNaN(body.minCompletion)) { successful = false; minCompletion.style.backgroundColor = 'var(--error)'; } else { minCompletion.style.backgroundColor = 'var(--foreground)'; }
 			if (Number.isNaN(body.maxCompletion)) { successful = false; maxCompletion.style.backgroundColor = 'var(--error)'; } else { maxCompletion.style.backgroundColor = 'var(--foreground)'; }
@@ -72,9 +79,9 @@ const loadAchievementSearch = () => {
 				achievement_id:   item.ID,
 				achievement_name: item.name,
 				game_name:  item.game,
-				completion: item.completion == null ? 'N/A' : item.completion + '%',
-				difficulty: item.difficulty == null ? 'N/A' : item.difficulty + ' / 10',
-				quality:    item.quality    == null ? 'N/A' : item.quality    + ' / 10'
+				completion: item.completion == null ? 'N/A' : `${item.completion}%`,
+				difficulty: item.difficulty == null ? 'N/A' : `${item.difficulty} / 10`,
+				quality:    item.quality    == null ? 'N/A' : `${item.quality} / 10`
 			}))));
 			await template.expand();
 			data.then(data => {
@@ -82,6 +89,25 @@ const loadAchievementSearch = () => {
 				canSearch = true;
 				loadLazyImages();
 			});
+	
+			const headers = {
+				game:       document.querySelector(".list-page-header > .achievement-game-name" ),
+				name:       document.querySelector(".list-page-header > .achievement-name"      ),
+				completion: document.querySelector(".list-page-header > .achievement-completion"),
+				difficulty: document.querySelector(".list-page-header > .achievement-difficulty"),
+				quality:    document.querySelector(".list-page-header > .achievement-quality"   ),
+			}
+			for (const header in headers) {
+				headers[header].addEventListener("click", (clickEvent) => {
+					if (ordering === header) {
+						direction = !direction;
+					} else {
+						ordering = header;
+						direction = true;
+					}
+					loadList();
+				});
+			}
 		}
 	};
 

@@ -1,3 +1,7 @@
+.list-page-entry.achievement:hover {
+	background-color: var(--background-light);
+}
+
 .list-page-entry-text.achievement-game-name  { flex-grow: 1.75; }
 .list-page-entry-text.achievement-name       { flex-grow: 2;   }
 .list-page-entry-text.achievement-completion { flex-grow: 1;   }

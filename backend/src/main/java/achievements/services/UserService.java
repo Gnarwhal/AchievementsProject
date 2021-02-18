@@ -1,9 +1,9 @@
 package achievements.services;
 
 import achievements.data.Profile;
-import achievements.data.query.AddPlatform;
-import achievements.data.query.RemovePlatform;
-import achievements.data.query.SetUsername;
+import achievements.data.request.AddPlatform;
+import achievements.data.request.RemovePlatform;
+import achievements.data.request.SetUsername;
 import achievements.misc.DbConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -210,4 +210,6 @@ public class UserService {
 		}
 		return -1;
 	}
+
+
 }

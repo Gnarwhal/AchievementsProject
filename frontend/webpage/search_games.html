@@ -25,7 +25,7 @@
 			<div id="search-games-page" class="search page">
 				<div class="page-subsection">
 					<div class="page-header">
-						<p class="page-header-text">Search Games</p>
+						<p class="page-header-text">Game Search</p>
 						<div class="page-header-separator"></div>
 					</div>
 				</div>
@@ -34,8 +34,8 @@
 						<div id="list-page-search-dropdown">
 							<div id="search-wrapper" class="page-subsection-wrapper">
 								<div id="list-page-search-pair" class="list-page-search page-subsection-chunk">
-									<label for="achievement-search">Search</label>
-									<input id="achievement-search" type="text" placeholder="Name" name="achievement-search"/>
+									<label id="game-search-button" for="game-search">Search</label>
+									<input id="game-search-field"  type="text" placeholder="Name" name="game-search"/>
 								</div>
 							</div>
 							<div id="filter-dropdown-wrapper" class="page-subsection-wrapper">
@@ -48,14 +48,14 @@
 						<div id="list-page-filters-flex">
 							<div class="list-page-filter-section page-subsection-wrapper">
 								<div class="page-subheader">
-									<p class="page-subheader-text">Games</p>
+									<p class="page-subheader-text">Me</p>
 									<div class="page-subheader-separator"></div>
 								</div> 
 								<div class="list-page-filter-chunk page-subsection-chunk">
 									<div class="page-subsection-wrapper">
-										<div id="games-owned-filter" class="list-page-filter">
+										<div id="owned-filter" class="list-page-filter">
 											<div class="list-page-filter-checkbox"></div>
-											<p class="list-page-filter-name">Games Owned</p>
+											<p class="list-page-filter-name">Owned By Me</p>
 										</div>
 									</div>
 								</div>
@@ -67,31 +67,39 @@
 								</div> 
 								<div class="list-page-filter-chunk page-subsection-chunk">
 									<div class="page-subsection-wrapper">
-										<div id="from-games-owned-filter" class="list-page-filter">
-											<div class="list-page-filter-checkbox"></div>
-											<p class="list-page-filter-name">My Games</p>
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Min Avg. Completion</p>
+											<input id="min-avg-completion-filter" type="text" class="list-page-filter-param"></input>
 										</div>
-										<div id="in-progress-filter" class="list-page-filter">
-											<div class="list-page-filter-checkbox"></div>
-											<p class="list-page-filter-name">In Progress</p>
-										</div>
-										<div id="completed-filter" class="list-page-filter">
-											<div class="list-page-filter-checkbox"></div>
-											<p class="list-page-filter-name">Completed</p>
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Max Avg. Completion</p>
+											<input id="max-avg-completion-filter" type="text" class="list-page-filter-param"></input>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="list-page-filter-section page-subsection-wrapper">
 								<div class="page-subheader">
-									<p class="page-subheader-text">Platforms</p>
+									<p class="page-subheader-text">Users</p>
 									<div class="page-subheader-separator"></div>
 								</div> 
 								<div class="list-page-filter-chunk page-subsection-chunk">
 									<div class="page-subsection-wrapper">
-										<div id="games-owned-filter" class="list-page-filter">
-											<div class="list-page-filter-checkbox"></div>
-											<p class="list-page-filter-name">Games Owned</p>
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Min Num Owners</p>
+											<input id="min-num-owners-filter" type="text" class="list-page-filter-param"></input>
+										</div>
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Max Num Owners</p>
+											<input id="max-num-owners-filter" type="text" class="list-page-filter-param"></input>
+										</div>
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Min Num Perfects</p>
+											<input id="min-num-perfects-filter" type="text" class="list-page-filter-param"></input>
+										</div>
+										<div class="list-page-filter">
+												<p class="list-page-filter-label">Max Num Perfects</p>
+											<input id="max-num-perfects-filter" type="text" class="list-page-filter-param"></input>
 										</div>
 									</div>
 								</div>
@@ -103,25 +111,28 @@
 							<div class="page-subsection-chunk">
 								<div class="list-page-list">
 									<div class="list-page-header">
-										<p class="list-page-entry-icon"></p>
-										<p class="list-page-entry-text achievement-name">Name</p>
-										<p class="list-page-entry-text achievement-description">Description</p>
-										<p class="list-page-entry-text achievement-stages">Stages</p>
+										<p class="list-page-entry-icon game"></p>
+										<p class="list-page-entry-text game-name">Game</p>
+										<p class="list-page-entry-text game-achievement-count">Achievement Count</p>
+										<p class="list-page-entry-text game-avg-completion">Avg. Completion</p>
+										<p class="list-page-entry-text game-num-owners">Num Owners</p>
+										<p class="list-page-entry-text game-num-perfects">Num Perfects</p>
 									</div>
-									<template data-template="achievements-page-list: List<Basic>">
+									<template id="game-list-template" data-template="games-page-list: List<Basic>">
 										<div class="list-page-entry">
-											<img class="list-page-entry-icon" src="/static/res/dummy_achievement.png" alt="Achievement Thumbnail"></img>
-											<div class="list-page-entry-text-section">
-												<p class="list-page-entry-text achievement-name">${achievement-name}</p>
-												<p class="list-page-entry-text achievement-description">${achievement-description}</p>
-												<p class="list-page-entry-text achievement-stages">${stages}</p>
-											</div>
+											<img class="list-page-entry-icon lazy-img game" data-src="/api/game/${game_id}/image" alt="Game Thumbnail"></img>
+											<p class="list-page-entry-text game-name">${game_name}</p>
+											<p class="list-page-entry-text game-achievement-count">${achievement_count}</p>
+											<p class="list-page-entry-text game-avg-completion">${avg_completion}</p>
+											<p class="list-page-entry-text game-num-owners">${num_owners}</p>
+											<p class="list-page-entry-text game-num-perfects">${num_perfects}</p>
 										</div>
 									</template>
 								</div>
 							</div>
 						</div>
 					</div>
+					<img id="loading-results" class="ap-loading" src="/static/res/loading.svg" alt="Loading Symbol" />
 				</div>
 			</div>
 		</div>

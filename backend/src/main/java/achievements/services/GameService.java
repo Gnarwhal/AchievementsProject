@@ -24,7 +24,7 @@ public class GameService {
 
 	public String[] getIcon(int gameId) {
 		try {
-			var stmt = db.prepareCall("{call GetAchievementIcon(?)}");
+			var stmt = db.prepareCall("{call GetGameIcon(?)}");
 			return imageService.getImageType(stmt, gameId);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -25,7 +25,7 @@
 			<div id="search-users-page" class="search page">
 				<div class="page-subsection">
 					<div class="page-header">
-						<p class="page-header-text">Search Users</p>
+						<p class="page-header-text">User Search</p>
 						<div class="page-header-separator"></div>
 					</div>
 				</div>
@@ -34,8 +34,8 @@
 						<div id="list-page-search-dropdown">
 							<div id="search-wrapper" class="page-subsection-wrapper">
 								<div id="list-page-search-pair" class="list-page-search page-subsection-chunk">
-									<label for="achievement-search">Search</label>
-									<input id="achievement-search" type="text" placeholder="Name" name="achievement-search"/>
+									<label id="user-search-button" for="user-search">Search</label>
+									<input id="user-search-field"  type="text" placeholder="Name" name="user-search"/>
 								</div>
 							</div>
 							<div id="filter-dropdown-wrapper" class="page-subsection-wrapper">
@@ -53,45 +53,39 @@
 								</div> 
 								<div class="list-page-filter-chunk page-subsection-chunk">
 									<div class="page-subsection-wrapper">
-										<div id="games-owned-filter" class="list-page-filter">
-											<div class="list-page-filter-checkbox"></div>
-											<p class="list-page-filter-name">Games Owned</p>
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Min Owned</p>
+											<input id="min-owned-filter" type="text" class="list-page-filter-param"></input>
+										</div>
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Max Owned</p>
+											<input id="max-owned-filter" type="text" class="list-page-filter-param"></input>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="list-page-filter-section page-subsection-wrapper">
 								<div class="page-subheader">
-									<p class="page-subheader-text">General</p>
+									<p class="page-subheader-text">Achievements</p>
 									<div class="page-subheader-separator"></div>
 								</div> 
 								<div class="list-page-filter-chunk page-subsection-chunk">
 									<div class="page-subsection-wrapper">
-										<div id="from-games-owned-filter" class="list-page-filter">
-											<div class="list-page-filter-checkbox"></div>
-											<p class="list-page-filter-name">From My Games</p>
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Min Completed</p>
+											<input id="min-completed-filter" type="text" class="list-page-filter-param"></input>
 										</div>
-										<div id="completed-filter" class="list-page-filter">
-											<div class="list-page-filter-checkbox"></div>
-											<p class="list-page-filter-name">Completed</p>
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Max Completed</p>
+											<input id="max-completed-filter" type="text" class="list-page-filter-param"></input>
 										</div>
-										<div id="completed-filter" class="list-page-filter">
-											<div class="list-page-filter-checkbox"></div>
-											<p class="list-page-filter-name">Completed</p>
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Min Avg. Completion</p>
+											<input id="min-avg-completion-filter" type="text" class="list-page-filter-param"></input>
 										</div>
-									</div>
-								</div>
-							</div>
-							<div class="list-page-filter-section page-subsection-wrapper">
-								<div class="page-subheader">
-									<p class="page-subheader-text">Platforms</p>
-									<div class="page-subheader-separator"></div>
-								</div> 
-								<div class="list-page-filter-chunk page-subsection-chunk">
-									<div class="page-subsection-wrapper">
-										<div id="games-owned-filter" class="list-page-filter">
-											<div class="list-page-filter-checkbox"></div>
-											<p class="list-page-filter-name">Games Owned</p>
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Max Avg. Completion</p>
+											<input id="max-avg-completion-filter" type="text" class="list-page-filter-param"></input>
 										</div>
 									</div>
 								</div>
@@ -104,24 +98,27 @@
 								<div class="list-page-list">
 									<div class="list-page-header">
 										<p class="list-page-entry-icon"></p>
-										<p class="list-page-entry-text achievement-name">Name</p>
-										<p class="list-page-entry-text achievement-description">Description</p>
-										<p class="list-page-entry-text achievement-stages">Stages</p>
+										<p class="list-page-entry-text user-username">Username</p>
+										<p class="list-page-entry-text user-game-count">Game Count</p>
+										<p class="list-page-entry-text user-achievement-count">Achievement Count</p>
+										<p class="list-page-entry-text user-avg-completion">Avg. Completion</p>
+										<p class="list-page-entry-text user-perfect-games">Perfect Games</p>
 									</div>
-									<template data-template="achievements-page-list: List<Basic>">
-										<div class="list-page-entry">
-											<img class="list-page-entry-icon" src="/static/res/dummy_achievement.png" alt="Achievement Thumbnail"></img>
-											<div class="list-page-entry-text-section">
-												<p class="list-page-entry-text achievement-name">${achievement-name}</p>
-												<p class="list-page-entry-text achievement-description">${achievement-description}</p>
-												<p class="list-page-entry-text achievement-stages">${stages}</p>
-											</div>
+									<template id="user-list-template" data-template="user-page-list: List<Basic>">
+										<div class="list-page-entry user" data-id="${user_id}">
+											<img class="list-page-entry-icon lazy-img" data-src="/api/user/${user_id}/image" alt="User Image"></img>
+											<p class="list-page-entry-text user-username">${username}</p>
+											<p class="list-page-entry-text user-game-count">${game_count}</p>
+											<p class="list-page-entry-text user-achievement-count">${achievement_count}</p>
+											<p class="list-page-entry-text user-avg-completion">${avg_completion}</p>
+											<p class="list-page-entry-text user-perfect-games">${perfect_games}</p>
 										</div>
 									</template>
 								</div>
 							</div>
 						</div>
 					</div>
+					<img id="loading-results" class="ap-loading" src="/static/res/loading.svg" alt="Loading Symbol" />
 				</div>
 			</div>
 		</div>

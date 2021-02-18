@@ -1,10 +1,11 @@
 :root {
 	--background-dark:     #111117;
 	--background:          #22222A;
+	--background-light:    #33333B;
+	--distinction:         #44444C;
 	--foreground-disabled: #77777D;
 	--foreground-dark:     #AAAAAA;
 	--foreground:          #EEEEEE;
-	--distinction:         #44444C;
 
 	--accent-hue: 0;
 

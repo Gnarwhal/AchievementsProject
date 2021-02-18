@@ -2,9 +2,9 @@ package achievements.controllers;
 
 import achievements.data.APError;
 import achievements.data.APPostRequest;
-import achievements.data.query.AddPlatform;
-import achievements.data.query.RemovePlatform;
-import achievements.data.query.SetUsername;
+import achievements.data.request.AddPlatform;
+import achievements.data.request.RemovePlatform;
+import achievements.data.request.SetUsername;
 import achievements.services.ImageService;
 import achievements.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

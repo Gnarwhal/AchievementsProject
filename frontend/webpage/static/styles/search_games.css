@@ -1,0 +1,9 @@
+.list-page-entry-icon.game {
+	width: 137px;
+}
+
+.list-page-entry-text.game-name              { flex-grow: 2.5; }
+.list-page-entry-text.game-achievement-count { flex-grow: 1;   }
+.list-page-entry-text.game-avg-completion    { flex-grow: 1;   }
+.list-page-entry-text.game-num-owners        { flex-grow: 1;   }
+.list-page-entry-text.game-num-perfects      { flex-grow: 1;   }

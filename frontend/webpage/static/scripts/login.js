@@ -91,7 +91,7 @@ window.addEventListener("load", async (loadEvent) => {
 					const data = response.data;
 					if (response.status === 201) {
 						session = data;
-						window.location.href = "/";
+						window.location.href = `/user/${session.id}`;
 					} else if (response.status === 500) {
 						raiseError([], "Internal server error :(");
 					} else {

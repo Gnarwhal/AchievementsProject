@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.Types;
+import java.util.HashSet;
 
 @Service
 public class APIService {
@@ -37,10 +38,10 @@ public class APIService {
 		try {
 			var response = apis.apis.get(platformId).get(platformUserId);
 
-			var addIfNotGame = db.prepareCall("{call AddIfNotGame(?, ?, ?)}");
-			var addGameToPlatform = db.prepareCall("{call AddGameToPlatform(?, ?, ?)}");
-			var addGameToUser = db.prepareCall("{call AddGameToPlatform(?, ?, ?)}");
-			var addIfNotAchievement = db.prepareCall("{call AddIfNotAchievement(?, ?, ?, ?, ?, ?)}");
+			var addIfNotGame                  = db.prepareCall("{call AddIfNotGame(?, ?, ?)}");
+			var addGameToPlatform             = db.prepareCall("{call AddGameToPlatform(?, ?, ?)}");
+			var addGameToUser                 = db.prepareCall("{call AddGameToUser(?, ?, ?)}");
+			var addIfNotAchievement           = db.prepareCall("{call AddIfNotAchievement(?, ?, ?, ?, ?, ?)}");
 			var setAchievementProgressForUser = db.prepareCall("{call SetAchievementProgressForUser(?, ?, ?, ?)}");
 
 			addIfNotGame.registerOutParameter(3, Types.INTEGER);
@@ -70,6 +71,7 @@ public class APIService {
 				addGameToUser.setInt(3, platformId);
 				addGameToUser.execute();
 
+				var set = new HashSet<Integer>();
 				for (var achievement : game.getAchievements()) {
 					addIfNotAchievement.setInt(1, gameId);
 					addIfNotAchievement.setString(2, achievement.getName());
@@ -78,6 +80,7 @@ public class APIService {
 					addIfNotAchievement.setString(5, getFileType(achievement.getThumbnail()));
 					addIfNotAchievement.execute();
 					var achievementId = addIfNotAchievement.getInt(6);
+					set.add(achievementId);
 
 					var achievementIcon = new File("storage/images/achievement/" + achievementId + "." + getFileType(achievement.getThumbnail()));
 					if (!achievementIcon.exists()) {

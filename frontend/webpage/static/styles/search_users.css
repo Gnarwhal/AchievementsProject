@@ -1,0 +1,9 @@
+.list-page-entry.user:hover {
+	background-color: var(--background-light);
+}
+
+.list-page-entry-text.user-username          { flex-grow: 1.5;  }
+.list-page-entry-text.user-game-count        { flex-grow: 1;    }
+.list-page-entry-text.user-achievement-count { flex-grow: 1;    }
+.list-page-entry-text.user-avg-completion    { flex-grow: 1;    }
+.list-page-entry-text.user-perfect-games     { flex-grow: 1;    }

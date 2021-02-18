@@ -2,7 +2,7 @@
 -- GET USER NAME AND STATS PROCEDURE --
 ---------------------------------------
 
-CREATE PROCEDURE GetUserNameAndStats(
+ALTER PROCEDURE GetUserNameAndStats(
 	@userId INT,
 	@username VARCHAR(32) OUTPUT,
 	@completed INT OUTPUT,
@@ -42,7 +42,7 @@ SELECT * FROM [User]
 -- GET USER PLATFORMS PROCEDURE --
 ----------------------------------
 
-CREATE PROCEDURE GetUserPlatforms(
+ALTER PROCEDURE GetUserPlatforms(
 	@userId INT
 )
 AS
@@ -62,7 +62,7 @@ GO
 -- GET USER RATINGS PROCEDURE --
 --------------------------------
 
-CREATE PROCEDURE GetUserRatings(
+ALTER PROCEDURE GetUserRatings(
 	@userId INT
 )
 AS
@@ -83,7 +83,7 @@ GO
 -- GET USER IMAGE PROCEDURE --
 ------------------------------
 
-CREATE PROCEDURE GetUserImage(
+ALTER PROCEDURE GetUserImage(
 	@userId INT
 )
 AS
@@ -100,7 +100,7 @@ GO
 -- SET USERNAME --
 ------------------
 
-CREATE PROCEDURE SetUsername(
+ALTER PROCEDURE SetUsername(
 	@userId INT,
 	@username VARCHAR(32)
 )
@@ -118,7 +118,7 @@ GO
 -- SET USER IMAGE PROCEDURE --
 ------------------------------
 
-CREATE PROCEDURE SetUserImage(
+ALTER PROCEDURE SetUserImage(
 	@userId INT,
 	@type ImageType,
 	@oldType ImageType OUTPUT
@@ -138,7 +138,7 @@ GO
 -- ADD USER TO PLATFORM --
 --------------------------
 
-CREATE PROCEDURE AddUserToPlatform(
+ALTER PROCEDURE AddUserToPlatform(
 	@userId INT,
 	@platformId INT,
 	@platformUserID VARCHAR(32)
@@ -167,7 +167,7 @@ GO
 -- REMOVE USER FROM PLATFORM --
 -------------------------------
 
-CREATE PROCEDURE RemoveUserFromPlatform(
+ALTER PROCEDURE RemoveUserFromPlatform(
 	@userId INT,
 	@platformId INT
 )
@@ -197,7 +197,7 @@ GO
 -- ADD PLATFORM --
 ------------------
 
-CREATE PROCEDURE AddPlatform(
+ALTER PROCEDURE AddPlatform(
 	@name VARCHAR(32),
 	@platformId INT OUTPUT
 )
@@ -216,7 +216,7 @@ GO
 -- REMOVE PLATFORM --
 ---------------------
 
-CREATE PROCEDURE RemovePlatform(
+ALTER PROCEDURE RemovePlatform(
 	@platformId INT
 )
 AS
@@ -238,7 +238,7 @@ GO
 -- GET PLATFORMS --
 -------------------
 
-CREATE PROCEDURE GetPlatforms
+ALTER PROCEDURE GetPlatforms
 AS
 SELECT ID, PlatformName FROM [Platform]
 RETURN 0
@@ -248,7 +248,7 @@ GO
 -- GET PLATFORM NAME --
 -----------------------
 
-CREATE PROCEDURE GetPlatformName(
+ALTER PROCEDURE GetPlatformName(
 	@platformId INT,
 	@name VARCHAR(32) OUTPUT
 )
@@ -266,7 +266,7 @@ GO
 -- GET PLATFORM ICON --
 -----------------------
 
-CREATE PROCEDURE GetPlatformIcon(
+ALTER PROCEDURE GetPlatformIcon(
 	@platformId INT
 )
 AS
@@ -283,7 +283,7 @@ GO
 -- ADD GAME --
 --------------
 
-CREATE PROCEDURE AddGame(
+ALTER PROCEDURE AddGame(
 	@name VARCHAR(32),
 	@image ImageType,
 	@gameId INT OUTPUT
@@ -308,7 +308,7 @@ GO
 -- ADD IF NOT GAME --
 ---------------------
 
-CREATE PROCEDURE AddIfNotGame(
+ALTER PROCEDURE AddIfNotGame(
 	@name VARCHAR(32),
 	@image VARCHAR(11),
 	@gameId INT OUTPUT
@@ -332,7 +332,7 @@ GO
 -- REMOVE GAME --
 -----------------
 
-CREATE PROCEDURE RemoveGame(
+ALTER PROCEDURE RemoveGame(
 	@gameId INT
 )
 AS
@@ -496,7 +496,7 @@ GO
 -- ADD ACHIEVEMENT --
 ---------------------
 
-CREATE PROCEDURE AddAchievement(
+ALTER PROCEDURE AddAchievement(
 	@gameId INT,
 	@name VARCHAR(128),
 	@description VARCHAR(512),

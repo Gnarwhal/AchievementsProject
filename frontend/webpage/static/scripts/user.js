@@ -160,8 +160,11 @@ const loadProfile = () => {
 			document.querySelector("#platform-0"),
 		];
 
+		let allowSteamImport = true;
 		steamButtons[0].addEventListener("click", (clickEvent) => {
-			window.location.href = "/auth/steam";
+			if (allowSteamImport) {
+				window.location.href = "/auth/steam";
+			}
 		});
 		steamButtons[1].addEventListener("click", (clickEvent) => {
 			fetch(`/api/user/${profileId}/platforms/remove`, {
@@ -170,7 +173,10 @@ const loadProfile = () => {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ sessionKey: session.key, platformId: 0 })
+			}).then(() => {
+				allowSteamImport = true;
 			});
+			allowSteamImport = false;
 			steamButtons[1].parentElement.classList.remove("connected");
 		});
 

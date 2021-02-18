@@ -1,4 +1,4 @@
-package achievements.data.query;
+package achievements.data.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -22,6 +22,10 @@ public class SearchAchievements {
 	private Float minQuality;
 	@JsonProperty("maxQuality")
 	private Float maxQuality;
+	@JsonProperty("ordering")
+	private String ordering;
+	@JsonProperty("orderDirection")
+	private String orderDirection;
 
 	public String getSearchTerm() {
 		return searchTerm;
@@ -93,5 +97,21 @@ public class SearchAchievements {
 
 	public void setMaxQuality(Float maxQuality) {
 		this.maxQuality = maxQuality;
+	}
+
+	public String getOrdering() {
+		return ordering;
+	}
+
+	public void setOrdering(String ordering) {
+		this.ordering = ordering;
+	}
+
+	public String getOrderDirection() {
+		return orderDirection;
+	}
+
+	public void setOrderDirection(String orderDirection) {
+		this.orderDirection = orderDirection;
 	}
 }

@@ -63,7 +63,7 @@ const commonTemplates = async () => {
 		]);
 	} else {
 		template.apply("navbar-section-right").values([
-			{ item: "login", title: "Login" }
+			{ item: "login", title: "Login / Create Account" }
 		]);
 	}
 };
@@ -96,7 +96,7 @@ const connectNavbar = () => {
 				window.location.href = "/login";
 			});
 		} else if (item.dataset.pageName === "profile") {
-			item.addEventListener("click", (clickEvent) => window.location.href = `/profile/${session.id}`);
+			item.addEventListener("click", (clickEvent) => window.location.href = `/user/${session.id}`);
 		} else {
 			item.addEventListener("click", (clickEvent) => window.location.href = `/${item.dataset.pageName}`);
 		}

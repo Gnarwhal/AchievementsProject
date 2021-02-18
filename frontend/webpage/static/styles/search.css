@@ -289,6 +289,9 @@
 
 	color: var(--foreground);
 	font-size: 24px;
+
+	transition-property: background-color;
+	transition-duration: 0.15s;
 }
 
 .list-page-entry-icon {
@@ -309,6 +312,8 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
+	cursor: default;
 }
 
 .list-page-entry > .list-page-entry-text {
@@ -318,6 +323,17 @@
 
 .list-page-header > .list-page-entry-text {
 	border-left: 1px solid var(--accent-value0);
+
+	transition-property: background-color;
+	transition-duration: 0.15s;
+}
+
+.list-page-header > .list-page-entry-text:hover {
+	background-color: var(--accent-value1);
+}
+
+.list-page-header > .list-page-entry-text:active {
+	background-color: var(--accent-value0);
 }
 
 #loading-results {

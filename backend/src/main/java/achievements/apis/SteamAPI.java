@@ -60,7 +60,10 @@ public class SteamAPI extends PlatformAPI {
 			var newGame = new APIResponse.Game();
 			newGame.setPlatformGameId(Integer.toString(game.getAppid()));
 			newGame.setName(game.getName());
-			newGame.setThumbnail("https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/" + game.getAppid() + "/" + game.getImg_logo_url() + ".jpg");
+			// Technically this is not the advertised logo url, but it's used be steamcommunity.com
+			// and steamdb.info and it gives better aspect ratios and it means I don't need the random
+			// logo_url field
+			newGame.setThumbnail("https://cdn.cloudflare.steamstatic.com/steam/apps/" + game.getAppid() + "/header.jpg");
 			newGame.setPlayed(game.getPlaytime_forever() > 0);
 
 			var achievements = new HashMap<String, APIResponse.Game.Achievement>();
@@ -71,7 +74,6 @@ public class SteamAPI extends PlatformAPI {
 			var playerAchievementsUrl = playerAchievementsBaseUrl.cloneBuilder()
 				.queryParam("appid", game.getAppid())
 				.toUriString();
-
 
 			var schemaResponse = rest.exchange(gameSchemaUrl, HttpMethod.GET, entity, GetSchemaForGameBody.class).getBody().getGame().getAvailableGameStats();
 			if (schemaResponse != null && schemaResponse.getAchievements() != null) {

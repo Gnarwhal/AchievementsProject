@@ -33,3 +33,10 @@ AS
 	GROUP BY Achievement.ID
 GO
 
+-- List of games owned by a user removing duplicate ownership if owned on multiple platforms
+CREATE VIEW OwnsUnique
+AS
+	SELECT UserID, GameID
+	FROM Owns
+	GROUP BY UserID, GameID
+GO
