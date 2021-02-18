@@ -27,6 +27,9 @@
 
 -----------------------------
 
+--CREATE TYPE ImageType FROM VARCHAR(4) NULL
+--GO
+
 CREATE TABLE [User] (
 	ID INT IDENTITY(0, 1) NOT NULL,
 	Email VARCHAR(254) NOT NULL,
@@ -36,7 +39,9 @@ CREATE TABLE [User] (
 	Hue INT NOT NULL
 		CONSTRAINT HueDefault DEFAULT 0
 		CONSTRAINT HueConstraint CHECK (0 <= Hue AND Hue <= 360),
-	PFP VARCHAR(11) NULL,
+	ProfileImage ImageType,
+	[Admin] BIT NOT NULL
+		CONSTRAINT AdmivDefault DEFAULT 0,
 	Verified BIT NOT NULL
 		CONSTRAINT VerifiedDefault DEFAULT 0
 	PRIMARY KEY(ID)
@@ -44,14 +49,15 @@ CREATE TABLE [User] (
 
 CREATE TABLE [Platform] (
 	ID INT IDENTITY(0, 1) NOT NULL,
-	PlatformName VARCHAR(32) NOT NULL
+	PlatformName VARCHAR(32) NOT NULL,
+	Icon ImageType
 	PRIMARY KEY(ID)
 )
 
 CREATE TABLE [Game] (
 	ID INT IDENTITY(0, 1) NOT NULL,
 	Name VARCHAR(32) NOT NULL,
-	Thumbnail VARCHAR(256) NULL
+	Icon ImageType
 	PRIMARY KEY(ID)
 )
 
@@ -61,7 +67,7 @@ CREATE TABLE [Achievement] (
 	Name VARCHAR(128) NOT NULL,
 	Description VARCHAR(512) NULL,
 	Stages INT NOT NULL,
-	Thumbnail VARCHAR(256) NULL
+	Icon ImageType
 	PRIMARY KEY(ID)
 	FOREIGN KEY(GameID) REFERENCES [Game](ID)
 		ON UPDATE CASCADE
@@ -89,7 +95,7 @@ CREATE TABLE [Progress] (
 	PlatformID INT NOT NULL,
 	AchievementID INT NOT NULL,
 	Progress INT NOT NULL
-	PRIMARY KEY(UserID, AchievementID)
+	PRIMARY KEY(UserID, PlatformID, AchievementID)
 	FOREIGN KEY(UserID) REFERENCES [User](ID)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
@@ -117,7 +123,7 @@ CREATE TABLE [IsOn] (
 CREATE TABLE [ExistsOn] (
 	GameID INT NOT NULL,
 	PlatformID INT NOT NULL,
-	PlatformGameID INT NOT NULL
+	PlatformGameID VARCHAR(32) NOT NULL
 	PRIMARY KEY(GameID, PlatformID)
 	FOREIGN KEY(GameID) REFERENCES [Game](ID)
 		ON UPDATE CASCADE

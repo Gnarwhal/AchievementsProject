@@ -8,7 +8,7 @@ import javax.annotation.PostConstruct;
 import java.sql.Connection;
 
 @Service
-public class PlatformService {
+public class AchievementService {
 
 	@Autowired
 	private DbConnection dbs;
@@ -22,10 +22,10 @@ public class PlatformService {
 		db = dbs.getConnection();
 	}
 
-	public String[] getIcon(int platformId) {
+	public String[] getIcon(int achievementId) {
 		try {
-			var stmt = db.prepareCall("{call GetPlatformIcon(?)}");
-			return imageService.getImageType(stmt, platformId);
+			var stmt = db.prepareCall("{call GetAchievementIcon(?)}");
+			return imageService.getImageType(stmt, achievementId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

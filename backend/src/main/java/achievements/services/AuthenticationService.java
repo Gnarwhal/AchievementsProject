@@ -68,7 +68,8 @@ public class AuthenticationService {
 				statement.getInt(1),
 				session.generate(
 					statement.getInt(6),
-					statement.getInt(7)
+					statement.getInt(7),
+					false
 				)
 			);
 			statement.close();
@@ -95,7 +96,8 @@ public class AuthenticationService {
 						0,
 						session.generate(
 							result.getInt("ID"),
-							result.getInt("Hue")
+							result.getInt("Hue"),
+							result.getBoolean("Admin")
 						)
 					);
 				} else {

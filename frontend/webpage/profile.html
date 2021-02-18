@@ -28,6 +28,10 @@
 						<div class="page-header-separator"></div>
 					</div>
 				</div>
+				<div id="importing">
+					<p id="importing-text">Contemplating...</p>
+					<img id="importing-loading" class="ap-loading" src="/static/res/loading.svg" alt="Loading Symbol" />
+				</div>
 				<template data-template="profile-page">
 					<div id="profile-section-1">
 						<div id="profile-info" class="page-subsection">
@@ -49,7 +53,7 @@
 								</div>
 								<div id="profile-info-pfp-border" class="page-subsection-chunk">
 									<div id="profile-info-pfp">
-										<img id="profile-info-pfp-img" src="/api/user/${id}/image" alt="User's Profile Picture" />
+										<img id="profile-info-pfp-img" class="lazy-img" data-src="/api/user/${id}/image" alt="User's Profile Picture" />
 										<div id="profile-info-pfp-vignette"></div>
 										<img id="profile-info-pfp-upload" src="/static/res/upload.svg" alt="Upload Image" />
 										<img id="profile-info-pfp-upload-hover" src="/static/res/upload-hover.svg" alt="Upload Image" />

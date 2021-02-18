@@ -23,8 +23,5 @@ src/main/resources/application-local.properties
 # Server Keystore
 src/main/resources/achievements-ssl-key.p12
 
-# Api Keys
-apikeys/
-
 # Program Data
-images/
+storage/

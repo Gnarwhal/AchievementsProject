@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Achievements Project</title>
+
+		<link rel="stylesheet" href="/static/styles/theme.css" />
+		<link rel="stylesheet" href="/static/styles/common.css" />
+		<link rel="stylesheet" href="/static/styles/search.css" />
+		<link rel="stylesheet" href="/static/styles/search_achievements.css" />
+	</head>
+	<body>
+		<div id="navbar">
+			<template data-template="navbar: List<Basic>">
+				<div id="navbar-section-${section}" class="navbar-section">
+					<template data-template="navbar-section-${section}: List<Basic>">
+						<div id="navbar-item-${item}" class="navbar-item" data-page-name="${item}">
+							${title}
+						</div>
+					</template>
+				</div>
+			</template>
+		</div>
+		<div id="content-body">
+			<div id="search-achievements-page" class="search page">
+				<div class="page-subsection">
+					<div class="page-header">
+						<p class="page-header-text">Search Achievements</p>
+						<div class="page-header-separator"></div>
+					</div>
+				</div>
+				<div class="page-subsection">
+					<div id="list-page-search-filters">
+						<div id="list-page-search-dropdown">
+							<div id="search-wrapper" class="page-subsection-wrapper">
+								<div id="list-page-search-pair" class="list-page-search page-subsection-chunk">
+									<label id="achievement-search-button" for="achievement-search">Search</label>
+									<input id="achievement-search-field"  type="text" placeholder="Name" name="achievement-search"/>
+								</div>
+							</div>
+							<div id="filter-dropdown-wrapper" class="page-subsection-wrapper">
+								<div id="filter-dropdown-stack">
+									<img id="filter-dropdown-button"       src="/static/res/dropdown.svg"       alt="Dropdown Button"/>
+									<img id="filter-dropdown-button-hover" src="/static/res/dropdown-hover.svg" alt="Dropdown Button"/>
+								</div>
+							</div>
+						</div>
+						<div id="list-page-filters-flex">
+							<div class="list-page-filter-section page-subsection-wrapper">
+								<div class="page-subheader">
+									<p class="page-subheader-text">Me</p>
+									<div class="page-subheader-separator"></div>
+								</div> 
+								<div class="list-page-filter-chunk page-subsection-chunk">
+									<div class="page-subsection-wrapper">
+										<div id="completed-filter" class="list-page-filter">
+											<div class="list-page-filter-checkbox"></div>
+											<p class="list-page-filter-name">Completed</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="list-page-filter-section page-subsection-wrapper">
+								<div class="page-subheader">
+									<p class="page-subheader-text">Difficulty</p>
+									<div class="page-subheader-separator"></div>
+								</div> 
+								<div class="list-page-filter-chunk page-subsection-chunk">
+									<div class="page-subsection-wrapper">
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Min Completion</p>
+											<input id="min-completion-filter" type="text" class="list-page-filter-param"></input>
+										</div>
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Max Completion</p>
+											<input id="max-completion-filter" type="text" class="list-page-filter-param"></input>
+										</div>
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Min Difficulty</p>
+											<input id="min-difficulty-filter" type="text" class="list-page-filter-param"></input>
+										</div>
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Max Difficulty</p>
+											<input id="max-difficulty-filter" type="text" class="list-page-filter-param"></input>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="list-page-filter-section page-subsection-wrapper">
+								<div class="page-subheader">
+									<p class="page-subheader-text">Quality</p>
+									<div class="page-subheader-separator"></div>
+								</div> 
+								<div class="list-page-filter-chunk page-subsection-chunk">
+									<div class="page-subsection-wrapper">
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Min Quality</p>
+											<input id="min-quality-filter" type="text" class="list-page-filter-param"></input>
+										</div>
+										<div class="list-page-filter">
+											<p class="list-page-filter-label">Max Quality</p>
+											<input id="max-quality-filter" type="text" class="list-page-filter-param"></input>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="list-page-partitions">
+						<div class="list-page-list-partition page-subsection-wrapper">
+							<div class="page-subsection-chunk">
+								<div class="list-page-list">
+									<div class="list-page-header">
+										<p class="list-page-entry-icon"></p>
+										<p class="list-page-entry-text achievement-game-name">Game</p>
+										<p class="list-page-entry-text achievement-name">Name</p>
+										<p class="list-page-entry-text achievement-completion">Completion Rate</p>
+										<p class="list-page-entry-text achievement-difficulty">Difficulty</p>
+										<p class="list-page-entry-text achievement-quality">Quality</p>
+									</div>
+									<template id="achievement-list-template" data-template="achievements-page-list: List<Basic>">
+										<div class="list-page-entry">
+											<img class="list-page-entry-icon lazy-img" data-src="/api/achievement/${achievement_id}/image" alt="Achievement Thumbnail"></img>
+											<p class="list-page-entry-text achievement-game-name">${game_name}</p>
+											<p class="list-page-entry-text achievement-name">${achievement_name}</p>
+											<p class="list-page-entry-text achievement-completion">${completion}</p>
+											<p class="list-page-entry-text achievement-difficulty">${difficulty}</p>
+											<p class="list-page-entry-text achievement-quality">${quality}</p>
+										</div>
+									</template>
+								</div>
+							</div>
+						</div>
+					</div>
+					<img id="loading-results" class="ap-loading" src="/static/res/loading.svg" alt="Loading Symbol" />
+				</div>
+			</div>
+		</div>
+		<script src="/static/scripts/template.js"></script>
+		<script src="/static/scripts/common.js"></script>
+		<script src="/static/scripts/search.js"></script>
+		<script src="/static/scripts/search_achievements.js"></script>
+	</body>
+</html>

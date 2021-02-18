@@ -30,10 +30,16 @@ app.get("/login", (req, res) => {
 	res.sendFile(path.join(__dirname + "/webpage/login.html"));
 });
 app.get("/", (req, res) => {
-	res.sendFile(path.join(__dirname + "/webpage/index.html"));
+	res.sendFile(path.join(__dirname + "/webpage/search_achievements.html"));
 });
-app.get("/about", (req, res) => {
-	res.sendFile(path.join(__dirname + "/webpage/about.html"));
+app.get("/achievements", (req, res) => {
+	res.sendFile(path.join(__dirname + "/webpage/search_achievements.html"));
+});
+app.get("/users", (req, res) => {
+	res.sendFile(path.join(__dirname + "/webpage/search_users.html"));
+});
+app.get("/games", (req, res) => {
+	res.sendFile(path.join(__dirname + "/webpage/search_games.html"));
 });
 app.get("/profile/:id", (req, res) => {
 	res.sendFile(path.join(__dirname + "/webpage/profile.html"));

@@ -13,12 +13,12 @@ public class SessionManager {
 	private HashMap<String, Session> sessions;
 
 	public SessionManager() {
-		sessions = new HashMap();
+		sessions = new HashMap<>();
 	}
 
-	public Session generate(int user, int hue) {
+	public Session generate(int user, int hue, boolean admin) {
 		var key = HashManager.encode(HashManager.generateBytes(16));
-		var session = new Session(key, user, hue);
+		var session = new Session(key, user, hue, admin);
 		sessions.put(key, session);
 		return session;
 	}
@@ -32,8 +32,13 @@ public class SessionManager {
 	}
 
 	public boolean validate(int user, String key) {
-		var foreign = sessions.get(key);
-		return foreign != null && user == foreign.getId();
+		var session = sessions.get(key);
+		return session != null && user == session.getId();
+	}
+
+	public boolean validateAdmin(int user, String key) {
+		var session = sessions.get(key);
+		return session != null && user == session.getId() && session.isAdmin();
 	}
 
 	public boolean refresh(String key) {
@@ -51,7 +56,7 @@ public class SessionManager {
 	public void clean() {
 		var remove = new ArrayList<String>();
 		sessions.forEach((key, session) -> {
-			if (!session.getUsed()) {
+			if (!session.isUsed()) {
 				remove.add(session.getKey());
 			} else {
 				session.setUsed(false);

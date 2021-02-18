@@ -25,7 +25,6 @@ const loadSession = async () => {
 
 		await fetch(`/api/auth/refresh`, {
 			method: 'POST',
-			mode: 'cors',
 			headers: {
 				'Content-Type': 'application/json'
 			},
@@ -52,8 +51,10 @@ const commonTemplates = async () => {
 		{ section: "right" }
 	]);
 	template.apply("navbar-section-left").values([
-		{ item: "project", title: "Project" },
-		{ item: "about",   title: "About"   }
+		{ item: "achievements", title: "Achievements" },
+		{ item: "users",        title: "Users"        },
+		{ item: "games",        title: "Games"        },
+		{ item: "import",       title: "Import"       }
 	]);
 	if (session) {
 		template.apply("navbar-section-right").values([
@@ -62,34 +63,40 @@ const commonTemplates = async () => {
 		]);
 	} else {
 		template.apply("navbar-section-right").values([
-			{ item: "login",   title: "Login" }
+			{ item: "login", title: "Login" }
 		]);
 	}
 };
 
+const loadLazyImages = () => {
+	const imgs = document.querySelectorAll(".lazy-img");
+	for (const img of imgs) {
+		img.src = img.dataset.src;
+	}
+}
+
 const connectNavbar = () => {
 	const navItems = document.querySelectorAll(".navbar-item");
+
+	if (!session || !session.admin) {
+		document.querySelector("#navbar-item-import").remove();
+	}
 
 	for (const item of navItems) {
 		if (item.dataset.pageName === "logout") {
 			item.addEventListener("click", (clickEvent) => {
 				fetch(`/api/auth/logout`, {
 					method: 'POST',
-					mode: 'cors',
 					headers: {
 						'Content-Type': 'application/json'
 					},
 					body: JSON.stringify({ key: session.key })
-				})
-				.then(response => {
-					session = undefined;
-					window.location.href = "/login";
 				});
+				session = undefined;
+				window.location.href = "/login";
 			});
 		} else if (item.dataset.pageName === "profile") {
 			item.addEventListener("click", (clickEvent) => window.location.href = `/profile/${session.id}`);
-		} else if (item.dataset.pageName === "project") {
-			item.addEventListener("click", (clickEvent) => window.location.href = `/`);
 		} else {
 			item.addEventListener("click", (clickEvent) => window.location.href = `/${item.dataset.pageName}`);
 		}

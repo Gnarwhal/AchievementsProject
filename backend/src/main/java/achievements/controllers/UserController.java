@@ -2,20 +2,18 @@ package achievements.controllers;
 
 import achievements.data.APError;
 import achievements.data.APPostRequest;
-import achievements.data.query.AddPlatformRequest;
-import achievements.data.query.RemovePlatformRequest;
+import achievements.data.query.AddPlatform;
+import achievements.data.query.RemovePlatform;
 import achievements.data.query.SetUsername;
+import achievements.services.ImageService;
 import achievements.services.UserService;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
 
 @RestController
 @RequestMapping("/user")
@@ -23,6 +21,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private ImageService imageService;
 
 	@GetMapping(value = "/{user}", produces = "application/json")
 	public ResponseEntity getProfile(@PathVariable("user") int user) {
@@ -45,38 +46,21 @@ public class UserController {
 
 	@GetMapping(value = "/{user}/image")
 	public void getProfilePicture(@PathVariable("user") int user, HttpServletResponse response) {
-		var pfp = userService.getProfileImageType(user);
-		if (pfp == null) {
-
-		} else {
-			var file = new File("images/user/" + pfp[0] + "." + pfp[1]);
-			response.setContentType("image/" + pfp[2]);
-			try {
-				var stream = new FileInputStream(file);
-				IOUtils.copy(stream, response.getOutputStream());
-
-				response.flushBuffer();
-				stream.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		var profileImage = userService.getProfileImage(user);
+		imageService.send(profileImage, "user", response);
 	}
 
 	@PostMapping(value = "/{user}/image", consumes = "multipart/form-data", produces = "application/json")
 	public ResponseEntity setProfilePicture(@PathVariable("user") int user, @RequestPart APPostRequest session, @RequestPart MultipartFile file) {
 		try {
-			var type = userService.setProfileImageType(user, session.getKey(), file.getContentType());
+			var type = userService.setProfileImage(user, session.getKey(), file);
 			if ("not_an_image".equals(type)) {
 				return ResponseEntity.badRequest().body("{ \"code\": 1, \"message\": \"Not an image type\" }");
 			} else if ("unsupported_type".equals(type)) {
 				return ResponseEntity.badRequest().body("{ \"code\": 1, \"message\": \"Unsupported file type\" }");
 			} else if ("forbidden".equals(type)) {
 				return ResponseEntity.status(HttpStatus.FORBIDDEN).body("{ \"code\": 2, \"message\": \"Invalid credentials\" }");
-			} else if (!"unknown".equals(type)) {
-				var pfp = new FileOutputStream("images/user/" + user + "." + type);
-				FileCopyUtils.copy(file.getInputStream(), pfp);
-				pfp.close();
+			} else if ("success".equals(type)) {
 				return ResponseEntity.status(HttpStatus.CREATED).body("{ \"code\": 0, \"message\": \"Success\" }");
 			}
 
@@ -87,7 +71,7 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/{user}/platforms/add", consumes = "application/json", produces = "application/json")
-	public ResponseEntity addPlatformForUser(@PathVariable("user") int userId, @RequestBody AddPlatformRequest request) {
+	public ResponseEntity addPlatformForUser(@PathVariable("user") int userId, @RequestBody AddPlatform request) {
 		var result = userService.addPlatform(userId, request);
 		if (result == 0) {
 			return ResponseEntity.status(HttpStatus.CREATED).body("{}");
@@ -97,7 +81,7 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/{user}/platforms/remove", consumes = "application/json", produces = "application/json")
-	public ResponseEntity removePlatformForUser(@PathVariable("user") int userId, @RequestBody RemovePlatformRequest request) {
+	public ResponseEntity removePlatformForUser(@PathVariable("user") int userId, @RequestBody RemovePlatform request) {
 		var result = userService.removePlatform(userId, request);
 		if (result == 0) {
 			return ResponseEntity.status(HttpStatus.CREATED).body("{}");

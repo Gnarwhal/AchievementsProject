@@ -11,6 +11,7 @@ window.addEventListener("load", async (loadEvent) => {
 		password: document.querySelector("#password"),
 		confirm:  document.querySelector("#confirm" )
 	};
+	fields.email.focus();
 
 	const createUser = document.querySelector("#create-user-button");
 	const login      = document.querySelector("#login-button");
@@ -80,7 +81,6 @@ window.addEventListener("load", async (loadEvent) => {
 				freeze();
 				fetch(`/api/auth/create_user`, {
 					method: 'POST',
-					mode: 'cors',
 					headers: {
 						'Content-Type': 'application/json'
 					},
@@ -141,7 +141,6 @@ window.addEventListener("load", async (loadEvent) => {
 				freeze();
 				fetch(`/api/auth/login`, {
 					method: 'POST',
-					mode: 'cors',
 					headers: {
 						'Content-Type': 'application/json'
 					},

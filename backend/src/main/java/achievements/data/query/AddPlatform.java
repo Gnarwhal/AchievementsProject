@@ -2,7 +2,7 @@ package achievements.data.query;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class AddPlatformRequest {
+public class AddPlatform {
 	@JsonProperty("sessionKey")
 	private String sessionKey;
 	@JsonProperty("platformId")

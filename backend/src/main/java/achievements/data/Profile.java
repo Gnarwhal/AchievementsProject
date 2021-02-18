@@ -1,6 +1,5 @@
 package achievements.data;
 
-import achievements.data.query.StringFilter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;

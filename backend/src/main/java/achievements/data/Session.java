@@ -11,14 +11,17 @@ public class Session {
 	private int id;
 	@JsonProperty("hue")
 	private int hue;
+	@JsonProperty("admin")
+	private boolean admin;
 	@JsonIgnore
 	private boolean used;
 
-	public Session(String key, int id, int hue) {
-		this.key  = key;
-		this.id   = id;
-		this.hue  = hue;
-		this.used = false;
+	public Session(String key, int id, int hue, boolean admin) {
+		this.key   = key;
+		this.id    = id;
+		this.hue   = hue;
+		this.admin = admin;
+		this.used  = false;
 	}
 
 	public String getKey() {
@@ -45,7 +48,15 @@ public class Session {
 		this.hue = hue;
 	}
 
-	public boolean getUsed() {
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
+	public boolean isUsed() {
 		return used;
 	}
 

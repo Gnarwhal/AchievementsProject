@@ -1,19 +1,24 @@
 package achievements.services;
 
 import achievements.data.Profile;
-import achievements.data.query.AddPlatformRequest;
-import achievements.data.query.RemovePlatformRequest;
+import achievements.data.query.AddPlatform;
+import achievements.data.query.RemovePlatform;
 import achievements.data.query.SetUsername;
 import achievements.misc.DbConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
-import java.util.HashMap;
+
+import static achievements.services.ImageService.MIME_TO_EXT;
 
 @Service
 public class UserService {
@@ -24,6 +29,12 @@ public class UserService {
 
 	@Autowired
 	private AuthenticationService auth;
+
+	@Autowired
+	private APIService apiService;
+
+	@Autowired
+	private ImageService imageService;
 
 	@PostConstruct
 	private void init() {
@@ -97,55 +108,51 @@ public class UserService {
 		return -1;
 	}
 
-	private static final HashMap<String, String> VALID_IMAGE_TYPES = new HashMap<>();
-	static {
-		VALID_IMAGE_TYPES.put("apng",    "apng");
-		VALID_IMAGE_TYPES.put("avif",    "avif");
-		VALID_IMAGE_TYPES.put("gif",     "gif" );
-		VALID_IMAGE_TYPES.put("jpeg",    "jpg" );
-		VALID_IMAGE_TYPES.put("png",     "png" );
-		VALID_IMAGE_TYPES.put("svg+xml", "svg" );
-		VALID_IMAGE_TYPES.put("webp",    "webp");
-	}
-	public String[] getProfileImageType(int userId) {
+	public String[] getProfileImage(int userId) {
 		try {
 			var stmt = db.prepareCall("{call GetUserImage(?)}");
-			stmt.setInt(1, userId);
-
-			var result = stmt.executeQuery();
-			if (result.next()) {
-				var type = result.getString("PFP");
-				if (type == null) {
-					return new String[] { "default", "png", "png" };
-				} else {
-					return new String[] { Integer.toString(userId), VALID_IMAGE_TYPES.get(type), type };
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NumberFormatException e) {
+			return imageService.getImageType(stmt, userId);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	public String setProfileImageType(int userId, String sessionKey, String type) {
+	public String setProfileImage(int userId, String sessionKey, MultipartFile file) {
 		try {
+			var type = file.getContentType();
 			if (type.matches("image/.*")) {
 				type = type.substring(6);
-				var extension = VALID_IMAGE_TYPES.get(type);
+				type = MIME_TO_EXT.get(type);
 				if (!auth.session().validate(userId, sessionKey)) {
 					return "forbidden";
-				} else if (extension == null) {
+				} else if (type == null) {
 					return "unsupported_type";
 				} else {
-					var stmt = db.prepareCall("{call SetUserImage(?, ?)}");
+					var stmt = db.prepareCall("{call SetUserImage(?, ?, ?)}");
 					stmt.setInt(1, userId);
 					stmt.setString(2, type);
+					stmt.registerOutParameter(3, Types.VARCHAR);
 
 					stmt.execute();
+					var oldType = stmt.getString(3);
 
-					return extension;
+					// Delete old file
+					if (oldType != null && type != oldType) {
+						var oldFile = new File("storage/images/user/" + userId + "." + oldType);
+						if (oldFile.exists()) {
+							oldFile.delete();
+						}
+					}
+
+					// Save new file (will overwrite old if file type didn't change)
+					{
+						var image = new FileOutputStream("storage/images/user/" + userId + "." + type);
+						FileCopyUtils.copy(file.getInputStream(), image);
+						image.close();
+					}
+
+					return "success";
 				}
 			} else {
 				return "not_an_image";
@@ -156,28 +163,41 @@ public class UserService {
 		return "unknown";
 	}
 
-	public int addPlatform(int userId, AddPlatformRequest request) {
-		try {
-			if (auth.session().validate(userId, request.getSessionKey())) {
-				var stmt = db.prepareCall("{call AddPlatform(?, ?, ?)}");
-				stmt.setInt(1, userId);
-				stmt.setInt(2, request.getPlatformId());
-				stmt.setString(3, request.getPlatformUserId());
+	public int addPlatform(int userId, AddPlatform request) {
+		if (auth.session().validate(userId, request.getSessionKey())) {
+			try {
+				db.setAutoCommit(false);
+				try {
+					var stmt = db.prepareCall("{call AddUserToPlatform(?, ?, ?)}");
+					stmt.setInt(1, userId);
+					stmt.setInt(2, request.getPlatformId());
+					stmt.setString(3, request.getPlatformUserId());
 
-				stmt.execute();
+					stmt.execute();
 
-				return 0;
+					int successful = apiService.importUserPlatform(userId, request.getPlatformId(), request.getPlatformUserId());
+
+					if (successful == 0) {
+						db.commit();
+						db.setAutoCommit(true);
+						return 0;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				db.rollback();
+				db.setAutoCommit(true);
+			} catch(SQLException e){
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return -1;
 	}
 
-	public int removePlatform(int userId, RemovePlatformRequest request) {
+	public int removePlatform(int userId, RemovePlatform request) {
 		try {
 			if (auth.session().validate(userId, request.getSessionKey())) {
-				var stmt = db.prepareCall("{call RemovePlatform(?, ?)}");
+				var stmt = db.prepareCall("{call RemoveUserFromPlatform(?, ?)}");
 				stmt.setInt(1, userId);
 				stmt.setInt(2, request.getPlatformId());
 

@@ -1,0 +1,5 @@
+.list-page-entry-text.achievement-game-name  { flex-grow: 1.75; }
+.list-page-entry-text.achievement-name       { flex-grow: 2;   }
+.list-page-entry-text.achievement-completion { flex-grow: 1;   }
+.list-page-entry-text.achievement-quality    { flex-grow: 1;   }
+.list-page-entry-text.achievement-difficulty { flex-grow: 1;   }

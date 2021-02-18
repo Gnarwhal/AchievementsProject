@@ -2,14 +2,25 @@ let profileId   = window.location.pathname.split('/').pop();
 let isReturn    = false;
 let profileData = null;
 const loadProfile = () => {
-	{
-		const lists = document.querySelectorAll(".profile-list");
+	const lists = document.querySelectorAll(".profile-list");
+	const checkLists = () => {
 		for (const list of lists) {
-			if (list.querySelectorAll(".profile-entry").length === 0) {
-				list.parentElement.removeChild(list);
+			let found = false;
+			const entries = list.querySelectorAll(".profile-entry");
+			for (const entry of entries) {
+				if (window.getComputedStyle(entry).getPropertyValue('display') !== 'none') {
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
+				list.style.display = 'none';
+			} else {
+				list.style.display = 'block';
 			}
 		}
 	}
+	checkLists();
 
 	{
 		const validImageFile = (type) => {
@@ -32,7 +43,6 @@ const loadProfile = () => {
 			if (usernameField.value !== '') {
 				fetch(`/api/user/${profileId}/username`, {
 					method: 'POST',
-					mode: 'cors',
 					headers: {
 						'Content-Type': 'application/json'
 					},
@@ -89,7 +99,6 @@ const loadProfile = () => {
 
 						fetch(`/api/user/${profileId}/image`, {
 							method: 'POST',
-							mode: 'cors',
 							body: data
 						}).then(response => {
 							if (upload.classList.contains("active")) {
@@ -141,6 +150,7 @@ const loadProfile = () => {
 			for (const platform of platforms) {
 				platform.classList.toggle("editing");
 			}
+			checkLists();
 		};
 		editPlatformsButton.addEventListener("click", togglePlatformEdit);
 		savePlatformsButton.addEventListener("click", togglePlatformEdit);
@@ -156,7 +166,6 @@ const loadProfile = () => {
 		steamButtons[1].addEventListener("click", (clickEvent) => {
 			fetch(`/api/user/${profileId}/platforms/remove`, {
 				method: 'POST',
-				mode: 'cors',
 				headers: {
 					'Content-Type': 'application/json'
 				},
@@ -213,11 +222,11 @@ const expandTemplates = async () => {
 	template.apply("profile-platforms-list").promise(profileData.then(data =>
 		data.platforms.map(platform => ({
 			platform_id: platform.id,
-			img: `<img class="profile-entry-icon" src="/api/platform/image/${platform.id}" alt="Steam Logo" />`,
+			img: `<img class="profile-entry-icon" src="/api/platform/${platform.id}/image" alt="Steam Logo" />`,
 			name: platform.name,
 			connected: platform.connected ? "connected" : "",
 			add:
-				(platform.id === 0 ? `<img id="add-steam" class="platform-add" src="https://community.cloudflare.steamstatic.com/public/images/signinthroughsteam/sits_01.png" alt="Add" />` :
+				(platform.id === 0 ? `<img id="add-steam" class="platform-add" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/steamworks_docs/english/sits_small.png" alt="Add" />` :
 				(platform.id === 1 ? `<p class="platform-unsupported">Coming soon...</p>` :
 				(platform.id === 2 ? `<p class="platform-unsupported">Coming soon...</p>` :
 				"")))
@@ -228,6 +237,7 @@ const expandTemplates = async () => {
 window.addEventListener("load", async (loadEvent) => {
 	await loadCommon();
 
+	var importing = document.querySelector("#importing");
 	if (!/\d+/.test(profileId)) {
 		isReturn = true;
 		const platform = profileId;
@@ -238,6 +248,9 @@ window.addEventListener("load", async (loadEvent) => {
 			delete session.lastProfile;
 		}
 
+		const importingText = importing.querySelector("#importing-text");
+		importingText.textContent = `Importing from ${platform}...`;
+		importing.style.display = `flex`;
 		if (platform === 'steam') {
 			const query = new URLSearchParams(window.location.search);
 
@@ -246,9 +259,8 @@ window.addEventListener("load", async (loadEvent) => {
 			} else {
 				// Regex courtesy of https://github.com/liamcurry/passport-steam/blob/master/lib/passport-steam/strategy.js
 				var steamId = /^https?:\/\/steamcommunity\.com\/openid\/id\/(\d+)$/.exec(query.get('openid.claimed_id'))[1];
-				await fetch("/api/user/platforms/add", {
+				await fetch(`/api/user/${profileId}/platforms/add`, {
 					method: 'POST',
-					mode: 'cors',
 					headers: {
 						'Content-Type': 'application/json'
 					},
@@ -266,13 +278,15 @@ window.addEventListener("load", async (loadEvent) => {
 	} else {
 		// Handle error
 	}
+	importing.remove();	
 
-	profileData = fetch(`/api/user/${profileId}`, { method: 'GET', mode: 'cors' })
+	profileData = fetch(`/api/user/${profileId}`, { method: 'GET' })
 		.then(response => response.json());
 
 	await expandTemplates();
 	await template.expand();
 
+	loadLazyImages();
 	connectNavbar();
 	loadProfile();
 });

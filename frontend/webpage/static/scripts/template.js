@@ -136,6 +136,10 @@ var template = template || {};
 		}
 	};
 
+	template.clear = () => {
+		templateEntryMap.clear();
+	}
+
 	const parseType = (type) => {
 		let result = type.match(/^\s*(\w+)\s*(?:<(.*)>)?\s*$/);
 		let id = result[1];
