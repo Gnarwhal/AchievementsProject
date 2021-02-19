@@ -16,14 +16,6 @@ public class Session {
 	@JsonIgnore
 	private boolean used;
 
-	public Session(String key, int id, int hue, boolean admin) {
-		this.key   = key;
-		this.id    = id;
-		this.hue   = hue;
-		this.admin = admin;
-		this.used  = false;
-	}
-
 	public String getKey() {
 		return key;
 	}

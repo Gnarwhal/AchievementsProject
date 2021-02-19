@@ -18,7 +18,7 @@ GO
 -- List of achievements and the percentage of people who have completed it
 CREATE VIEW AchievementCompletion
 AS
-	SELECT Achievement.ID, (CASE WHEN COUNT(UserID) = 0 THEN NULL ELSE (SUM(CASE WHEN Progress = Stages THEN 1 ELSE 0 END) * 100 / COUNT(UserID)) END) AS Completion
+	SELECT Achievement.ID, (CASE WHEN COUNT(UserID) = 0 THEN NULL ELSE (SUM(CASE WHEN Progress = Stages THEN 1 ELSE 0 END) * 100 / COUNT(UserID)) END) AS Completion, COUNT(UserID) AS NumberUsers
 	FROM Achievement
 	LEFT JOIN MaxProgress ON AchievementID = Achievement.ID
 	GROUP BY Achievement.ID

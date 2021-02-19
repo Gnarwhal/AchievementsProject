@@ -1,7 +1,7 @@
 window.addEventListener("load", async (loadEvent) => {
 	await loadCommon();
 
-	if (session && session.key) {
+	if (session.key) {
 		window.location.href = '/';
 	}
 
@@ -20,7 +20,7 @@ window.addEventListener("load", async (loadEvent) => {
 	const header = document.querySelector("#login-header-text");
 	const error  = document.querySelector("#error-message");
 
-	if (session) {
+	if (!session.key && session.id) {
 		error.style.display = "block";
 		error.textContent = "You have been signed out due to inactivity";
 	}

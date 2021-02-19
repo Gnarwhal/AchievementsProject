@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Achievements Project</title>
+
+		<link rel="stylesheet" href="/static/styles/theme.css" />
+		<link rel="stylesheet" href="/static/styles/common.css" />
+		<link rel="stylesheet" href="/static/styles/achievement.css" />
+	</head>
+	<body>
+		<div id="navbar">
+			<template data-template="navbar: List<Basic>">
+				<div id="navbar-section-${section}" class="navbar-section">
+					<template data-template="navbar-section-${section}: List<Basic>">
+						<div id="navbar-item-${item}" class="navbar-item" data-page-name="${item}">
+							${title}
+						</div>
+					</template>
+				</div>
+			</template>
+		</div>
+		<div id="content-body">
+			<div id="achievement-page" class="page">
+				<div class="page-subsection">
+					<div class="page-header">
+						<p class="page-header-text">Achievement</p>
+						<div class="page-header-separator"></div>
+					</div>
+				</div>
+				<div id="importing">
+					<p id="importing-text">Contemplating...</p>
+					<img id="importing-loading" class="ap-loading" src="/static/res/loading.svg" alt="Loading Symbol" />
+				</div>
+				<template data-template="achievement-page">
+					<div id="achievement-section-0">
+						<div id="achievement-info" class="page-subsection">
+							<div class="page-subsection-wrapper">
+								<div id="achievement-info-subheader" class="page-subheader">
+									<div id="achievement-info-flex" class="page-subheader-flex">
+										<p id="achievement-name-text" class="page-subheader-text">${name}</p>
+										<img id="achievement-icon-img" class="lazy-img" data-src="/api/achievement/${id}/image" alt="Achievement Icon" />
+									</div>
+									<div class="page-subheader-separator"></div>
+								</div>
+								<p id="achievement-description-text" class="page-subsection-chunk ap-text">${description}</p>
+							</div>
+						</div>
+					</div>
+					<div id="achievement-section-1">
+						<div id="achievement-stats" class="page-subsection">
+							<div id="achievement-stats-numeric">
+								<div id="achievement-completion" class="page-subsection-wrapper">
+									<div class="page-subheader">
+										<p class="page-subheader-text">Completion Rate</p>
+										<div class="page-subheader-separator"></div>
+									</div>
+									<div id="achievement-completion-stack">
+										<img id="achievement-completion-background" src="/static/res/completion.svg">
+										<canvas id="achievement-completion-canvas"></canvas>
+										<p id="achievement-completion-text">${completion}</p>
+									</div>
+								</div>
+								<div id="achievement-difficulty" class="page-subsection-wrapper">
+									<div class="page-subheader">
+										<p class="page-subheader-text">Difficulty</p>
+										<div class="page-subheader-separator"></div>
+									</div>
+									<p id="achievement-difficulty-text">${difficulty}</p>
+								</div>
+								<div id="achievement-quality" class="page-subsection-wrapper">
+									<div class="page-subheader">
+										<p class="page-subheader-text">Quality</p>
+										<div class="page-subheader-separator"></div>
+									</div>
+									<p id="achievement-quality-text">${quality}</p>
+								</div>
+							</div>
+						</div>
+						<div id="achievement-rating" class="page-subsection">
+							<div class="page-subsection-wrapper">
+								<div class="page-subheader">
+									<div class="page-subheader-flex">
+										<p class="page-subheader-text">My Rating</p>
+										<span id="rating-save-stack" class="achievement-save-stack">
+											<img class="achievement-save page-subheader-icon" src="/static/res/save.svg" alt="Save Platforms" />
+											<img class="achievement-save-hover page-subheader-icon" src="/static/res/save-hover.svg" alt="Save Platforms Hovered" />
+										</span>
+									</div>
+									<div class="page-subheader-separator"></div>
+								</div>
+								<div id="achievement-rating-subsection" class="page-subsection-chunk">
+									<div id="achievement-rating-numeric">
+										<div id="achievement-difficulty-rating" class="page-subsection-wrapper">
+											<div class="page-subheader">
+												<p class="page-subheader-text">Difficulty</p>
+												<div class="page-subheader-separator"></div>
+											</div>
+											<div class="achievement-rating-text-flex">
+												<input type="text" id="achievement-difficulty-rating-text" class="achievement-rating-text" value="${my_difficulty}"></input>
+												<p class="achievement-rating-max-text">/ 10</p>
+											</div>
+										</div>
+										<div id="achievement-quality-rating" class="page-subsection-wrapper">
+											<div class="page-subheader">
+												<p class="page-subheader-text">Quality</p>
+												<div class="page-subheader-separator"></div>
+											</div>
+											<div class="achievement-rating-text-flex">
+												<input type="text" id="achievement-quality-rating-text" class="achievement-rating-text" value="${my_quality}"></input>
+												<p class="achievement-rating-max-text">/ 10</p>
+											</div>
+										</div>
+									</div>
+									<div id="achievement-description-rating" class="page-subsection-wrapper">
+										<div class="page-subheader">
+											<p class="page-subheader-text">Review</p>
+											<div class="page-subheader-separator"></div>
+										</div>
+										<textarea id="achievement-review-rating-text">${my_review}</textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="achievement-section-2">
+						<div id="achievement-ratings" class="page-subsection">
+							<div class="page-subsection-wrapper">
+								<div class="page-subheader">
+									<p class="page-subheader-text">Ratings</p>
+									<div class="page-subheader-separator"></div>
+								</div>
+								<div class="page-subsection-chunk">
+									<div class="list-page-list">
+										<div class="list-page-header">
+											<p class="list-page-entry-icon"></p>
+											<p class="list-page-entry-text rating-username">Username</p>
+											<p class="list-page-entry-text rating-difficulty">Difficulty</p>
+											<p class="list-page-entry-text rating-quality">Quality</p>
+											<p class="list-page-entry-text rating-review">Review</p>
+										</div>
+										<template data-template="rating-list: List<Basic>">
+											<div class="list-page-entry rating" data-id="${user_id}">
+												<img class="list-page-entry-icon lazy-img" data-src="/api/user/${user_id}/image" alt="User Image"></img>
+												<p class="list-page-entry-text rating-username">${user_username}</p>
+												<p class="list-page-entry-text rating-difficulty">${user_difficulty}</p>
+												<p class="list-page-entry-text rating-quality">${user_quality}</p>
+												<p class="list-page-entry-text rating-review">${user_review}</p>
+											</div>
+										</template>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</template>
+			</div>
+		</div>
+		<script src="/static/scripts/template.js"></script>
+		<script src="/static/scripts/common.js"></script>
+		<script src="/static/scripts/achievement.js"></script>
+	</body>
+</html>

@@ -1,4 +1,4 @@
-#profile-page {
+#achievement-page {
 	max-width: 1600px;
 }
 
@@ -22,7 +22,7 @@
 	width: 64px;
 }
 
-.profile-list {
+.achievement-list {
 	width: 100%;
 	height: max-content;
 
@@ -33,7 +33,7 @@
 	box-shadow: 0px 0px 8px 8px var(--shadow-color);
 }
 
-.profile-entry {
+.achievement-entry {
 	overflow: hidden;
 
 	height: 64px;
@@ -46,7 +46,7 @@
 	background-color: var(--distinction);
 }
 
-.profile-entry-left {
+.achievement-entry-left {
 	height: 100%;
 
 	display: flex;
@@ -55,7 +55,7 @@
 	align-items: center;
 }
 
-.profile-entry-right {
+.achievement-entry-right {
 	height: 100%;
 
 	display: flex;
@@ -64,13 +64,13 @@
 	align-items: center;
 }
 
-.profile-entry-icon {
+.achievement-entry-icon {
 	width: 64px;
 
 	flex-grow: 0;
 }
 
-.profile-entry-text {
+.achievement-entry-text {
 	box-sizing: border-box;
 
 	margin: 0;
@@ -89,15 +89,52 @@
 	flex-grow: 0;
 }
 
-.top > .profile-entry-text {
+.top > .achievement-entry-text {
 	border: 0;
 }
 
-.profile-entry-text.platform-name {
+.achievement-entry-text.platform-name {
 	flex-grow: 1;
 }
 
-#profile-section-1 {
+#achievement-info {
+	height: max-content;
+}
+
+#achievement-info-flex {
+	justify-content: flex-start;
+	align-items: flex-end;
+}
+
+#achievement-name-text {
+	flex-grow: 0;
+	width: max-content;
+}
+
+#achievement-icon-img {
+	flex-grow: 0;
+	margin-bottom: 0.25em;
+	margin-left: 32px;
+
+	font-size: 32px;
+	width: 64px;
+	height: 64px;
+	object-fit: contain;
+
+	background-color: var(--background-dark);
+
+	position: relative;
+}
+
+#achievement-description-text {
+	font-size: 24px;
+	color: var(--foreground);
+	background: var(--distinction);
+	margin: 0;
+	padding: 16px;
+}
+
+#achievement-section-1 {
 	box-sizing: border-box;
 
 	width: 100%;
@@ -109,151 +146,37 @@
 	align-items: flex-start;
 }
 
-#profile-left {
-	widtH: 50%;
-	height: max-content;
-
-	max-width: 512px;
-}
-
-#profile-info-username-text.active,
-#profile-info-username-field {
-	display: none;
-}
-
-#profile-info-username-field.active {
-	display: block;
-}
-
-#profile-info-username-field {
-	margin-right: 8px;
-	padding: 4px;
-	font-size: 24px;
-	color: var(--background);
-	background-color: var(--foreground);
-
-	border-radius: 8px;
-
-	border: 0;
-	outline: none;
-}
-
-#profile-info-pfp-border {
-	box-sizing: border-box;
-
-	padding: 24px;
-	background-color: var(--distinction);
-
-	width: 100%;
-	height: max-content;
-
-	box-shadow: 0px 0px 8px 8px var(--shadow-color);
-
-	border-radius: 8px;
-}
-
-#profile-info-pfp {
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-
-	border-radius: 8px;
-
-	position: relative;
-}
-
-#profile-info-pfp-img {
-	display: block;
-	width: 100%;
-	height: 100%;
-	border-radius: 8px;
-	object-fit: contain;
-
-	background-color: var(--background-dark);
-
-	position: absolute;
-}
-
-#profile-info-pfp-vignette {
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-
-	box-shadow: inset 0px 0px 30px 10px var(--shadow-color);
-
-	border-radius: 8px;
-
-	position: absolute;
-	z-index: 1;
-}
-
-#profile-info-pfp-upload,
-#profile-info-pfp-upload-hover,
-#profile-info-pfp-upload-invalid {
-	top: 0;
-	left: 0;
-	width: 100%;
-	
-	border-radius: 8px;
-
-	background-color: var(--background-dark);
-	opacity: 0.8;
-
-	display: block;
-
-	visibility: hidden;
-}
-
-#profile-info-pfp-upload {
-	position: relative;
-}
-
-#profile-info-pfp-upload-hover,
-#profile-info-pfp-upload-invalid {
-	position: absolute;
-}
-
-#profile-info-pfp         #profile-info-pfp-upload.active,
-#profile-info-pfp.hover   #profile-info-pfp-upload-hover.active,
-#profile-info-pfp.invalid #profile-info-pfp-upload-invalid.active {
-	visibility: visible;
-}
-
-#profile-info-pfp.hover   #profile-info-pfp-upload.active,
-#profile-info-pfp.invalid #profile-info-pfp-upload.active {
-	visibility: hidden;
-}
-
-#profile-stats {
+#achievement-stats {
+	flex-basis: 0;
 	flex-grow: 1;
 
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
 }
 
-#profile-stats-numeric {
+#achievement-stats-numeric {
 	flex-grow: 1;
-	max-width: 300px;
+	width: 100%;
+	max-width: 800px;
 
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: space-between;
 }
 
-#profile-completion-stack {
-	width: 100%;
+#achievement-completion-stack {
+	flex-grow: 1;
 	height: max-content;
 	position: relative;
 }
 
-#profile-completion-background {
+#achievement-completion-background {
 	width: 100%;
 	display: block;
 }
 
-#profile-completion-canvas {
+#achievement-completion-canvas {
 	width: 100%;
 	height: 100%;
 
@@ -262,7 +185,7 @@
 	top: 0;
 }
 
-#profile-completion-text {
+#achievement-completion-text {
 	margin: 0;
 
 	width: 100%;
@@ -280,7 +203,12 @@
 	align-items: center;
 }
 
-#profile-perfect-text {
+#achievement-difficulty,
+#achievement-quality {
+	flex-grow: 1;
+}
+
+#achievement-difficulty-text {
 	margin: 0;
 
 	height: 48px;
@@ -291,6 +219,101 @@
 	line-height: 48px;
 	text-align: center;
 }
+
+#achievement-quality-text {
+	margin: 0;
+
+	height: 48px;
+
+	color: var(--foreground);
+
+	font-size: 48px;
+	line-height: 48px;
+	text-align: center;
+}
+
+#achievement-rating {
+	flex-basis: 0;
+	flex-grow: 1;
+}
+
+.achievement-save-stack {
+	display: none;
+}
+
+.achievement-save-stack.active {
+	display: block;
+	width: max-content;
+	height: max-content;
+}
+
+.achievement-save-stack:hover .achievement-save,
+.achievement-save-hover {
+	display: none;
+}
+
+.achievement-save,
+.achievement-save-stack:hover .achievement-save-hover {
+	display: block;
+}
+
+#achievement-rating-subsection {
+	background-color: var(--distinction);
+}
+
+#achievement-rating-numeric {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.achievement-rating-text-flex {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+#achievement-difficulty-rating,
+#achievement-quality-rating {
+	flex-grow: 1;
+}
+
+.achievement-rating-text {
+	flex-basis: max-content;
+	flex-grow: 1;
+}
+
+.achievement-rating-max-text {
+	flex-grow: 0;
+
+	margin: 0;
+	margin-left: 16px;
+	font-size: 24px;
+
+	color: var(--foreground);
+}
+
+#achievement-difficulty-rating-text,
+#achievement-quality-rating-text,
+#achievement-review-rating-text {
+	box-sizing: border-box;
+	padding: 8px;
+	font-size: 20px;
+	color: var(--background);
+	border: 0;
+	outline: none;
+
+	border-radius: 8px;
+}
+
+#achievement-review-rating-text {
+	width: 100%;
+	height: 96px;
+
+	resize: none;
+}
+
 
 #profile-section-2 {
 	box-sizing: border-box;
@@ -307,6 +330,10 @@
 #profile-hardest {
 	flex-grow: 1;
 	height: 100%;
+}
+
+#profile-platforms {
+	flex-grow: 1;
 }
 
 #profile-platforms .profile-entry {
@@ -412,35 +439,19 @@
 }
 
 #profile-ratings {
-	width: 100%;
-}
-
-.list-page-entry.achievement:hover {
-	background-color: var(--background-light);
-}
-
-.list-page-entry-text.achievement-name       { flex-grow: 2;   }
-.list-page-entry-text.achievement-completion { flex-grow: 1;   }
-.list-page-entry-text.achievement-quality    { flex-grow: 1;   }
-.list-page-entry-text.achievement-difficulty { flex-grow: 1;   }
-
-.list-page-header > .list-page-entry-text.-aichevevement-name:hover,
-.list-page-header > .list-page-entry-text.-aichevevement-completion:hover,
-.list-page-header > .list-page-entry-text.-aichevevement-quality:hover,
-.list-page-header > .list-page-entry-text.-aichevevement-difficulty:hover {
-	background-color: var(--accent-value2);
+	flex-grow: 1;
 }
 
 .list-page-entry.rating:hover {
 	background-color: var(--background-light);
 }
 
-.list-page-entry-text.rating-achievement { flex-grow: 2; }
-.list-page-entry-text.rating-difficulty  { flex-grow: 1; }
-.list-page-entry-text.rating-quality     { flex-grow: 1; }
-.list-page-entry-text.rating-review      { flex-grow: 5; }
+.list-page-entry-text.rating-username   { flex-grow: 1.5; }
+.list-page-entry-text.rating-difficulty { flex-grow: 1;   }
+.list-page-entry-text.rating-quality    { flex-grow: 1;   }
+.list-page-entry-text.rating-review     { flex-grow: 5;   }
 
-.list-page-header > .list-page-entry-text.rating-achievement:hover,
+.list-page-header > .list-page-entry-text.rating-username:hover,
 .list-page-header > .list-page-entry-text.rating-difficulty:hover,
 .list-page-header > .list-page-entry-text.rating-quality:hover,
 .list-page-header > .list-page-entry-text.rating-review:hover {

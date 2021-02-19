@@ -60,6 +60,11 @@ const loadProfile = () => {
 				usernameField.value = usernameField.value.substring(0, 32);
 			}
 		});
+		usernameField.addEventListener("keydown", (keyEvent) => {
+			if (keyEvent.key === "Enter") {
+				saveProfileButton.click();
+			}
+		})
 
 		const pfp               = document.querySelector("#profile-info-pfp-img");
 		const pfpStack          = document.querySelector("#profile-info-pfp");
@@ -188,7 +193,6 @@ const loadProfile = () => {
 	// Canvasing
 
 	const completionCanvas = document.querySelector("#profile-completion-canvas");
-	const completionText   = document.querySelector("#profile-completion-text");
 
 	const STROKE_WIDTH = 0.18;
 	const style   = window.getComputedStyle(completionCanvas);
@@ -214,6 +218,24 @@ const loadProfile = () => {
 	if (profileId === session.id) {
 		document.querySelector("#profile-page").classList.add("self");
 	}
+
+	{
+		const noteworthy = document.querySelectorAll(".list-page-entry.achievement");
+		for (const achievement of noteworthy) {
+			achievement.addEventListener("click", (clickEvent) => {
+				window.location.href = `/achievement/${achievement.dataset.id}`;
+			});
+		}
+	}
+
+	{
+		const ratings = document.querySelectorAll(".list-page-entry.rating");
+		for (const rating of ratings) {
+			rating.addEventListener("click", (clickEvent) => {
+				window.location.href = `/achievement/${rating.dataset.id}`;
+			});
+		}
+	}
 }
 
 const expandTemplates = async () => {
@@ -225,6 +247,18 @@ const expandTemplates = async () => {
 		average: data.average === null ? "N/A" : data.average + "%",
 		perfect: data.perfect,
 	})));
+	template.apply("profile-noteworthy-list").promise(
+		fetch(`/api/user/${profileId}/noteworthy`, {
+			method: 'GET'
+		})
+		.then(response => response.json())
+		.then(data => data.map(data => ({
+				achievement_id:	data.ID,
+				achievement_name: data.name,
+				completion: data.completion
+			}))
+		)
+	);
 	template.apply("profile-platforms-list").promise(profileData.then(data =>
 		data.platforms.map(platform => ({
 			platform_id: platform.id,
@@ -238,6 +272,13 @@ const expandTemplates = async () => {
 				"")))
 		}))
 	));
+	template.apply("rating-list").promise(profileData.then(data => data.ratings.map(data => ({
+		achievement_id: data.achievementId,
+		rating_achievement: data.name,
+		rating_difficulty: data.difficulty,
+		rating_quality: data.quality,
+		rating_review: data.review
+	}))));
 }
 
 window.addEventListener("load", async (loadEvent) => {
@@ -247,7 +288,7 @@ window.addEventListener("load", async (loadEvent) => {
 	if (!/\d+/.test(profileId)) {
 		isReturn = true;
 		const platform = profileId;
-		if  (!session) {
+		if  (!session.key) {
 			window.location.href = "/404";
 		} else {
 			profileId = session.lastProfile;
@@ -278,7 +319,7 @@ window.addEventListener("load", async (loadEvent) => {
 		window.history.replaceState({}, '', `/profile/${profileId}`);
 	} else if (/\d+/.test(profileId)) {
 		profileId = Number(profileId);
-		if (session) {
+		if (session.key) {
 			session.lastProfile = profileId;
 		}
 	} else {

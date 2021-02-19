@@ -9,36 +9,50 @@ const loadRoot = () => {
 	}
 };
 
-let session = null;
+let session = { id: null };
+const clearSession = () => session = { id: null };
 const loadSession = async () => {
 	window.addEventListener('beforeunload', (beforeUnloadEvent) => {
-		if (session) {
-			window.sessionStorage.setItem('session', JSON.stringify(session));
-		} else {
-			window.sessionStorage.removeItem('session');
-		}
+		window.sessionStorage.setItem('session', JSON.stringify(session));
 	});
 
-	session = JSON.parse(window.sessionStorage.getItem('session'));
-	if (session) {
+	session = JSON.parse(window.sessionStorage.getItem('session')) || { id: -1 };
+	if (session.hue) {
 		root.setProperty('--accent-hue', session.hue);
+	}
 
+	if (session.id !== null) {
 		await fetch(`/api/auth/refresh`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ key: session.key })
+			body: JSON.stringify({ key: session.key, id: session.id })
 		})
 		.then(async response => ({ status: response.status, data: await response.json() }))
 		.then(response => {
-			if (response.status !== 200 && window.location.pathname != "/login") {
-				delete session.key;
-				window.location.href = "/login";
+			if (response.status !== 200 && window.location.pathname !== "/login") {
+				session.id  = null;
+				session.key = null;
+				if (session.id !== -1) {
+					window.location.href = "/login";
+				}
+			} else {
+				session.key = response.data.key;
+				session.id  = response.data.id;
+				if (session.id === -1 && window.location.pathname !== '/import') {
+					window.location.href = '/import';
+				}
 			}
 		});
 	}
 };
+
+const authenticate = (obj) => {
+	obj.sessionKey = session.key;
+	obj.userId     = session.id;
+	return obj;
+}
 
 const loadCommon = async () => {
 	loadRoot();
@@ -56,7 +70,7 @@ const commonTemplates = async () => {
 		{ item: "games",        title: "Games"        },
 		{ item: "import",       title: "Import"       }
 	]);
-	if (session) {
+	if (session.id !== -1 && session.id !== null) {
 		template.apply("navbar-section-right").values([
 			{ item: "profile", title: "Profile" },
 			{ item: "logout",  title: "Logout"  }
@@ -76,29 +90,31 @@ const loadLazyImages = () => {
 }
 
 const connectNavbar = () => {
-	const navItems = document.querySelectorAll(".navbar-item");
+	if (session.id !== -1) {
+		const navItems = document.querySelectorAll(".navbar-item");
 
-	if (!session || !session.admin) {
-		document.querySelector("#navbar-item-import").remove();
-	}
+		if (!session.admin) {
+			document.querySelector("#navbar-item-import").remove();
+		}
 
-	for (const item of navItems) {
-		if (item.dataset.pageName === "logout") {
-			item.addEventListener("click", (clickEvent) => {
-				fetch(`/api/auth/logout`, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({ key: session.key })
+		for (const item of navItems) {
+			if (item.dataset.pageName === "logout") {
+				item.addEventListener("click", (clickEvent) => {
+					fetch(`/api/auth/logout`, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({ key: session.key })
+					});
+					clearSession();
+					window.location.href = "/login";
 				});
-				session = undefined;
-				window.location.href = "/login";
-			});
-		} else if (item.dataset.pageName === "profile") {
-			item.addEventListener("click", (clickEvent) => window.location.href = `/user/${session.id}`);
-		} else {
-			item.addEventListener("click", (clickEvent) => window.location.href = `/${item.dataset.pageName}`);
+			} else if (item.dataset.pageName === "profile") {
+				item.addEventListener("click", (clickEvent) => window.location.href = `/user/${session.id}`);
+			} else {
+				item.addEventListener("click", (clickEvent) => window.location.href = `/${item.dataset.pageName}`);
+			}
 		}
 	}
 };

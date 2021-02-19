@@ -84,11 +84,14 @@ public class AuthenticationService {
 	public LoginResponse login(User user) {
 		var response = new LoginResponse(-1);
 		try {
-			var statement = db.prepareCall("{call GetUserLogin(?)}");
-			statement.setString(1, user.email);
+			var statement = db.prepareCall("{? = call GetUserLogin(?)}");
+			statement.registerOutParameter(1, Types.INTEGER);
+			statement.setString(2, user.email);
 
-			var result = statement.executeQuery();
-			if (result.next()) {
+			statement.execute();
+			if (statement.getInt(1) == 0) {
+				var result = statement.executeQuery();
+				result.next();
 				var salt = result.getString("Salt");
 				var hash = result.getString("Password");
 				if (Password.validate(salt, user.getPassword(), hash)) {
@@ -114,6 +117,19 @@ public class AuthenticationService {
 	}
 
 	public boolean refresh(Session key) { return session.refresh(key.getKey()); }
+
+	public boolean openAuth() {
+		try {
+			var stmt = db.prepareCall("{call HasUser(?)}");
+			stmt.registerOutParameter(1, Types.BOOLEAN);
+
+			stmt.execute();
+			return !stmt.getBoolean(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	public void logout(Session key) {
 		session.remove(key.getKey());

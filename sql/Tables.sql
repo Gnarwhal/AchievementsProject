@@ -27,8 +27,8 @@
 
 -----------------------------
 
---CREATE TYPE ImageType FROM VARCHAR(4) NULL
---GO
+CREATE TYPE ImageType FROM VARCHAR(4) NULL
+GO
 
 CREATE TABLE [User] (
 	ID INT IDENTITY(0, 1) NOT NULL,

@@ -18,7 +18,11 @@ public class SessionManager {
 
 	public Session generate(int user, int hue, boolean admin) {
 		var key = HashManager.encode(HashManager.generateBytes(16));
-		var session = new Session(key, user, hue, admin);
+		var session = new Session();
+		session.setKey(key);
+		session.setId(user);
+		session.setHue(hue);
+		session.setAdmin(admin);
 		sessions.put(key, session);
 		return session;
 	}

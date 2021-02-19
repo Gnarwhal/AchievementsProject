@@ -65,11 +65,18 @@ public class AuthController {
 
 	@PostMapping(value = "/refresh", consumes = "application/json", produces = "application/json")
 	public ResponseEntity refresh(@RequestBody Session key) {
-		if (authService.refresh(key)) {
-			return ResponseEntity.ok("{}");
-		} else {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{}");
+		if (key.getId() == -1) {
+			if (authService.openAuth()) {
+				if (authService.refresh(key)) {
+					return ResponseEntity.ok(key);
+				} else {
+					return ResponseEntity.ok(authService.session().generate(-1, 0, true));
+				}
+			}
+		} else if (authService.refresh(key)) {
+			return ResponseEntity.ok(key);
 		}
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{}");
 	}
 
 	@PostMapping(value = "/logout", consumes = "application/json")

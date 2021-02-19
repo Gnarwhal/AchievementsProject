@@ -119,7 +119,7 @@
 										<p id="achievement-header-quality" class="list-page-entry-text achievement-quality">Quality</p>
 									</div>
 									<template id="achievement-list-template" data-template="achievements-page-list: List<Basic>">
-										<div id="achievement-entry-${achievement_id}" class="list-page-entry achievement">
+										<div class="list-page-entry achievement" data-id="${achievement_id}">
 											<img class="list-page-entry-icon lazy-img" data-src="/api/achievement/${achievement_id}/image" alt="Achievement Icon"></img>
 											<p class="list-page-entry-text achievement-game-name">${game_name}</p>
 											<p class="list-page-entry-text achievement-name">${achievement_name}</p>

@@ -55,7 +55,7 @@ public class APIService {
 
 				addGameToPlatform.setInt(1, gameId);
 				addGameToPlatform.setInt(2, platformId);
-				addGameToPlatform.setString(3, platformUserId);
+				addGameToPlatform.setString(3, game.getPlatformGameId());
 				addGameToPlatform.execute();
 
 				var gameThumbnail = new File("storage/images/game/" + gameId + "." + getFileType(game.getThumbnail()));

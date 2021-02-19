@@ -11,12 +11,6 @@ public class User {
 	@JsonProperty("password")
 	public String password;
 
-	public User(String email, String username, String password) {
-		this.email = email;
-		this.username = username;
-		this.password = password;
-	}
-
 	public String getEmail() {
 		return email;
 	}

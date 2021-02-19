@@ -85,7 +85,6 @@ const loadGameSearch = () => {
 			}))));
 			await template.expand();
 			data.then(data => {
-				console.log(data);
 				loading.style.display = 'none';
 				canSearch = true;
 				loadLazyImages();

@@ -88,6 +88,13 @@ const loadAchievementSearch = () => {
 				loading.style.display = 'none';
 				canSearch = true;
 				loadLazyImages();
+
+				const entries = document.querySelectorAll(".list-page-entry.achievement");
+				for (const entry of entries) {
+					entry.addEventListener("click", (clickEvent) => {
+						window.location.href = `/achievement/${entry.dataset.id}`;
+					});
+				}
 			});
 	
 			const headers = {

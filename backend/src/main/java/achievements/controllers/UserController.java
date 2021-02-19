@@ -72,7 +72,7 @@ public class UserController {
 
 	@PostMapping(value = "/{user}/platforms/add", consumes = "application/json", produces = "application/json")
 	public ResponseEntity addPlatformForUser(@PathVariable("user") int userId, @RequestBody AddPlatform request) {
-		var result = userService.addPlatform(userId, request);
+		var result = userService.addPlatform(userId, request, true);
 		if (result == 0) {
 			return ResponseEntity.status(HttpStatus.CREATED).body("{}");
 		} else {
@@ -85,6 +85,16 @@ public class UserController {
 		var result = userService.removePlatform(userId, request);
 		if (result == 0) {
 			return ResponseEntity.status(HttpStatus.CREATED).body("{}");
+		} else {
+			return ResponseEntity.badRequest().body("{}");
+		}
+	}
+
+	@GetMapping(value = "/{user}/noteworthy", produces = "application/json")
+	public ResponseEntity getNoteworthy(@PathVariable("user") int userId) {
+		var result = userService.getNoteworthy(userId);
+		if (result != null) {
+			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.badRequest().body("{}");
 		}

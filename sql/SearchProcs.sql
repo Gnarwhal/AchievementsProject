@@ -2,7 +2,7 @@
 -- SEARCH ACHIEVEMENTS --
 -------------------------
 
-ALTER PROCEDURE SearchAchievements(
+CREATE PROCEDURE SearchAchievements(
 	@searchTerm     VARCHAR(32),
 	@userId         INT,
 	@completed      BIT,
@@ -61,7 +61,7 @@ GO
 -- SEARCH USERS --
 ------------------
 
-ALTER PROCEDURE SearchUsers(
+CREATE PROCEDURE SearchUsers(
 	@searchTerm       VARCHAR(32),
 	@minOwned         INT,
 	@maxOwned         INT,
@@ -118,7 +118,7 @@ GO
 -- SEARCH GAMES --
 ------------------
 
-ALTER PROCEDURE SearchGames(
+CREATE PROCEDURE SearchGames(
 	@searchTerm       VARCHAR(32),
 	@userId           INT,
 	@owned            BIT,

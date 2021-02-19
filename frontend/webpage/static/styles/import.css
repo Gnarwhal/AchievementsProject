@@ -1,0 +1,78 @@
+#import-page {
+	display: flex;
+	flex-direction: column;
+}
+
+#import-dropzone {
+	flex-grow: 1;
+	
+	overflow-y: auto;
+}
+
+#import-dropzone-wrapper {
+	box-sizing: border-box;
+
+	width: 100%;
+	height: 100%;
+}
+
+#upload-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100%;
+	height: 100%;
+}
+
+#upload-icon-stack {
+	width: max-content;
+	height: max-content;
+
+	position: relative;
+}
+
+#import-icon-base,
+#import-icon-hover {
+	width: 256px;
+	height: 256px;
+	display: block;
+}
+
+#import-icon-hover {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+#import-dropzone.active #import-icon-base,
+#import-icon-hover {
+	visibility: hidden;
+}
+
+#import-icon-base,
+#import-dropzone.active #import-icon-hover {
+	visibility: visible;
+}
+
+#import-console {
+	display: none;
+}
+
+.console-entry {
+	box-sizing: border-box;
+	margin: 0;
+	padding-top: 0.25em;
+	height: max-content;
+
+	color: var(--foreground);
+	font-size: 24px;
+	font-family: 'Ubuntu Mono', monospace;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow-x: hidden;
+}
+
+.console-entry.top {
+	padding-top: 0;
+}

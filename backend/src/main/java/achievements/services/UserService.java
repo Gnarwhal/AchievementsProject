@@ -4,6 +4,7 @@ import achievements.data.Profile;
 import achievements.data.request.AddPlatform;
 import achievements.data.request.RemovePlatform;
 import achievements.data.request.SetUsername;
+import achievements.data.response.search.Achievement;
 import achievements.misc.DbConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.List;
 
 import static achievements.services.ImageService.MIME_TO_EXT;
 
@@ -64,6 +66,8 @@ public class UserService {
 					if (average != null) {
 						profile.setAverage(Integer.parseInt(average));
 					}
+				} else {
+					return null;
 				}
 			}
 
@@ -81,6 +85,24 @@ public class UserService {
 					platforms.add(platform);
 				}
 				profile.setPlatforms(platforms);
+			}
+
+			{
+				var stmt = db.prepareCall("{call GetRatingsByUser(?)}");
+				stmt.setInt(1, userId);
+
+				var results = stmt.executeQuery();
+				var ratings = new ArrayList<Profile.Rating>();
+				while (results.next()) {
+					var rating = new Profile.Rating();
+					rating.setAchievementId(results.getInt("AchievementID"));
+					rating.setName(results.getString("Name"));
+					rating.setDifficulty(results.getFloat("Difficulty")); if (results.wasNull()) { rating.setDifficulty(null); }
+					rating.setQuality(results.getFloat("Quality")); if (results.wasNull()) { rating.setQuality(null); }
+					rating.setReview(results.getString("Description"));
+					ratings.add(rating);
+				}
+				profile.setRatings(ratings);
 			}
 
 			return profile;
@@ -163,8 +185,8 @@ public class UserService {
 		return "unknown";
 	}
 
-	public int addPlatform(int userId, AddPlatform request) {
-		if (auth.session().validate(userId, request.getSessionKey())) {
+	public int addPlatform(int userId, AddPlatform request, boolean validate) {
+		if (!validate || auth.session().validate(userId, request.getSessionKey())) {
 			try {
 				db.setAutoCommit(false);
 				try {
@@ -211,5 +233,24 @@ public class UserService {
 		return -1;
 	}
 
+	public List<Achievement> getNoteworthy(int userId) {
+		try {
+			var stmt = db.prepareCall("{call GetNoteworthyAchievementsForUser(?)}");
+			stmt.setInt(1, userId);
 
+			var results = stmt.executeQuery();
+			var achievements = new ArrayList<Achievement>();
+			while (results.next()) {
+				var achievement = new Achievement();
+				achievement.setID(results.getInt("ID"));
+				achievement.setName(results.getString("Name"));
+				achievement.setCompletion(results.getInt("Completion"));
+				achievements.add(achievement);
+			}
+			return achievements;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
